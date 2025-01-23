@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalTrigger,
 } from './AnimatedModal';
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 
 const AnimatedModal = ({
   triggerText,
@@ -23,9 +23,9 @@ const AnimatedModal = ({
     <Box height={10} className="flex items-center justify-center">
       <Modal>
         <ModalTrigger className="bg-white flex justify-center group/modal-btn">
-          <Text
-            height={10}
-            border={'1px solid gray'}
+          <Button
+            variant="outline"
+            colorScheme="white"
             boxShadow={'0 0 10px 2px #ffffff5a'}
             style={{
               padding: '0.5rem 1rem',
@@ -33,7 +33,7 @@ const AnimatedModal = ({
             }}
           >
             {triggerText}
-          </Text>
+          </Button>
         </ModalTrigger>
         <ModalBody>
           <ModalContent>

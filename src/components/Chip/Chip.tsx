@@ -102,6 +102,7 @@ const Chip = ({ type, size = 'md' }: ChipProps) => {
       borderRadius="lg"
       border={`1px solid`}
       color="white"
+      zIndex={10}
     >
       <Text fontSize="sm">{ChipMap[type].title}</Text>
       {ChipMap[type].Icon({})}

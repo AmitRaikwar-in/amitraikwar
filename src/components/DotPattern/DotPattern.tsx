@@ -29,8 +29,7 @@ export function DotPattern({
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       className={
-        'pointer-events-none relative inset-0 w-full fill-neutral-400/80 ' +
-        className
+        'pointer-events-none inset-0 w-full fill-neutral-400/80 ' + className
       }
       {...props}
     >

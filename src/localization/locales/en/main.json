@@ -28,7 +28,9 @@
     "title": "Skills"
   },
   "contact": {
-    "title": "Contact"
+    "title": "Contact",
+    "description": "Get in touch, I'd love to hear from you! Whether you have a question, feedback, or just want to connect, feel free to reach out. You can contact me through the email below or use out LinkedIn, Instagram to message directly.",
+    "getInTouch": "Get in Touch"
   },
   "articles": {
     "title": "Articles"

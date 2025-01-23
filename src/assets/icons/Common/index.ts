@@ -5,6 +5,7 @@ export { default as ArrowIcon } from './ArrowIcon';
 export { default as RobotIcon } from './Robot';
 export { default as LinkedInIcon } from './LinkedInIcon';
 export { default as GithubIcon } from './GithubIcon';
+export { default as GetInTouch } from './GetInTouch';
 export { default as MediumIcon } from './MediumIcon';
 export { default as InstagramIcon } from './InstagramIcon';
 export { default as StarIcon } from './Star';

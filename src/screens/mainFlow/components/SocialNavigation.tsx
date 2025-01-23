@@ -18,6 +18,7 @@ import {
 import { useCursor } from '@components';
 import { RefObject, useRef } from 'react';
 import { CharacterType } from '../scene';
+import { CONTACT } from '@data';
 
 const IconProps = {
   variant: 'ghost',
@@ -26,6 +27,9 @@ const IconProps = {
   transform: 'scale(1.5)',
   _hover: {
     transform: 'scale(2.2)',
+  },
+  _active: {
+    bg: 'transparent',
   },
 };
 
@@ -54,6 +58,7 @@ const SocialNavigation = ({
   const onMouseLeave = () => {
     setCursorInsets(undefined);
   };
+
   return (
     <VStack position={'fixed'} bottom={20} right={14} rowGap={10} zIndex={1}>
       <Box
@@ -109,10 +114,38 @@ const SocialNavigation = ({
         backdropFilter={'blur(20px)'}
         transition={'background-color 0.3s'}
       >
-        <IconButton aria-label="" icon={<GithubIcon />} {...IconProps} />
-        <IconButton icon={<LinkedInIcon />} aria-label="" {...IconProps} />
-        <IconButton icon={<MediumIcon />} aria-label="" {...IconProps} />
-        <IconButton icon={<InstagramIcon />} aria-label="" {...IconProps} />
+        <IconButton
+          icon={<GithubIcon />}
+          aria-label="github icon"
+          as={'a'}
+          href={CONTACT.github}
+          target={'_blank'}
+          {...IconProps}
+        />
+        <IconButton
+          icon={<LinkedInIcon />}
+          aria-label="linkedin icon"
+          as={'a'}
+          href={CONTACT.linkedIn}
+          target={'_blank'}
+          {...IconProps}
+        />
+        <IconButton
+          icon={<MediumIcon />}
+          aria-label="medium icon"
+          as={'a'}
+          href={CONTACT.medium}
+          target={'_blank'}
+          {...IconProps}
+        />
+        <IconButton
+          icon={<InstagramIcon />}
+          aria-label="instagram icon"
+          as={'a'}
+          href={CONTACT.instagram}
+          target={'_blank'}
+          {...IconProps}
+        />
       </VStack>
     </VStack>
   );
