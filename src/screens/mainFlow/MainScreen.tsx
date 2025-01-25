@@ -1,5 +1,5 @@
 import { TitleBoxContainer } from '@components';
-import { Footer, NavigationBar } from './components';
+import { Footer } from './components';
 import { Contents } from './contents';
 import { CoverContent } from './CoverContent';
 
@@ -13,7 +13,6 @@ const MainScreen = () => {
       flexDir={'column'}
       alignItems={'center'}
     >
-      <NavigationBar />
       <CoverContent />
       <Contents />
       <Footer />

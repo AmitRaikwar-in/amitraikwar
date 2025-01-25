@@ -4,6 +4,7 @@ import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const NavigationLink = [
   {
@@ -18,6 +19,10 @@ const NavigationLink = [
     name: 'navigation.about',
     href: 'about',
   },
+  {
+    name: 'navigation.contact',
+    href: 'contact',
+  },
 ];
 
 const ArticleLink = {
@@ -26,6 +31,7 @@ const ArticleLink = {
 };
 
 const NavigationBar = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const { setCursorInsets } = useCursor();
@@ -56,52 +62,29 @@ const NavigationBar = () => {
   };
 
   return (
-    <>
-      <HStack
-        position={'fixed'}
-        marginY={{ md: 4, xl: 6 }}
-        w={'100%'}
-        paddingRight={14}
-        paddingLeft={{ base: 14, '2xl': 32 }}
-        zIndex={1000}
-        justifyContent={'space-between'}
-      >
-        <Img
-          src={AmitRaikwarLogo}
-          alt={'logo'}
-          w={8}
-          h={6}
-          _hover={{
-            transform: 'scale(1.3)',
-            transition: 'transform 0.5s',
-            cursor: 'pointer',
-          }}
-        />
-        <HStack>
-          <HStack
-            border={'1px solid gray'}
-            padding="2.5"
-            color={'white'}
-            borderRadius="100px"
-            bg={'rgba(255, 255, 255, 0.1)'}
-            backdropFilter={'blur(20px)'}
-            transition={'all 0.3s'}
-            _hover={{
-              transform: 'scale(1.1)',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            ref={ref}
-            onClick={() => {}} // eslint-disable-line
-          >
-            <SearchIcon />
-          </HStack>
-        </HStack>
-      </HStack>
+    <HStack
+      position={'fixed'}
+      marginY={{ md: 2, xl: 4 }}
+      width={'100%'}
+      paddingRight={14}
+      paddingLeft={{ base: 14, '2xl': 32 }}
+      zIndex={1000}
+      justifyContent={'space-between'}
+    >
+      <Img
+        src={AmitRaikwarLogo}
+        alt={'logo'}
+        w={8}
+        h={6}
+        onClick={() => navigate('/')}
+        _hover={{
+          transform: 'scale(1.3)',
+          transition: 'transform 0.5s',
+          cursor: 'pointer',
+        }}
+      />
       <HStack
         zIndex={1000}
-        position={'fixed'}
         columnGap={3}
         top={6}
         border={'1px solid gray'}
@@ -121,13 +104,6 @@ const NavigationBar = () => {
             onClick={() => scrollToComponent(href)}
           />
         ))}
-        <LinkButton
-          key={ArticleLink.name}
-          text={t(ArticleLink.name)}
-          href={ArticleLink.href}
-          fontSize={'lg'}
-          animationOnHover
-        />
         <Box
           padding="0.2"
           borderRadius="100px"
@@ -136,14 +112,34 @@ const NavigationBar = () => {
           transition={'background-color 0.3s'}
         >
           <LinkButton
-            key={'Contact'}
-            text={t('navigation.contact')}
-            href={'#contact'}
+            key={ArticleLink.name}
+            text={t(ArticleLink.name)}
+            href={ArticleLink.href}
             fontSize={'lg'}
+            animationOnHover
           />
         </Box>
       </HStack>
-    </>
+      <HStack
+        border={'1px solid gray'}
+        padding="2.5"
+        color={'white'}
+        borderRadius="100px"
+        bg={'rgba(255, 255, 255, 0.1)'}
+        backdropFilter={'blur(20px)'}
+        transition={'all 0.3s'}
+        _hover={{
+          transform: 'scale(1.1)',
+          cursor: 'pointer',
+        }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        ref={ref}
+        onClick={() => {}} // eslint-disable-line
+      >
+        <SearchIcon />
+      </HStack>
+    </HStack>
   );
 };
 
