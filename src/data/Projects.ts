@@ -51,13 +51,13 @@ export const ProjectsData: ProjectItemType[] = [
     demoVideo: 'mac/AR_Mac.webm',
   },
   {
-    title: 'Top App AI',
+    title: 'Top Apps AI',
     icon: ProjectName.TopAppAi,
     description:
       'A web app for AI enthusiasts to find top AI applications. This app has more than 2000 AI applications listed.',
     githubLink: 'https://www.github.com/onemanfighter/mac-os-app',
     image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
-    link: 'https://topappai.com',
+    link: 'https://topappsai.com',
     tags: [Language.react, Language.typescript, Language.chakra],
     keyPoints: [
       'Top App AI helps you to find top AI applications.',
