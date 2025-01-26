@@ -1,8 +1,14 @@
+import { VStack } from '@chakra-ui/react';
+
 const ArticlesScreen = () => {
   return (
-    <div>
-      <h1>Articles</h1>
-    </div>
+    <VStack
+      minH={'100vh'}
+      id="projects"
+      rowGap={20}
+      bg={'black'}
+      paddingTop={20}
+    ></VStack>
   );
 };
 

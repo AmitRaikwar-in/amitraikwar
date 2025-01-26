@@ -15,11 +15,9 @@ const FooterEndText = () => (
 const Footer = () => {
   return (
     <Box
-      display={'absolute'}
       flexDirection={'column'}
-      width={'99%'}
-      height={'230px'}
-      p={2}
+      width={'100%'}
+      overflowX={'hidden'}
       bg={'black'}
       color={'white'}
     >

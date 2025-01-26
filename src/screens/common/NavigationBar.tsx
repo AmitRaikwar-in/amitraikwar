@@ -72,7 +72,7 @@ const NavigationBar = () => {
       width={'100%'}
       paddingRight={14}
       paddingLeft={{ base: 14, '2xl': 32 }}
-      zIndex={1}
+      zIndex={2}
       justifyContent={'space-between'}
     >
       <Img
