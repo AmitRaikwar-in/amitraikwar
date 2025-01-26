@@ -1,4 +1,4 @@
-import { useMotionValue, useSpring, spring, frame } from 'framer-motion';
+import { useMotionValue, useSpring, frame } from 'framer-motion';
 import { RefObject, useEffect } from 'react';
 import { SPRING_SETTING } from './constants';
 

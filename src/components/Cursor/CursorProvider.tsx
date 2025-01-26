@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from 'react';
 import FollowCursor from './FollowCursor';
-import SplashCursor from './SplashCursor';
 
 export type CursorType = 'follow' | 'splash';
 

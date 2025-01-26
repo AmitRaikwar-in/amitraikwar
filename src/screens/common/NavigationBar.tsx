@@ -1,10 +1,11 @@
-import { Box, HStack, Img, Kbd } from '@chakra-ui/react';
+import { Box, HStack, Img } from '@chakra-ui/react';
 import { LinkButton, useCursor } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useMoveToTop } from '@hooks';
 
 const NavigationLink = [
   {
@@ -31,6 +32,7 @@ const ArticleLink = {
 };
 
 const NavigationBar = () => {
+  const moveToTop = useMoveToTop();
   const location = useLocation();
   const pathName = location.pathname;
   const navigate = useNavigate();
@@ -77,7 +79,10 @@ const NavigationBar = () => {
         src={AmitRaikwarLogo}
         alt={'logo'}
         w={8}
-        onClick={() => navigate('/')}
+        onClick={() => {
+          navigate('/');
+          moveToTop();
+        }}
         _hover={{
           transform: 'scale(1.3)',
           transition: 'transform 0.5s',

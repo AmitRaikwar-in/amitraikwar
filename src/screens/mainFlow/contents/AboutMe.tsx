@@ -1,4 +1,4 @@
-import { Heading, HStack, VStack } from '@chakra-ui/react';
+import { Heading, VStack } from '@chakra-ui/react';
 import { useCursor } from '@components';
 import { useIsIntersecting } from '@hooks';
 import { useEffect, useRef } from 'react';
@@ -24,9 +24,13 @@ const AboutMe = () => {
       id="about"
       width={'99vw'}
       paddingX={32}
-      paddingY={24}
     >
-      <Heading width={'100%'} textAlign={'start'}>
+      <Heading
+        width={'100%'}
+        textAlign={'start'}
+        position={'sticky'}
+        top={'10vh'}
+      >
         {t('about.title')}
       </Heading>
       <TextGenerateEffect words={t('about.aboutMe')} />

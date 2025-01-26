@@ -4,15 +4,10 @@ import { useTranslation } from 'react-i18next';
 const Work = () => {
   const { t } = useTranslation();
   return (
-    <Box
-      zIndex={0}
-      height={'100vh'}
-      width={'99vw'}
-      id="work"
-      paddingX={32}
-      paddingY={24}
-    >
-      <Heading>{t('work.title')}</Heading>
+    <Box zIndex={0} height={'100vh'} width={'99vw'} id="work" paddingX={32}>
+      <Heading position={'sticky'} top={'10vh'}>
+        {t('work.title')}
+      </Heading>
     </Box>
   );
 };

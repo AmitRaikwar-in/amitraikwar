@@ -69,7 +69,7 @@ const ProjectItem = ({
   );
   const { scrollY } = useScroll({ target: ref });
 
-  const opacity = useTransform(scrollY, base, [0.5, 1, 0, 0]);
+  const opacity = useTransform(scrollY, base, [1, 1, 0, 0]);
   const translateXX = useTransform(scrollY, base, ['0%', '0%', '120%', '200%']);
   const translateX = useTransform(scrollY, base, [
     '0%',

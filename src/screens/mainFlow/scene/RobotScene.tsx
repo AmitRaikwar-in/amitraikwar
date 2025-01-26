@@ -1,36 +1,16 @@
 /* eslint-disable react/no-unknown-property */
-import { Canvas, useFrame } from '@react-three/fiber';
-import { lazy, Suspense, useEffect, useRef } from 'react';
-import { easing } from 'maath';
+import { Canvas } from '@react-three/fiber';
+import { lazy, useEffect, useRef } from 'react';
 
-import { Environment, Html, useProgress } from '@react-three/drei';
-import { Box, Progress } from '@chakra-ui/react';
+import { Environment } from '@react-three/drei';
 import { useMousePositions } from '@hooks';
 import gsap from 'gsap';
 import { Mesh } from 'three';
 import { CharacterType } from '.';
-import {
-  Bloom,
-  DepthOfField,
-  EffectComposer,
-  SelectiveBloom,
-} from '@react-three/postprocessing';
-
-const LoaderComponent = () => {
-  const { progress } = useProgress();
-  return (
-    <Html>
-      <Box width="100vw" height="100vh">
-        <Progress width={300} value={progress} max={100} />
-      </Box>
-      Loading...
-    </Html>
-  );
-};
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 const AdamHead = lazy(() => import('./AdamHead'));
 const LieutenantHead = lazy(() => import('./LieutenantHead'));
-const IonDrive = lazy(() => import('./IonDrive'));
 const Copernicus = lazy(() => import('./Copernicus'));
 
 const RobotScene = ({ type = 'copernicus' }: { type: CharacterType }) => {
@@ -77,15 +57,13 @@ const RobotScene = ({ type = 'copernicus' }: { type: CharacterType }) => {
         intensity={0.4}
         color={'blue'}
       />
-      <Suspense fallback={<LoaderComponent />}>
-        {type === 'adam' ? (
-          <AdamHead ref={ref} />
-        ) : type === 'copernicus' ? (
-          <Copernicus ref={ref} />
-        ) : (
-          <LieutenantHead ref={ref} />
-        )}
-      </Suspense>
+      {type === 'adam' ? (
+        <AdamHead ref={ref} />
+      ) : type === 'copernicus' ? (
+        <Copernicus ref={ref} />
+      ) : (
+        <LieutenantHead ref={ref} />
+      )}
       <Environment preset="night" blur={0.2} />
       <EffectComposer>
         <Bloom

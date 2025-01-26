@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 const Contact = () => {
   const { t } = useTranslation();
   return (
-    <Box minH={'100vh'} id="contact" paddingTop={24} rowGap={10}>
-      <Heading textAlign={'start'}>{t('contact.title')}</Heading>
+    <Box minH={'100vh'} width={'99vw'} id="contact" paddingX={32}>
+      <Heading textAlign={'start'} position={'sticky'} top={'10vh'}>
+        {t('contact.title')}
+      </Heading>
       <HStack></HStack>
     </Box>
   );

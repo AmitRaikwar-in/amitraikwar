@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { motion, MotionValue } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -22,10 +22,7 @@ const HeroText = ({ opacity }: { opacity: MotionValue<number> }) => {
       >
         {t('about.quoteHeading')}
       </Text>
-      <Text
-        className="text-base md:text-lg text-white font-normal inter-var text-center"
-        marginTop={{ base: 2 }}
-      >
+      <Text className="text-base md:text-lg text-white font-normal inter-var text-center">
         {t('about.quoteSubheading')}
       </Text>
     </motion.div>
