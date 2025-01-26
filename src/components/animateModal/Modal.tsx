@@ -44,13 +44,7 @@ const AnimatedModal = ({
             >
               {title}
             </Heading>
-            <ReactPlayer
-              controls
-              url={videoUrl}
-              style={{
-                margin: 'auto',
-              }}
-            />
+            <ReactPlayer controls url={videoUrl} />
           </ModalContent>
           <ModalFooter>
             <Button

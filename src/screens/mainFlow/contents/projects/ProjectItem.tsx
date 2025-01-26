@@ -15,8 +15,10 @@ import {
   Link,
   Wrap,
 } from '@chakra-ui/react';
-import { useCursor, AnimatedModal, Chip, CardSpotlight } from '@components';
+import { AnimatedModal, Chip, CardSpotlight } from '@components';
 import { ProjectItemType } from '@data';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
 const CustomIconButton = ({
@@ -48,6 +50,7 @@ const CustomIconButton = ({
 };
 
 const ProjectItem = ({
+  index,
   title,
   icon,
   description,
@@ -57,32 +60,53 @@ const ProjectItem = ({
   link,
   tags,
   demoVideo,
-}: ProjectItemType) => {
-  const { setCursorInsets } = useCursor();
+}: ProjectItemType & { index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const height = window.innerHeight;
+  console.log(height);
+  const base = [0, 1400, 1800, ref.current?.offsetHeight ?? 2209].map(
+    (val) => val + height * 0.55 * index,
+  );
+  const { scrollY } = useScroll({ target: ref });
 
-  const onMouseEnter = () => {
-    setCursorInsets({
-      top: 0,
-      left: 0,
-      width: 0,
-      height: 0,
-      borderRadius: '0.5rem',
-    });
-  };
-
-  const onMouseLeave = () => {
-    setCursorInsets(undefined);
-  };
+  const opacity = useTransform(scrollY, base, [0.5, 1, 0, 0]);
+  const translateXX = useTransform(scrollY, base, ['0%', '0%', '120%', '200%']);
+  const translateX = useTransform(scrollY, base, [
+    '0%',
+    '0%',
+    '-120%',
+    '-200%',
+  ]);
 
   return (
-    <HStack width={'100%'} px={32} zIndex={10}>
-      <VStack width={'40%'} justifyContent={'center'}>
+    <HStack
+      width={'100%'}
+      px={32}
+      zIndex={1}
+      ref={ref}
+      position={'sticky'}
+      top={'38vh'}
+      gap={20}
+      overflowX={'hidden'}
+    >
+      <motion.div
+        style={{
+          width: '40%',
+          justifyContent: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          translateX: translateX,
+          opacity: opacity,
+          overflowX: 'hidden',
+        }}
+      >
         <Carousel
           axis="horizontal"
           dynamicHeight
           showStatus={false}
           emulateTouch
           autoPlay
+          showThumbs={false}
           infiniteLoop
           interval={3000}
           showArrows={false}
@@ -94,53 +118,58 @@ const ProjectItem = ({
             <Img key={img} src={img} alt={title} loading="lazy" />
           ))}
         </Carousel>
-      </VStack>
-      <CardSpotlight
+      </motion.div>
+      <motion.div
         style={{
           width: '55%',
+          translateX: translateXX,
+          opacity: opacity,
+          overflowX: 'hidden',
         }}
       >
-        <VStack
-          width={'100%'}
-          height={'55vh'}
-          alignItems={'flex-start'}
-          justifyContent={'space-between'}
-        >
-          <HStack justifyContent={'space-between'} width={'full'}>
-            <HStack>
-              <Heading size="lg">{title}</Heading>
-              {PROJECT_NAME_ICON_MAP[icon]}
-            </HStack>
-            <HStack spacing={5}>
-              <AnimatedModal
-                triggerText={'Demo'}
-                title={title}
-                videoUrl={demoVideo}
-                websiteUrl={link}
-              />
-              <CustomIconButton type="web" link={link} />
-              <CustomIconButton link={githubLink} />
-            </HStack>
-          </HStack>
-          <HStack justify={'flex-start'}>
-            <StarTrekIcon width={56} height={56} />
-            <Text>{description}</Text>
-          </HStack>
-          <VStack alignItems={'flex-start'} width={'100%'}>
-            {keyPoints.map((point) => (
-              <HStack key={point} justify={'flex-start'} paddingStart={3}>
-                <StarIcon />
-                <Text key={point}>{point}</Text>
+        <CardSpotlight>
+          <VStack
+            width={'100%'}
+            height={'55vh'}
+            alignItems={'flex-start'}
+            justifyContent={'space-between'}
+          >
+            <HStack justifyContent={'space-between'} width={'full'}>
+              <HStack>
+                <Heading size="lg">{title}</Heading>
+                {PROJECT_NAME_ICON_MAP[icon]}
               </HStack>
-            ))}
+              <HStack spacing={5}>
+                <AnimatedModal
+                  triggerText={'Demo'}
+                  title={title}
+                  videoUrl={demoVideo}
+                  websiteUrl={link}
+                />
+                <CustomIconButton type="web" link={link} />
+                <CustomIconButton link={githubLink} />
+              </HStack>
+            </HStack>
+            <HStack justify={'flex-start'}>
+              <StarTrekIcon width={56} height={56} />
+              <Text>{description}</Text>
+            </HStack>
+            <VStack alignItems={'flex-start'} width={'100%'}>
+              {keyPoints.map((point) => (
+                <HStack key={point} justify={'flex-start'} paddingStart={3}>
+                  <StarIcon />
+                  <Text key={point}>{point}</Text>
+                </HStack>
+              ))}
+            </VStack>
+            <Wrap>
+              {tags.map((tag) => (
+                <Chip key={tag} type={tag} />
+              ))}
+            </Wrap>
           </VStack>
-          <Wrap>
-            {tags.map((tag) => (
-              <Chip key={tag} type={tag} />
-            ))}
-          </Wrap>
-        </VStack>
-      </CardSpotlight>
+        </CardSpotlight>
+      </motion.div>
     </HStack>
   );
 };

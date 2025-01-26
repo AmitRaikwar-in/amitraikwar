@@ -4,7 +4,6 @@ import {
   LinkedInIcon,
   MediumIcon,
   RobotIcon,
-  SunIcon,
 } from '@assets';
 import {
   Box,
@@ -56,26 +55,25 @@ const SocialNavigation = ({
     setCursorInsets(undefined);
   };
   return (
-    <VStack position={'fixed'} bottom={20} right={14} rowGap={10} zIndex={10}>
+    <VStack position={'fixed'} bottom={20} right={14} rowGap={10} zIndex={1}>
       <Box
         ref={menuButtonRef}
-        zIndex={101}
+        zIndex={1}
         onMouseEnter={onMouseEnter(menuButtonRef, '6px')}
         onMouseLeave={onMouseLeave}
       >
         <Menu isLazy placement="top-start" closeOnBlur closeOnSelect={true}>
-          <MenuButton>
-            <IconButton
-              variant={'outline'}
-              borderColor={'gray'}
-              boxShadow={'0px 0px 10px 3px gray'}
-              bg={'rgba(255, 255, 255, 0.1)'}
-              backdropFilter={'blur(20px)'}
-              transition={'background-color 0.3s'}
-              aria-label="Options"
-              size={'lg'}
-              icon={<RobotIcon height={'2em'} width={'2em'} />}
-            />
+          <MenuButton
+            borderColor={'gray'}
+            boxShadow={'0px 0px 10px 3px gray'}
+            bg={'rgba(255, 255, 255, 0.1)'}
+            backdropFilter={'blur(20px)'}
+            transition={'background-color 0.3s'}
+            aria-label="Options"
+            padding={2}
+            borderRadius={'10px'}
+          >
+            <RobotIcon height={'2em'} width={'2em'} />
           </MenuButton>
           <MenuList
             style={{

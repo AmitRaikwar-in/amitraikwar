@@ -9,7 +9,7 @@ const HeroText = ({ opacity }: { opacity: MotionValue<number> }) => {
     <motion.div
       style={{
         opacity,
-        zIndex: 100,
+        zIndex: 1,
         position: 'sticky',
         top: '8vh',
         overflowX: 'hidden',

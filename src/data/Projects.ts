@@ -51,37 +51,42 @@ export const ProjectsData: ProjectItemType[] = [
     demoVideo: 'mac/AR_Mac.webm',
   },
   {
-    title: 'Mac OS App',
-    icon: ProjectName.MacOs,
+    title: 'Top App AI',
+    icon: ProjectName.TopAppAi,
     description:
-      'Developed a web app of the Mac OS desktop using React and Tailwind CSS. This project is inspired by the Mac OS desktop.',
+      'A web app for AI enthusiasts to find top AI applications. This app has more than 2000 AI applications listed.',
     githubLink: 'https://www.github.com/onemanfighter/mac-os-app',
     image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
-    link: 'https://mac.amitraikwar.in',
+    link: 'https://topappai.com',
     tags: [Language.react, Language.typescript, Language.chakra],
     keyPoints: [
-      'This project is inspired by the Mac OS desktop.',
-      'It is built with React and Chakra ui.',
-      'Currently working on adding more features and improving the design.',
-      'Mac OS App supports various features like opening and closing of windows, changing the wallpaper, and more.',
+      'Top App AI helps you to find top AI applications.',
+      'It has more than 2000 AI applications listed.',
+      'Top App AI supports various features like searching, filtering, and more.',
     ],
     demoVideo: 'mac/AR_Mac.webm',
   },
   {
-    title: 'Mac OS App',
-    icon: ProjectName.MacOs,
+    title: 'Telegramonic.com',
+    icon: ProjectName.Telegramonic,
     description:
-      'Developed a web app of the Mac OS desktop using React and Tailwind CSS. This project is inspired by the Mac OS desktop.',
-    githubLink: 'https://www.github.com/onemanfighter/mac-os-app',
-    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
-    link: 'https://mac.amitraikwar.in',
-    tags: [Language.react, Language.typescript, Language.chakra],
-    keyPoints: [
-      'This project is inspired by the Mac OS desktop.',
-      'It is built with React and Chakra ui.',
-      'Currently working on adding more features and improving the design.',
-      'Mac OS App supports various features like opening and closing of windows, changing the wallpaper, and more.',
+      'Web app for listing telegram channels and groups. This project is built with React, TypeScript, and Chakra UI.',
+    githubLink: 'https://www.github.com/onemanfighter/telegramonic',
+    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'], // Update
+    link: 'https://telegramonic.com',
+    tags: [
+      Language.react,
+      Language.typescript,
+      Language.chakra,
+      Language.i18n,
+      Language.zustand,
+      Language.tanstack,
     ],
-    demoVideo: 'mac/AR_Mac.webm',
+    keyPoints: [
+      'Telegramonic helps you to find telegram channels and groups.',
+      'It has more than 3000 telegram channels and groups listed.',
+      'Telegramonic supports various features like searching, filtering, and more.',
+    ],
+    demoVideo: 'mac/AR_Mac.webm', // Update
   },
 ];

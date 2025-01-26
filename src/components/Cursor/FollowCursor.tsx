@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { useMousePositions, useSpringMousePosition } from '../../hooks';
+import { useSpringMousePosition } from '../../hooks';
 import { useCursor } from './CursorProvider';
 
 const FollowCursor = () => {
@@ -37,7 +37,7 @@ const FollowCursor = () => {
         y: top === 0 ? y : top,
         backgroundColor: '#FFFFFFC5',
         mixBlendMode: 'difference',
-        zIndex: 999,
+        zIndex: 1,
         position: 'fixed',
         pointerEvents: 'none',
         ...props,

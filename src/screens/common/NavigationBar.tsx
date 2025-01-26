@@ -4,7 +4,7 @@ import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NavigationLink = [
   {
@@ -31,6 +31,8 @@ const ArticleLink = {
 };
 
 const NavigationBar = () => {
+  const location = useLocation();
+  const pathName = location.pathname;
   const navigate = useNavigate();
   const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
@@ -68,14 +70,13 @@ const NavigationBar = () => {
       width={'100%'}
       paddingRight={14}
       paddingLeft={{ base: 14, '2xl': 32 }}
-      zIndex={1000}
+      zIndex={1}
       justifyContent={'space-between'}
     >
       <Img
         src={AmitRaikwarLogo}
         alt={'logo'}
         w={8}
-        h={6}
         onClick={() => navigate('/')}
         _hover={{
           transform: 'scale(1.3)',
@@ -93,6 +94,7 @@ const NavigationBar = () => {
         bg={'rgba(255, 255, 255, 0.1)'}
         backdropFilter={'blur(20px)'}
         transition={'background-color 0.3s'}
+        display={pathName !== '/' ? 'none' : 'flex'}
       >
         {NavigationLink.map(({ name, href }) => (
           <LinkButton

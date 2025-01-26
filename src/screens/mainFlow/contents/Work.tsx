@@ -5,7 +5,7 @@ const Work = () => {
   const { t } = useTranslation();
   return (
     <Box
-      zIndex={100}
+      zIndex={0}
       height={'100vh'}
       width={'99vw'}
       id="work"
