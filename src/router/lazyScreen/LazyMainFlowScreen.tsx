@@ -10,23 +10,3 @@ export const LazyHostScreen = () => {
     </LazyComponentProvider>
   );
 };
-
-const MainScreen = lazy(() => import('@screens/mainFlow/MainScreen'));
-
-export const LazyMainScreen = () => {
-  return (
-    <LazyComponentProvider>
-      <MainScreen />
-    </LazyComponentProvider>
-  );
-};
-
-const ArticlesScreen = lazy(() => import('@screens/articles/Articles'));
-
-export const LazyArticlesScreen = () => {
-  return (
-    <LazyComponentProvider>
-      <ArticlesScreen />
-    </LazyComponentProvider>
-  );
-};

@@ -9,6 +9,6 @@ export type ProjectItemType = {
   githubLink: string;
   link: string;
   tags: Language[];
-  image: [string, string, string];
-  demoVideo: string;
+  image?: [string, string, string];
+  demoVideo?: string;
 };

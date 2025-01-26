@@ -1,4 +1,4 @@
-const Articles = () => {
+const ArticlesScreen = () => {
   return (
     <div>
       <h1>Articles</h1>
@@ -6,4 +6,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default ArticlesScreen;

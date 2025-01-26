@@ -26,14 +26,16 @@ const ChipMap: Record<Language, { title: string; Icon: React.ReactNode }> = {
   [Language.supabase]: { title: 'Supabase', Icon: <Supabase /> },
   [Language.tanstack]: { title: 'Tanstack', Icon: <Tanstack /> },
   [Language.zustand]: { title: 'Zustand', Icon: <Zustand /> },
+  [Language.more]: { title: 'More...', Icon: <Python /> },
 };
 
-const Chip = ({ type }: ChipProps) => {
+const Chip = ({ type, size = 'md' }: ChipProps) => {
   return (
     <HStack
       boxShadow={'0 0 4px 2px #FFFFFFA0'}
-      spacing={1}
-      p={1}
+      spacing={size === 'md' ? 1 : 0.1}
+      p={size === 'md' ? 1 : 0.3}
+      px={size === 'md' ? 1 : 0.6}
       borderRadius="lg"
       border={`1px solid`}
       color="white"

@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { NavigationBar } from '@screens/common';
+import { Footer, NavigationBar } from '@screens/common';
 import { Outlet } from 'react-router-dom';
 
 const Host = () => {
@@ -7,6 +7,7 @@ const Host = () => {
     <Box width={'100vw'} height={'100%'}>
       <NavigationBar />
       <Outlet />
+      <Footer />
     </Box>
   );
 };

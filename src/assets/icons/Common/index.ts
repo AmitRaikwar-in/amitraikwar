@@ -10,3 +10,4 @@ export { default as InstagramIcon } from './InstagramIcon';
 export { default as StarIcon } from './Star';
 export { default as StarTrekIcon } from './Startrek';
 export { default as Redirect } from './Redirect';
+export { default as NpmIcon } from './NpmIcon';

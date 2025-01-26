@@ -10,8 +10,10 @@ export enum Language {
   supabase = 'supabase',
   tanstack = 'tanstack',
   i18n = 'i18n',
+  more = 'more',
 }
 
 export type ChipProps = {
+  size?: 'sm' | 'md';
   type: Language;
 };

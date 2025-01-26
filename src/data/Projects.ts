@@ -89,4 +89,55 @@ export const ProjectsData: ProjectItemType[] = [
     ],
     demoVideo: 'mac/AR_Mac.webm', // Update
   },
+  {
+    title: 'Hourcoding UI Library',
+    icon: ProjectName.HourcodingUI,
+    description:
+      'Developed a UI library for Hourcoding.com and others hourcoding sub-project.',
+    githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
+    link: 'https://www.npmjs.com/package/@hourcoding/hourcoding-ui',
+    tags: [
+      Language.react,
+      Language.tanstack,
+      Language.zustand,
+      Language.typescript,
+      Language.chakra,
+    ],
+    keyPoints: [
+      'This website is designed for coding tutorials and programming articles.',
+      'It is built with React, Next.js, TypeScript, Chakra UI, and Tailwind CSS.',
+      'Currently working on adding more content and improving the design.',
+      'Hourcoding.com supports various features like coding tutorials, cheatsheets.',
+    ],
+  },
+  {
+    title: 'Galaxy UI Library',
+    icon: ProjectName.GalaxyUI,
+    description:
+      'Developed a TS UI library having most React UI component and hooks.',
+    githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
+    link: 'https://www.npmjs.com/package/@galaxy_ui/ui',
+    tags: [Language.react, Language.typescript, Language.i18n],
+    keyPoints: [
+      'This website is designed for coding tutorials and programming articles.',
+      'It is built with React, Next.js, TypeScript, Chakra UI, and Tailwind CSS.',
+    ],
+  },
+  {
+    title: 'Dashwave',
+    icon: ProjectName.Dashwave,
+    description: 'Management website for life and work.',
+    githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
+    link: 'https://dashwave.amitraikwar.com',
+    tags: [
+      Language.react,
+      Language.typescript,
+      Language.i18n,
+      Language.supabase,
+    ],
+    keyPoints: [
+      'This website is designed for coding tutorials and programming articles.',
+      'It is built with React, Next.js, TypeScript, Chakra UI, and Tailwind CSS.',
+    ],
+  },
 ];

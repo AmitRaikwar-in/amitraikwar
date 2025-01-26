@@ -1,5 +1,4 @@
 import { TitleBoxContainer } from '@components';
-import { Footer } from './components';
 import { Contents } from './contents';
 import { CoverContent } from './CoverContent';
 
@@ -15,7 +14,6 @@ const MainScreen = () => {
     >
       <CoverContent />
       <Contents />
-      <Footer />
     </TitleBoxContainer>
   );
 };

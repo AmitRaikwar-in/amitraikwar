@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import FollowCursor from './FollowCursor';
+import SplashCursor from './SplashCursor';
 
 export type CursorType = 'follow' | 'splash';
 
@@ -81,7 +82,7 @@ const CursorProvider = ({ children }: { children: React.ReactNode }) => {
         setCursorInsets,
       }}
     >
-      {cursorType === 'splash' ? <FollowCursor /> : <FollowCursor />}
+      {cursorType === 'splash' ? <SplashCursor /> : <FollowCursor />}
       {children}
     </CursorContext.Provider>
   );

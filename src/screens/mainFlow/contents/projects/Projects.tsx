@@ -1,9 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { VStack } from '@chakra-ui/react';
+import { VStack, Wrap } from '@chakra-ui/react';
 import { ProjectsData } from '@data';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import ProjectItem from './ProjectItem';
-import { WavyBackground } from '@components';
+import { Card, WavyBackground } from '@components';
 import HeroText from './HeroText';
 import { useRef } from 'react';
 
@@ -31,17 +30,19 @@ const Projects = () => {
       >
         <WavyBackground />
       </motion.div>
-      <motion.div
-        style={{
-          position: 'sticky',
-          top: '35vh',
-          translateY: '-15vh',
-        }}
-      >
-        {ProjectsData.map((project, index) => (
-          <ProjectItem key={index} index={index} {...project} />
+      <Wrap style={{ zIndex: 0 }} spacing={16} justify="center" mx={24} mb={24}>
+        {ProjectsData.map(({ title, tags, icon, description, link }, index) => (
+          <Card
+            key={index}
+            titleText={title}
+            centerText=""
+            chips={tags}
+            icon={icon}
+            description={description}
+            link={link}
+          />
         ))}
-      </motion.div>
+      </Wrap>
       );
     </VStack>
   );
