@@ -2,7 +2,7 @@ import { Language } from '@components';
 import { ProjectItemType } from './types';
 import { ProjectName } from '@assets';
 
-export const ProjectsData: ProjectItemType[] = [
+export const PROJECT_DATA: ProjectItemType[] = [
   {
     title: 'Hourcoding.com',
     icon: ProjectName.Hourcoding,

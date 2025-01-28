@@ -68,12 +68,14 @@ const NavigationBar = () => {
   return (
     <HStack
       position={'fixed'}
-      marginY={{ md: 2, xl: 4 }}
+      paddingTop={{ md: 2, xl: 4 }}
+      paddingBottom={4}
       width={'100%'}
       paddingRight={14}
       paddingLeft={{ base: 14, '2xl': 32 }}
       zIndex={2}
       justifyContent={'space-between'}
+      bg={'linear-gradient(180deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 100%)'}
     >
       <Img
         src={AmitRaikwarLogo}

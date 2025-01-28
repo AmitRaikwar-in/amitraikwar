@@ -12,3 +12,15 @@ export type ProjectItemType = {
   image?: [string, string, string];
   demoVideo?: string;
 };
+
+export type WorkItemType = {
+  title: string;
+  description: string;
+  keyPoints: string[];
+  links: { title: string; link: string }[];
+  tags: string[];
+};
+
+export type WorkType = {
+  [title: string]: WorkItemType;
+};

@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { VStack, Wrap } from '@chakra-ui/react';
-import { ProjectsData } from '@data';
+import { PROJECT_DATA } from '@data';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Card, WavyBackground } from '@components';
 import HeroText from './HeroText';
@@ -31,7 +31,7 @@ const Projects = () => {
         <WavyBackground />
       </motion.div>
       <Wrap style={{ zIndex: 0 }} spacing={16} justify="center" mx={24} mb={24}>
-        {ProjectsData.map(({ title, tags, icon, description, link }, index) => (
+        {PROJECT_DATA.map(({ title, tags, icon, description, link }, index) => (
           <Card
             key={index}
             titleText={title}

@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/react';
-import { ProjectsData } from '@data';
+import { PROJECT_DATA } from '@data';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { ProjectItem } from './components';
 import { useEffect, useRef } from 'react';
@@ -12,7 +12,7 @@ const Projects = () => {
   const secondName = location.pathname.split('/')[2];
   const ref = useRef(null);
 
-  const filteredProjects = ProjectsData.filter((project) =>
+  const filteredProjects = PROJECT_DATA.filter((project) =>
     project.icon === secondName ? project : null,
   );
 
