@@ -6,7 +6,7 @@ const Work = () => {
   const { t } = useTranslation();
   return (
     <Box zIndex={0} height={'200vh'} width={'99vw'} id="work" paddingX={32}>
-      <Heading position={'sticky'} top={'10vh'}>
+      <Heading position={'sticky'} top={'10vh'} zIndex={3}>
         {t('work.title')}
       </Heading>
       <Timeline
