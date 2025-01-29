@@ -19,7 +19,10 @@ const Footer = () => {
       width={'100%'}
       overflowX={'hidden'}
       bg={'black'}
+      height={'10vh'}
       color={'white'}
+      display={'flex'}
+      justifyContent={'center'}
     >
       <HoverBorderGradient>
         <FooterEndText />

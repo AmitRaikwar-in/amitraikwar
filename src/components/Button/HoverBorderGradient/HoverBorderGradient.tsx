@@ -106,7 +106,7 @@ const HoverBorderGradientBase = ({
       }}
       onMouseLeave={() => setHovered(false)}
       className={
-        'relative flex rounded-full border border-gray-900  content-center bg-black/20 hover:bg-black/10 transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap gap-10 h-min justify-center overflow-visible p-px decoration-clone w-fit'
+        'relative flex rounded-full border border-gray-900  content-center bg-black/20 hover:bg-black/10 transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap h-min justify-center overflow-visible  decoration-clone w-fit'
       }
       {...props}
     >
