@@ -26,11 +26,7 @@ const Timeline = ({
   });
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(
-    scrollYProgress,
-    [0, 0.02, 0.04, 0.7, 0.1],
-    [0, 0.1, 0.2, 0.3, 1],
-  );
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
     <div className="w-full bg-black font-sans md:px-10" ref={containerRef}>
@@ -75,7 +71,7 @@ const Timeline = ({
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
+            className="absolute z-100 inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
           />
         </div>
       </div>

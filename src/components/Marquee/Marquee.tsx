@@ -27,6 +27,7 @@ const Marquee = ({
         flexDirection: vertical ? 'column' : 'row',
       }}
       gap={gap}
+      paddingX={gap}
       {...hoverProps}
     >
       <style>

@@ -73,7 +73,7 @@ const NavigationBar = () => {
       width={'100%'}
       paddingRight={14}
       paddingLeft={{ base: 14, '2xl': 32 }}
-      zIndex={2}
+      zIndex={10}
       justifyContent={'space-between'}
       bg={'linear-gradient(180deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 100%)'}
     >

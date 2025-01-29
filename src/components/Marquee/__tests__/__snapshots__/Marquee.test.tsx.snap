@@ -3,7 +3,7 @@
 exports[`Marquee should render the Marquee component 1`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
     <style>
@@ -45,7 +45,7 @@ exports[`Marquee should render the Marquee component 1`] = `
 exports[`Marquee should render the Marquee component 2`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
     <style>
@@ -267,7 +267,7 @@ exports[`Marquee should render the Marquee component 2`] = `
 exports[`Marquee should render the Marquee component with horizontal direction 1`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
     <style>
@@ -489,7 +489,7 @@ exports[`Marquee should render the Marquee component with horizontal direction 1
 exports[`Marquee should render the Marquee component with reverse false 1`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
     <style>
@@ -711,7 +711,7 @@ exports[`Marquee should render the Marquee component with reverse false 1`] = `
 exports[`Marquee should render the Marquee component with vertical direction 1`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: column;"
   >
     <style>
@@ -933,7 +933,7 @@ exports[`Marquee should render the Marquee component with vertical direction 1`]
 exports[`Marquee should render the Marquee component without hover 1`] = `
 <div>
   <div
-    class="css-lhfv11"
+    class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
     <style>

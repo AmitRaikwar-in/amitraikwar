@@ -1,9 +1,13 @@
 import { HStack, Text } from '@chakra-ui/react';
-import { ChipProps, Language } from './types';
+import { ChipProps, Skills } from './types';
 import {
   ChakraUI,
+  Css,
   Express,
+  Git,
+  Html,
   I18next,
+  Jest,
   Mysql,
   NodeJs,
   Python,
@@ -13,20 +17,79 @@ import {
   Typescript,
   Zustand,
 } from '@assets/icons/Chips';
+import { SVGProps } from 'react';
 
-const ChipMap: Record<Language, { title: string; Icon: React.ReactNode }> = {
-  [Language.python]: { title: 'Python', Icon: <Python /> },
-  [Language.typescript]: { title: 'Typescript', Icon: <Typescript /> },
-  [Language.chakra]: { title: 'Chakra UI', Icon: <ChakraUI /> },
-  [Language.react]: { title: 'React', Icon: <React /> },
-  [Language.node]: { title: 'NodeJs', Icon: <NodeJs /> },
-  [Language.express]: { title: 'Express', Icon: <Express /> },
-  [Language.mysql]: { title: 'MySql', Icon: <Mysql /> },
-  [Language.i18n]: { title: 'I18next', Icon: <I18next /> },
-  [Language.supabase]: { title: 'Supabase', Icon: <Supabase /> },
-  [Language.tanstack]: { title: 'Tanstack', Icon: <Tanstack /> },
-  [Language.zustand]: { title: 'Zustand', Icon: <Zustand /> },
-  [Language.more]: { title: 'More...', Icon: <Python /> },
+export const ChipMap: Record<
+  Skills,
+  {
+    title: string;
+    Icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+  }
+> = {
+  [Skills.python]: {
+    title: 'Python',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Python {...props} />,
+  },
+  [Skills.typescript]: {
+    title: 'Typescript',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Typescript {...props} />,
+  },
+  [Skills.chakra]: {
+    title: 'Chakra UI',
+    Icon: (props: SVGProps<SVGSVGElement>) => <ChakraUI {...props} />,
+  },
+  [Skills.react]: {
+    title: 'React',
+    Icon: (props: SVGProps<SVGSVGElement>) => <React {...props} />,
+  },
+  [Skills.node]: {
+    title: 'NodeJs',
+    Icon: (props: SVGProps<SVGSVGElement>) => <NodeJs {...props} />,
+  },
+  [Skills.express]: {
+    title: 'Express',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Express {...props} />,
+  },
+  [Skills.mysql]: {
+    title: 'MySql',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Mysql {...props} />,
+  },
+  [Skills.i18n]: {
+    title: 'I18next',
+    Icon: (props: SVGProps<SVGSVGElement>) => <I18next {...props} />,
+  },
+  [Skills.supabase]: {
+    title: 'Supabase',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Supabase {...props} />,
+  },
+  [Skills.tanstack]: {
+    title: 'Tanstack',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Tanstack {...props} />,
+  },
+  [Skills.zustand]: {
+    title: 'Zustand',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Zustand {...props} />,
+  },
+  [Skills.git]: {
+    title: 'Git',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Git {...props} />,
+  },
+  [Skills.jest]: {
+    title: 'Jest',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Jest {...props} />,
+  },
+  [Skills.html]: {
+    title: 'HTML',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Html {...props} />,
+  },
+  [Skills.css]: {
+    title: 'CSS',
+    Icon: (props: SVGProps<SVGSVGElement>) => <Css {...props} />,
+  },
+  [Skills.more]: {
+    title: 'More...',
+    Icon: (_props: SVGProps<SVGSVGElement>) => <></>,
+  },
 };
 
 const Chip = ({ type, size = 'md' }: ChipProps) => {
@@ -41,7 +104,7 @@ const Chip = ({ type, size = 'md' }: ChipProps) => {
       color="white"
     >
       <Text fontSize="sm">{ChipMap[type].title}</Text>
-      {ChipMap[type].Icon}
+      {ChipMap[type].Icon({})}
     </HStack>
   );
 };

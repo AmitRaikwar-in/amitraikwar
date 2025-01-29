@@ -1,11 +1,15 @@
 export { ChakraUI } from './ChakraUI';
+export { Css } from './Css';
 export { Python } from './Python';
 export { Express } from './Express';
-export { Typescript } from './Typescript';
+export { Html } from './Html';
 export { I18next } from './I18next';
+export { Git } from './Git';
+export { Jest } from './Jest';
 export { Mysql } from './Mysql';
 export { React } from './React';
 export { NodeJs } from './NodeJs';
 export { Supabase } from './Supabase';
+export { Typescript } from './Typescript';
 export { Tanstack } from './Tanstack';
 export { Zustand } from './Zustand';

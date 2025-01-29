@@ -2,7 +2,13 @@ import { SVGProps } from 'react';
 
 export function Tanstack(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={22} {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={22}
+      viewBox="0 0 24 22"
+      {...props}
+    >
       <path
         d="m14.813 13.629-.461.816a.782.782 0 0 1-.676.399h-3.528a.775.775 0 0 1-.671-.399l-.461-.816Zm1.285-2.281-.809 1.437H8.54l-.812-1.437Zm-.782-2.235.786 1.387H7.727l.785-1.387Zm-1.64-2.11c.277 0 .535.15.676.395l.488.872H8.988l.489-.872a.772.772 0 0 1 .671-.394Zm0 0"
         style={{

@@ -98,7 +98,7 @@ const WorkUIData = () => {
                     </Wrap>
                     <HStack>
                       <CustomHeading title="Important Links:" />
-                      <Wrap spacing={1}>
+                      <Wrap spacingX={5}>
                         {links.map(({ title, link }, index) => (
                           <Text
                             key={index}
