@@ -44,7 +44,17 @@ const AnimatedModal = ({
             >
               {title}
             </Heading>
-            <ReactPlayer controls url={videoUrl} />
+            <ReactPlayer
+              controls
+              progressInterval={1000}
+              previewTabIndex={0}
+              url={videoUrl}
+              style={{
+                justifyContent: 'center',
+                flex: 1,
+                borderRadius: '0.5rem',
+              }}
+            />
           </ModalContent>
           <ModalFooter>
             <Button
