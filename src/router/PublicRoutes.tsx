@@ -8,12 +8,14 @@ import { LazyHostScreen } from './lazyScreen';
 import MainScreen from '../screens/mainFlow/MainScreen';
 import ArticlesScreen from '../screens/articles/ArticlesScreen';
 import ProjectsScreen from '../screens/projects/ProjectsScreen';
+import ArticleEditor from '@screens/articleEditor/ArticleEditor';
 
 const publicRouter = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<LazyHostScreen />}>
       <Route path="" element={<MainScreen />} />
       <Route path="articles" element={<ArticlesScreen />} />
+      <Route path="privateRoute" element={<ArticleEditor />} />
       <Route path="projects" element={<ProjectsScreen />}>
         <Route path=":id" element={<ProjectsScreen />} />
       </Route>

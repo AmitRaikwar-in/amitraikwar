@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import FollowCursor from './FollowCursor';
 import SplashCursor from './SplashCursor';
 
-export type CursorType = 'follow' | 'splash';
+export type CursorType = 'follow' | 'splash' | 'none';
 
 export const CursorContext = createContext<{
   insets:
@@ -82,7 +82,13 @@ const CursorProvider = ({ children }: { children: React.ReactNode }) => {
         setCursorInsets,
       }}
     >
-      {cursorType === 'splash' ? <SplashCursor /> : <FollowCursor />}
+      {cursorType !== 'none' ? (
+        cursorType === 'splash' ? (
+          <SplashCursor />
+        ) : (
+          <FollowCursor />
+        )
+      ) : null}
       {children}
     </CursorContext.Provider>
   );
