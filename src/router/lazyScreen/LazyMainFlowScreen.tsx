@@ -10,3 +10,13 @@ export const LazyHostScreen = () => {
     </LazyComponentProvider>
   );
 };
+
+const HiderScreen = lazy(() => import('@screens/hider/Hider'));
+
+export const LazyHiderScreen = () => {
+  return (
+    <LazyComponentProvider>
+      <HiderScreen />
+    </LazyComponentProvider>
+  );
+};
