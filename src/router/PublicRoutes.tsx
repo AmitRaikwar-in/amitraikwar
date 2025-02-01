@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import {
   Navigate,
   Outlet,
@@ -11,6 +12,10 @@ import ArticlesScreen from '../screens/articles/ArticlesScreen';
 import ProjectsScreen from '../screens/projects/ProjectsScreen';
 import ArticleEditor from '@screens/articleEditor/ArticleEditor';
 
+export const BASE_URL = 'secret_path';
+export const BASE_URL_ROUTE = isEmpty(BASE_URL) ? '/' : `/${BASE_URL}`;
+export const BASE_NAV_ROUTE = isEmpty(BASE_URL) ? '/' : `/${BASE_URL}/`;
+
 const publicRouter = createBrowserRouter(
   createRoutesFromChildren(
     <Route
@@ -21,8 +26,8 @@ const publicRouter = createBrowserRouter(
         </>
       }
     >
-      <Route path="" element={<LazyHiderScreen />} />
-      <Route path="version2" element={<LazyHostScreen />}>
+      {!isEmpty(BASE_URL) && <Route path="" element={<LazyHiderScreen />} />}
+      <Route path={BASE_URL} element={<LazyHostScreen />}>
         <Route path="" element={<MainScreen />} />
         <Route path="articles" element={<ArticlesScreen />} />
         <Route path="privateRoute" element={<ArticleEditor />} />

@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMoveToTop } from '@hooks';
+import { BASE_URL_ROUTE } from '@router';
 
 const NavigationLink = [
   {
@@ -82,7 +83,7 @@ const NavigationBar = () => {
         alt={'logo'}
         w={8}
         onClick={() => {
-          navigate('/');
+          navigate(BASE_URL_ROUTE);
           moveToTop();
         }}
         _hover={{
@@ -101,7 +102,7 @@ const NavigationBar = () => {
         bg={'rgba(255, 255, 255, 0.1)'}
         backdropFilter={'blur(20px)'}
         transition={'background-color 0.3s'}
-        display={pathName !== '/' ? 'none' : 'flex'}
+        display={pathName !== BASE_URL_ROUTE ? 'none' : 'flex'}
       >
         {NavigationLink.map(({ name, href }) => (
           <LinkButton
@@ -123,7 +124,7 @@ const NavigationBar = () => {
           <LinkButton
             key={ArticleLink.name}
             text={t(ArticleLink.name)}
-            href={ArticleLink.href}
+            href={BASE_URL_ROUTE + '/' + ArticleLink.href}
             fontSize={'lg'}
             animationOnHover
           />

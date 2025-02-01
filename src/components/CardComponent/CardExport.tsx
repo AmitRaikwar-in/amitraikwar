@@ -59,7 +59,7 @@ const Card = ({
         >
           {titleText}
         </Text>
-        <Button size="sm" py={0} px={1} as={Link} to={'/projects/' + icon}>
+        <Button size="sm" py={0} px={1} as={Link} to={'projects/' + icon}>
           Know More
         </Button>
       </HStack>

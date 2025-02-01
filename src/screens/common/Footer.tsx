@@ -1,11 +1,12 @@
 import { Box, Text } from '@chakra-ui/react';
 import { HoverBorderGradient } from '@components';
+import { BASE_URL_ROUTE } from '@router';
 import { Link } from 'react-router-dom';
 
 const FooterEndText = () => (
   <Text fontSize={'md'}>
     © {new Date().getFullYear()}{' '}
-    <Link to={'/'} color="violet">
+    <Link to={BASE_URL_ROUTE} color="violet">
       Amit Raikwar
     </Link>{' '}
     | All rights reserved

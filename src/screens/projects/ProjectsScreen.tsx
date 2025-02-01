@@ -5,15 +5,18 @@ import { ProjectItem } from './components';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useCursor } from '@components';
+import { BASE_URL } from '@router';
 
 const Projects = () => {
   const { setCursorType } = useCursor();
   const location = useLocation();
-  const secondName = location.pathname.split('/')[2];
+  const name = location.pathname.split('/');
+
+  const projectName = name[1] === BASE_URL ? name[3] : name[2];
   const ref = useRef(null);
 
   const filteredProjects = PROJECT_DATA.filter((project) =>
-    project.icon === secondName ? project : null,
+    project.icon === projectName ? project : null,
   );
 
   useEffect(() => {
