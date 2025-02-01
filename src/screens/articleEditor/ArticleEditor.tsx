@@ -5,6 +5,21 @@ import '@mdxeditor/editor/style.css';
 import { useCursor } from '@components';
 import { useLayoutEffect } from 'react';
 
+const MD_Example = `
+# Hello world
+This is a paragraph
+
+- This is a list
+- This is another list
+
+\`\`\`js
+console.log('Hello world');
+\`\`\`
+
+This is a code block
+
+`;
+
 const ArticleEditor = () => {
   const { setCursorType } = useCursor();
   useLayoutEffect(() => {
@@ -15,21 +30,23 @@ const ArticleEditor = () => {
   }, [setCursorType]);
   return (
     <VStack px={10} pt={20} width={'100vw'} rowGap={4} bg={'black'}>
-      <Input placeholder="Title" />
-      <Input placeholder="Description" />
+      <VStack w={'50%'} rowGap={4}>
+        <Input placeholder="Title" />
+        <Input placeholder="Subtitle" />
+      </VStack>
       <Box
         width={'100%'}
-        bg={'black'}
         border={'1px solid white'}
         borderRadius={'md'}
         p={2}
+        className=" min-h-[100vh]"
       >
         <MDXEditor
-          className="w-full"
-          markdown="# Hello world"
+          className="bg-white"
+          markdown={MD_Example}
           plugins={ALL_PLUGINS}
           spellCheck={true}
-          contentEditableClassName="w-[100%] h-96 text-white"
+          contentEditableClassName="min-h-[100vh] px-6 py-6 prose"
         />
       </Box>
     </VStack>

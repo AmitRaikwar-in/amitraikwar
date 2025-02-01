@@ -1,11 +1,12 @@
 import {
   toolbarPlugin,
-  KitchenSinkToolbar,
   listsPlugin,
   quotePlugin,
   headingsPlugin,
   linkPlugin,
   linkDialogPlugin,
+  UndoRedo,
+  BoldItalicUnderlineToggles,
   imagePlugin,
   tablePlugin,
   thematicBreakPlugin,
@@ -16,18 +17,21 @@ import {
   markdownShortcutPlugin,
   AdmonitionDirectiveDescriptor,
   directivesPlugin,
+  KitchenSinkToolbar,
 } from '@mdxeditor/editor';
 
 export const ALL_PLUGINS = [
-  toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
-  listsPlugin(),
-  quotePlugin({
-    quoteAutocompleteSuggestions: [
-      'https://via.placeholder.com/150',
-      'https://via.placeholder.com/150',
-    ],
+  toolbarPlugin({
+    toolbarContents: () => (
+      <>
+        <UndoRedo />
+        <BoldItalicUnderlineToggles />
+        <KitchenSinkToolbar />
+      </>
+    ),
   }),
-  headingsPlugin({ allowedHeadingLevels: [1, 2, 3] }),
+  quotePlugin({ quoteTypes: ['blockquote', 'pullquote'], pullquote: true }),
+  headingsPlugin(),
   linkPlugin(),
   linkDialogPlugin(),
   imagePlugin({
@@ -38,11 +42,15 @@ export const ALL_PLUGINS = [
     imageUploadHandler: async () =>
       Promise.resolve('https://picsum.photos/200/300'),
   }),
+  listsPlugin({
+    orderedList: true,
+    unorderedList: true,
+    taskList: true,
+  }),
   tablePlugin(),
   thematicBreakPlugin(),
   frontmatterPlugin(),
-  codeBlockPlugin({ defaultCodeBlockLanguage: '' }),
-  //   sandpackPlugin({ sandpackConfig: virtuosoSampleSandpackConfig }),
+  codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
   codeMirrorPlugin({
     codeBlockLanguages: {
       js: 'JavaScript',

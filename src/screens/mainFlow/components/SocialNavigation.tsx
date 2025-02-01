@@ -3,6 +3,8 @@ import {
   InstagramIcon,
   LinkedInIcon,
   MediumIcon,
+  MusicIcon,
+  MusicOffIcon,
   RobotIcon,
 } from '@assets';
 import {
@@ -16,7 +18,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useCursor } from '@components';
-import { RefObject, useRef } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { CharacterType } from '../scene';
 import { CONTACT } from '@data';
 
@@ -39,10 +41,22 @@ const SocialNavigation = ({
   handleCharacterClick: (type: CharacterType) => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    if (isPlaying) {
+      document.querySelector('audio')?.play();
+    } else {
+      document.querySelector('audio')?.pause();
+    }
+  }, [isPlaying]);
+
   const menuButtonRef = useRef<HTMLDivElement>(null);
+  const musicRef = useRef<HTMLButtonElement>(null);
   const { setCursorInsets } = useCursor();
   const onMouseEnter =
-    (ref: RefObject<HTMLDivElement>, radius: string) => () => {
+    (ref: RefObject<HTMLDivElement | HTMLButtonElement>, radius: string) =>
+    () => {
       const { width, height, top, left } =
         ref.current?.getBoundingClientRect() || {
           width: 56,
@@ -60,7 +74,34 @@ const SocialNavigation = ({
   };
 
   return (
-    <VStack position={'fixed'} bottom={20} right={14} rowGap={10} zIndex={1}>
+    <VStack position={'fixed'} bottom={20} right={14} rowGap={6} zIndex={1}>
+      <IconButton
+        ref={musicRef}
+        aria-label={'music'}
+        borderColor={'gray'}
+        boxShadow={'0px 0px 10px 3px gray'}
+        bg={'rgba(255, 255, 255, 0.1)'}
+        backdropFilter={'blur(20px)'}
+        transition={'background-color 0.3s'}
+        padding={2}
+        borderRadius={'10px'}
+        icon={
+          isPlaying ? (
+            <MusicIcon width={'1.5em'} height={'1.5em'} color="white" />
+          ) : (
+            <MusicOffIcon width={'1.5em'} height={'1.5em'} color="white" />
+          )
+        }
+        onClick={() => setIsPlaying(!isPlaying)}
+        onMouseEnter={onMouseEnter(musicRef, '10px')}
+        onMouseLeave={onMouseLeave}
+      />
+      <audio src="bg.mp3" loop hidden autoPlay>
+        <p>
+          If you are reading this, it is because your browser does not support
+          the audio element.
+        </p>
+      </audio>
       <Box
         ref={menuButtonRef}
         zIndex={1}
