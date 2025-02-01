@@ -15,8 +15,7 @@ const Hider = () => {
         <Text color={'white'} textAlign={'center'} fontSize={'2xl'}>
           You cannot 🚫access this website until you know me personally 😝.
           <br />
-          <br />
-          This is temporary🚧, I will remove this soon⏳.
+          This is temporary🚧, It will be resolved soon⏳.
         </Text>
       </Box>
     </TitleBoxContainer>

@@ -35,10 +35,9 @@ const Projects = () => {
           <Card
             key={index}
             titleText={title}
-            centerText=""
             chips={tags}
             icon={icon}
-            description={description}
+            description={description.split('\n').slice(0, 1).join('\n')}
             link={link}
           />
         ))}

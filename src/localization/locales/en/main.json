@@ -19,7 +19,8 @@
     "aboutMe": "I'm a full-stack developer driven by a passion for crafting exceptional digital experiences. My expertise lies in React and React Native, enabling me to seamlessly build robust and engaging applications from the ground up. Driven by curiosity, I always try to explore and learn new things."
   },
   "work": {
-    "title": "Work Experience"
+    "title": "Work Experience",
+    "description": "I've been working with Raja software labs for more than 3.5 years. Here's a timeline of my journey at RSL along with key skills development."
   },
   "projects": {
     "title": "Projects"
@@ -29,7 +30,7 @@
   },
   "contact": {
     "title": "Contact",
-    "description": "Get in touch, I'd love to hear from you! Whether you have a question, feedback, or just want to connect, feel free to reach out. You can contact me through the email below or use out LinkedIn, Instagram to message directly.",
+    "description": "Get in touch, I'd love to hear from you! Whether you have a question, feedback, or just want to connect, feel free to reach out. You can contact me through the email below or use LinkedIn, Instagram to message directly.",
     "getInTouch": "Get in Touch"
   },
   "articles": {

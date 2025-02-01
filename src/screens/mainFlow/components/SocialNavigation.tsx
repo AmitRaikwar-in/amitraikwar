@@ -41,7 +41,7 @@ const SocialNavigation = ({
   handleCharacterClick: (type: CharacterType) => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (isPlaying) {

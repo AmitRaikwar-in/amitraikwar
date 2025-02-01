@@ -127,14 +127,12 @@ const WorkUIData = () => {
 
 const Work = () => {
   const { t } = useTranslation();
-  const mainTitle =
-    "I've been working on Raja software labs for the past 3.5 years. Here's a timeline of my journey at RSL along with key skills development.";
   return (
     <Box zIndex={0} minH={'100vh'} width={'99vw'} id="work" paddingX={32}>
       <Heading position={'sticky'} top={'10vh'} zIndex={3}>
         {t('work.title')}
       </Heading>
-      <Timeline title={mainTitle} data={WorkUIData()} />
+      <Timeline title={t('work.description')} data={WorkUIData()} />
     </Box>
   );
 };

@@ -31,7 +31,7 @@ const Timeline = ({
   return (
     <div className="w-full bg-black font-sans md:px-10" ref={containerRef}>
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-xl">
+        <p className="text-neutral-900 dark:text-neutral-100 text-sm md:text-base max-w-xl">
           {title}
         </p>
       </div>

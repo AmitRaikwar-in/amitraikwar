@@ -166,8 +166,8 @@ const ProjectItem = ({
                 <CustomIconButton link={githubLink} />
               </HStack>
             </HStack>
-            <HStack justify={'flex-start'}>
-              <StarTrekIcon width={56} height={56} />
+            <HStack justify={'start'} alignItems={'start'}>
+              <StarTrekIcon width={'72px'} height={'72px'} />
               <Text>{description}</Text>
             </HStack>
             <VStack alignItems={'flex-start'} width={'100%'}>
