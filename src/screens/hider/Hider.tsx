@@ -13,7 +13,7 @@ const Hider = () => {
         alignItems={'center'}
       >
         <Text color={'white'} textAlign={'center'} fontSize={'2xl'}>
-          You cannot 🚫access this website until you know the me personally 😝.
+          You cannot 🚫access this website until you know me personally 😝.
           <br />
           <br />
           This is temporary🚧, I will remove this soon⏳.
