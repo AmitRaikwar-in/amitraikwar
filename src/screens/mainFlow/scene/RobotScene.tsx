@@ -13,7 +13,11 @@ const AdamHead = lazy(() => import('./AdamHead'));
 const LieutenantHead = lazy(() => import('./LieutenantHead'));
 const Copernicus = lazy(() => import('./Copernicus'));
 
-const RobotScene = ({ type = 'copernicus' }: { type: CharacterType }) => {
+const RobotScene = ({
+  type = CharacterType.COPERNICUS,
+}: {
+  type: CharacterType;
+}) => {
   const { x, y } = useMousePositions();
   const ref = useRef<Mesh | null>(null);
   const tl = useRef<gsap.core.Timeline>();
@@ -46,7 +50,8 @@ const RobotScene = ({ type = 'copernicus' }: { type: CharacterType }) => {
       dpr={[1, 2]}
       performance={{ min: 0.1, max: 1 }}
       camera={{
-        position: type === 'copernicus' ? [0, -3, -20] : [0, -3, 20],
+        position:
+          type === CharacterType.COPERNICUS ? [0, -3, -20] : [0, -3, 20],
         fov: 20,
       }}
     >
@@ -57,9 +62,9 @@ const RobotScene = ({ type = 'copernicus' }: { type: CharacterType }) => {
         intensity={0.4}
         color={'blue'}
       />
-      {type === 'adam' ? (
+      {type === CharacterType.ADAM ? (
         <AdamHead ref={ref} />
-      ) : type === 'copernicus' ? (
+      ) : type === CharacterType.COPERNICUS ? (
         <Copernicus ref={ref} />
       ) : (
         <LieutenantHead ref={ref} />

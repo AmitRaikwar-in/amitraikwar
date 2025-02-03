@@ -37,8 +37,10 @@ const IconProps = {
 
 const SocialNavigation = ({
   handleCharacterClick: handlerCharacterClick,
+  audioSource,
 }: {
   handleCharacterClick: (type: CharacterType) => void;
+  audioSource: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -96,7 +98,7 @@ const SocialNavigation = ({
         onMouseEnter={onMouseEnter(musicRef, '10px')}
         onMouseLeave={onMouseLeave}
       />
-      <audio src="bg.mp3" loop hidden autoPlay>
+      <audio src={audioSource} loop hidden autoPlay>
         <p>
           If you are reading this, it is because your browser does not support
           the audio element.
@@ -129,16 +131,14 @@ const SocialNavigation = ({
               boxShadow: '0px 0px 10px 4px gray',
             }}
           >
-            {(['adam', 'lieutenant', 'copernicus'] as CharacterType[]).map(
-              (character: CharacterType) => (
-                <MenuItem
-                  key={character}
-                  onClick={() => handlerCharacterClick(character)}
-                >
-                  <Text fontSize={'xl'}>{character.toUpperCase()}</Text>
-                </MenuItem>
-              ),
-            )}
+            {Object.values(CharacterType).map((character: CharacterType) => (
+              <MenuItem
+                key={character}
+                onClick={() => handlerCharacterClick(character)}
+              >
+                <Text fontSize={'xl'}>{character.toUpperCase()}</Text>
+              </MenuItem>
+            ))}
           </MenuList>
         </Menu>
       </Box>

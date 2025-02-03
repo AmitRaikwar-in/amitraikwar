@@ -108,7 +108,7 @@ const WavyBackground = ({
 
   return (
     <div
-      className={'flex flex-col items-center justify-center mx-auto'}
+      className={'flex flex-col items-center justify-center'}
       style={{
         height: '15vh',
         zIndex: 0,
@@ -121,6 +121,7 @@ const WavyBackground = ({
         ref={canvasRef}
         id="canvas"
         style={{
+          zIndex: -1,
           height: '100vh',
           width: '100%',
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),

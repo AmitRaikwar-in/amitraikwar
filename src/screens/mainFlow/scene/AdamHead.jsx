@@ -7,10 +7,10 @@ ExporterVersion: 2.2.0
 import { useGLTF } from '@react-three/drei';
 import { forwardRef } from 'react';
 
-useGLTF.preload('adamHead.glb');
+useGLTF.preload('/adamHead.glb');
 
 const Model = forwardRef((props, ref) => {
-  const { scene } = useGLTF('adamHead.glb');
+  const { scene } = useGLTF('/adamHead.glb');
 
   scene.traverse((child) => {
     if (child.isMesh) {
