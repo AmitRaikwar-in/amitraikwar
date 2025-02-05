@@ -27,6 +27,7 @@ module.exports = {
     '@assets/(.*)': '<rootDir>/src/assets/$1',
     '@assets': '<rootDir>/src/assets',
     '@screens': '<rootDir>/src/screens',
+    '@services': '<rootDir>/src/services',
     '@screens/(.*)': '<rootDir>/src/screens/$1',
     '@data': '<rootDir>/src/data',
     '@hooks': '<rootDir>/src/hooks',

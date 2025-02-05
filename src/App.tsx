@@ -6,20 +6,32 @@ import {
 } from '@providers';
 import { HelmetProvider } from 'react-helmet-async';
 import { CursorProvider } from '@components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 5,
+      retryDelay: 1000,
+    },
+  },
+});
 
 function App() {
   return (
-    <ThemeProvider>
-      <React.StrictMode>
-        <HelmetProvider>
-          <CursorProvider>
-            <LocalizationProvider>
-              <AppRouterProvider />
-            </LocalizationProvider>
-          </CursorProvider>
-        </HelmetProvider>
-      </React.StrictMode>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <React.StrictMode>
+          <HelmetProvider>
+            <CursorProvider>
+              <LocalizationProvider>
+                <AppRouterProvider />
+              </LocalizationProvider>
+            </CursorProvider>
+          </HelmetProvider>
+        </React.StrictMode>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
