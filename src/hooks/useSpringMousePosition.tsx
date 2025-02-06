@@ -1,6 +1,7 @@
-import { useMotionValue, useSpring, frame } from 'framer-motion';
+import { useMotionValue, frame, useSpring } from 'framer-motion';
 import { RefObject, useEffect } from 'react';
 import { SPRING_SETTING } from './constants';
+// import { SPRING_SETTING } from './constants';
 
 const useSpringMousePosition = (ref: RefObject<HTMLDivElement | null>) => {
   const xPos = window.innerWidth / 2;
@@ -9,7 +10,6 @@ const useSpringMousePosition = (ref: RefObject<HTMLDivElement | null>) => {
   const yPoint = useMotionValue(yPos);
   const x = useSpring(xPoint, SPRING_SETTING);
   const y = useSpring(yPoint, SPRING_SETTING);
-
   useEffect(() => {
     if (!ref.current) return;
 

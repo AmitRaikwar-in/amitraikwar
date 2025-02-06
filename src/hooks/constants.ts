@@ -1,1 +1,5 @@
-export const SPRING_SETTING = { damping: 10, stiffness: 100, restDelta: 0.001 };
+export const SPRING_SETTING = {
+  damping: 40,
+  stiffness: 1000,
+  restDelta: 0.001,
+};
