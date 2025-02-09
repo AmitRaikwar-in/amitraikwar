@@ -16,11 +16,11 @@ export const GetRequest = async (url: string) => {
 };
 
 export const PostRequest = async (url: string, data: unknown) => {
-  try {
-    const response = await instance.post(url, data);
-    return response.data;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
+  const response = await instance.post(url, data, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+  return response.data;
 };
