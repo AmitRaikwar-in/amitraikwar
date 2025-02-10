@@ -6,13 +6,24 @@ import {
   HStack,
   Button,
   VStack,
+  Text,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const CommentBox = ({
   comments,
 }: {
   comments: { comment: string; user: string; email: string }[];
 }) => {
+  const [state, setState] = useState<{
+    email: string;
+    name: string;
+    comment: string;
+  }>({ email: '', name: '', comment: '' });
+
+  const isDisabled =
+    state.email === '' || state.name === '' || state.comment === '';
+
   return (
     <Box
       w={'100%'}
@@ -25,19 +36,52 @@ const CommentBox = ({
     >
       <Heading size={'md'}>Comments</Heading>
       <Divider />
-      {comments?.map((comment, index) => (
-        <Box key={index} p={2}>
-          <Heading size={'sm'}>{comment.user}</Heading>
-          <Box>{comment.comment}</Box>
-        </Box>
-      ))}
-      <VStack p={4} borderRadius={'md'} mt={4} rowGap={5}>
+      {comments ? (
+        comments?.map((comment, index) => (
+          <Box
+            key={index}
+            p={2}
+            px={4}
+            borderRadius={'md'}
+            mt={4}
+            bg={'gray.800'}
+          >
+            <Heading size={'md'}>
+              🤖{comment.user} 📫{comment.email}
+            </Heading>
+            <Box paddingStart={2}>⎆ {comment.comment}</Box>
+          </Box>
+        ))
+      ) : (
+        <Text alignSelf={'start'} color={'gray.500'} p={4}>
+          No Comments
+        </Text>
+      )}
+      <VStack p={4} borderRadius={'md'} mt={4} rowGap={3}>
+        <Divider />
+        <Text alignSelf={'start'}>Add a Comment</Text>
         <HStack columnGap={4} w={'100%'}>
-          <Input type="text" placeholder="Enter email" />
-          <Input type="text" placeholder="Enter Name" />
+          <Input
+            type="text"
+            placeholder="Enter email"
+            value={state.email}
+            onChange={(e) => setState({ ...state, email: e.target.value })}
+          />
+          <Input
+            type="text"
+            placeholder="Enter Name"
+            value={state.name}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
+          />
         </HStack>
-        <Input placeholder="Add a comment" />
-        <Button alignSelf={'start'}>Submit</Button>
+        <Input
+          placeholder="Add a comment"
+          value={state.comment}
+          onChange={(e) => setState({ ...state, comment: e.target.value })}
+        />
+        <Button alignSelf={'start'} isDisabled={isDisabled}>
+          Submit
+        </Button>
       </VStack>
     </Box>
   );

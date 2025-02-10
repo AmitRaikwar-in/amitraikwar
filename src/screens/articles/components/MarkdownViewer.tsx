@@ -32,7 +32,7 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
     >
       <Box width={'80%'} id="md-preview-flex-box">
         <MdPreview mdString={mdString ?? ''} />
-        <CommentBox comments={comments} />
+        <CommentBox comments={JSON.parse(comments).comments} />
       </Box>
       <SideViewer mdString={mdString ?? ''} />
     </HStack>
