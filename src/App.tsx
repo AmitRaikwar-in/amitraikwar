@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from '@providers';
 import { HelmetProvider } from 'react-helmet-async';
-import { CursorProvider } from '@components';
+import { CursorProvider, Noise } from '@components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
@@ -25,6 +25,7 @@ function App() {
           <HelmetProvider>
             <CursorProvider>
               <LocalizationProvider>
+                <Noise />
                 <AppRouterProvider />
               </LocalizationProvider>
             </CursorProvider>

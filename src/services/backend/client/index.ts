@@ -1,1 +1,1 @@
-export { GetRequest } from './client';
+export { GetRequest, PostRequest } from './client';

@@ -1,5 +1,5 @@
 import { Box, Heading, HStack, Text, Wrap } from '@chakra-ui/react';
-import { Timeline } from '@components';
+import { Noise, Timeline } from '@components';
 import { WORK_DATA } from '@data';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
@@ -132,6 +132,7 @@ const Work = () => {
       <Heading position={'sticky'} top={'10vh'} zIndex={3}>
         {t('work.title')}
       </Heading>
+      <Noise type="fg" />
       <Timeline title={t('work.description')} data={WorkUIData()} />
     </Box>
   );

@@ -3,11 +3,9 @@ import { useCallQuery } from '../common';
 
 const useGetArticlesData = () => {
   return useCallQuery({
-    method: () => {
-      return getArticlesData();
-    },
+    method: () => getArticlesData(),
     queryOptions: {
-      queryKey: ['articles'],
+      queryKey: ['article'],
     },
   });
 };

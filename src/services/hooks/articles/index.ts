@@ -1,1 +1,1 @@
-export { default as useGetArticlesData } from './useGetLearningData';
+export { default as useGetArticlesData } from './useGetAllArticlesData';

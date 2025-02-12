@@ -1,1 +1,1 @@
-export { default as getArticlesData } from './getArticlesData';
+export { default as getArticlesData } from './getAllArticlesData';
