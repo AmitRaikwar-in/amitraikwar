@@ -1,8 +1,10 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { HEADING_TYPE_REGEX } from './constants';
+import { useLikeArticleData } from '@services';
 
 const SideViewer = ({ mdString }: { mdString: string }) => {
+  const { mutate } = useLikeArticleData();
   // Extract headings from the markdown string and remove dots.
   const headings = useMemo(
     () =>
@@ -37,7 +39,27 @@ const SideViewer = ({ mdString }: { mdString: string }) => {
       width={'20%'}
       overflowY={'scroll'}
       scrollSnapType={'y mandatory'}
+      display={'flex'}
+      px={2}
+      rowGap={1}
+      flexDir={'column'}
     >
+      <Button size={'sm'} onClick={mutate}>
+        Like 👍
+      </Button>
+      <Button
+        size={'sm'}
+        as={'a'}
+        href={'#comments'}
+        onClick={() =>
+          document.getElementById('comments')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          })
+        }
+      >
+        Comments 💬
+      </Button>
       {headings.map(({ marginStart, itemName, link }, index) => (
         <>
           <Text

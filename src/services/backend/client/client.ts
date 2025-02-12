@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LEARNING_BACKEND_URL } from '../learnings/constants';
+import { LEARNING_BACKEND_URL } from '../articles/constants';
 
 const instance = axios.create({
   baseURL: LEARNING_BACKEND_URL,

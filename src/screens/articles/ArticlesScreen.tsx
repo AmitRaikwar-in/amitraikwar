@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { MarkdownViewer } from './components';
 import { useMemo, useState } from 'react';
 import { groupBy } from 'lodash';
+import { BASE_NAV_ROUTE } from '@router';
 
 const ArticlesScreen = () => {
   const { data } = useGetArticlesData();
@@ -76,7 +77,7 @@ const ArticlesScreen = () => {
                 _hover={{ bg: 'gray.600', cursor: 'pointer', color: 'violet' }}
                 onClick={() => {
                   if (secondPath) {
-                    navigate(-1);
+                    navigate(BASE_NAV_ROUTE + 'articles');
                   }
                   setCategory(group_name);
                 }}
