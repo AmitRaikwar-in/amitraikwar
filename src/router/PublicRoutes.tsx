@@ -29,7 +29,9 @@ const publicRouter = createBrowserRouter(
       {!isEmpty(BASE_URL) && <Route path="" element={<LazyHiderScreen />} />}
       <Route path={BASE_URL} element={<LazyHostScreen />}>
         <Route path="" element={<MainScreen />} />
-        <Route path="articles" element={<ArticlesScreen />} />
+        <Route path="articles" element={<ArticlesScreen />}>
+          <Route path=":id" element={<ArticlesScreen />} />
+        </Route>
         <Route path="privateRoute" element={<ArticleEditor />} />
         <Route path="projects" element={<ProjectsScreen />}>
           <Route path=":id" element={<ProjectsScreen />} />

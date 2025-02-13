@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MdPreview should render MdPreview 1`] = `
+<div>
+  <div
+    class="css-1npfbn5"
+    data-color-mode="dark"
+  >
+    <markdown-preview
+      source=""
+    />
+  </div>
+</div>
+`;
+
+exports[`MdPreview should render MdPreview 2`] = `
+<div>
+  <div
+    class="css-1npfbn5"
+    data-color-mode="dark"
+  >
+    <markdown-preview
+      source="test"
+    />
+  </div>
+</div>
+`;

@@ -25,3 +25,9 @@ jest.mock('@fontsource/space-mono', () => {
     default: jest.fn(),
   };
 });
+
+// React markdown preview mock.
+jest.mock('@uiw/react-markdown-preview', () => ({
+  __esModule: true,
+  default: 'markdown-preview',
+}));

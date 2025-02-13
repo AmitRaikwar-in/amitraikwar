@@ -1,11 +1,11 @@
-import { getArticlesData } from '../../backend';
+import { getArticleData } from '../../backend';
 import { useCallQuery } from '../common';
 
-const useGetArticlesData = () => {
+const useGetArticlesData = (articleKey: string) => {
   return useCallQuery({
-    method: () => getArticlesData(),
+    method: () => getArticleData(articleKey),
     queryOptions: {
-      queryKey: ['article'],
+      queryKey: ['article', articleKey],
     },
   });
 };

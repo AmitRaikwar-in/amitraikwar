@@ -1,6 +1,10 @@
 import { Box, HStack, Img, Text } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCursor } from '../Cursor';
 
 type ArticleCardProps = {
+  article_key: string;
   title: string;
   image: string;
   description: string;
@@ -11,6 +15,7 @@ type ArticleCardProps = {
 };
 
 const ArticleCard = ({
+  article_key,
   title,
   last_updated,
   image,
@@ -19,14 +24,28 @@ const ArticleCard = ({
   views,
   likes,
 }: ArticleCardProps) => {
+  const navigation = useNavigate();
+  const { setCursorType } = useCursor();
+  useEffect(() => {
+    setCursorType('none');
+  }, [setCursorType]);
+
   return (
     <Box
-      bg={'black'}
+      zIndex={1}
+      _hover={{
+        transform: 'scale(1.02)',
+        cursor: 'pointer',
+      }}
+      transition={'all 0.4s ease'}
+      bg={'rgba(0, 0, 0, 0.4)'}
+      backdropFilter={'blur(10px)'}
       padding={4}
       borderRadius={10}
-      border={'1px solid #ffffffa0'}
+      border={'1px solid gray'}
       width={'300px'}
       color={'white'}
+      onClick={() => navigation(article_key)}
     >
       <Text fontSize="2xl" fontWeight="bold" color="brand.900" marginBottom={2}>
         {title}

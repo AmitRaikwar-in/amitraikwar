@@ -8,6 +8,7 @@ export * from './Cursor';
 export * from './DotPattern';
 export * from './Lights';
 export * from './LoadingSpinner';
+export * from './MdPreview';
 export * from './MeteorEffect';
 export * from './Marquee';
 export * from './Noise';
