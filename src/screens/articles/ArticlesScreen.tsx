@@ -7,11 +7,45 @@ import { useMemo, useState } from 'react';
 import { groupBy } from 'lodash';
 import { BASE_NAV_ROUTE } from '@router';
 
+const CategoryButton = ({
+  category,
+  setCategory,
+  secondPath,
+  isSelected,
+}: {
+  category: string;
+  setCategory: (category: string) => void;
+  secondPath: string;
+  isSelected: boolean;
+}) => {
+  const navigate = useNavigate();
+  return (
+    <Button
+      w={'100%'}
+      color={'white'}
+      py={3}
+      px={5}
+      bg={isSelected ? 'gray.800' : ''}
+      fontSize={20}
+      variant={'ghost'}
+      border={'1px solid gray'}
+      _hover={{ bg: 'gray.600', cursor: 'pointer', color: 'violet' }}
+      onClick={() => {
+        if (secondPath) {
+          navigate(BASE_NAV_ROUTE + 'articles');
+        }
+        setCategory(category);
+      }}
+    >
+      {category}
+    </Button>
+  );
+};
+
 const ArticlesScreen = () => {
   const { data } = useGetArticlesData();
   const location = useLocation();
-  const navigate = useNavigate();
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('All');
   const secondPath = location.pathname.split('/')[3];
 
   const articles = useMemo(
@@ -61,29 +95,21 @@ const ArticlesScreen = () => {
           top={'12vh'}
           marginTop={'12vh'}
         >
+          <CategoryButton
+            category={'All'}
+            setCategory={setCategory}
+            secondPath={secondPath}
+            isSelected={'All' === category}
+          />
           {Object.keys(filteredArticles).map(
             (group_name: any, index: number) => (
-              <Button
-                w={'100%'}
+              <CategoryButton
                 key={index}
-                py={3}
-                color={'white'}
-                px={5}
-                bg={group_name === category ? 'gray.800' : ''}
-                fontSize={20}
-                m={0}
-                variant={'ghost'}
-                border={'1px solid gray'}
-                _hover={{ bg: 'gray.600', cursor: 'pointer', color: 'violet' }}
-                onClick={() => {
-                  if (secondPath) {
-                    navigate(BASE_NAV_ROUTE + 'articles');
-                  }
-                  setCategory(group_name);
-                }}
-              >
-                {group_name}
-              </Button>
+                category={group_name}
+                setCategory={setCategory}
+                secondPath={secondPath}
+                isSelected={group_name === category}
+              />
             ),
           )}
         </VStack>
@@ -102,9 +128,12 @@ const ArticlesScreen = () => {
               justify="start"
               justifyContent={'space-between'}
             >
-              {(category ? filteredArticles[category] : articles)?.map(
-                (article: any) => <ArticleCard key={article.id} {...article} />,
-              )}
+              {(category && category !== 'All'
+                ? filteredArticles[category]
+                : articles
+              )?.map((article: any) => (
+                <ArticleCard key={article.id} {...article} />
+              ))}
             </Wrap>
           )}
           {secondPath && <MarkdownViewer articleKey={secondPath} />}

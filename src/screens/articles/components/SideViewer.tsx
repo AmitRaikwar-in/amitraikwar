@@ -1,9 +1,17 @@
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, HStack, Text } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { HEADING_TYPE_REGEX } from './constants';
 import { useLikeArticleData } from '@services';
 
-const SideViewer = ({ mdString }: { mdString: string }) => {
+const SideViewer = ({
+  mdString,
+  likes,
+  views,
+}: {
+  mdString: string;
+  likes: number;
+  views: number;
+}) => {
   const { mutate } = useLikeArticleData();
   // Extract headings from the markdown string and remove dots.
   const headings = useMemo(
@@ -44,22 +52,37 @@ const SideViewer = ({ mdString }: { mdString: string }) => {
       rowGap={1}
       flexDir={'column'}
     >
-      <Button size={'sm'} onClick={mutate}>
-        Like 👍
-      </Button>
-      <Button
-        size={'sm'}
-        as={'a'}
-        href={'#comments'}
-        onClick={() =>
-          document.getElementById('comments')?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-          })
-        }
+      <HStack w={'100%'} justifyContent={'space-evenly'}>
+        <Text>Likes👍: {likes}</Text>
+        <Text>Views👀: {views}</Text>
+      </HStack>
+      <Divider />
+
+      <HStack w={'100%'} justifyContent={'space-evenly'}>
+        <Button size={'sm'} onClick={mutate}>
+          Like Article👍
+        </Button>
+        <Button
+          size={'sm'}
+          as={'a'}
+          href={'#comments'}
+          onClick={() => scrollToComponent('comments')}
+        >
+          Comments 💬
+        </Button>
+      </HStack>
+      <Divider />
+      <Text
+        fontSize={'large'}
+        color={'primary'}
+        style={{
+          padding: 2,
+          width: '100%',
+        }}
+        fontWeight={'bold'}
       >
-        Comments 💬
-      </Button>
+        ON THIS PAGE
+      </Text>
       {headings.map(({ marginStart, itemName, link }, index) => (
         <>
           <Text

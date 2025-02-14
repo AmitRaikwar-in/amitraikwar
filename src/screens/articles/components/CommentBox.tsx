@@ -8,13 +8,15 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useAddComment, useGetComments } from '@services';
+import { useMemo, useState } from 'react';
 
-const CommentBox = ({
-  comments,
-}: {
-  comments: { comment: string; user: string; email: string }[];
-}) => {
+const CommentBox = ({ articleKey }: { articleKey: string }) => {
+  const { data, refetch } = useGetComments(articleKey);
+  const { mutate } = useAddComment();
+
+  const comments = useMemo(() => (data as any)?.data?.rows, [data]);
+
   const [state, setState] = useState<{
     email: string;
     name: string;
@@ -23,6 +25,19 @@ const CommentBox = ({
 
   const isDisabled =
     state.email === '' || state.name === '' || state.comment === '';
+
+  const handleSubmit = () => {
+    mutate({
+      articleKey,
+      comment: {
+        comment: state.comment,
+        email: state.email,
+        name: state.name,
+      },
+    });
+    setState({ email: '', name: '', comment: '' });
+    refetch();
+  };
 
   return (
     <Box
@@ -37,21 +52,26 @@ const CommentBox = ({
       <Heading size={'md'}>Comments</Heading>
       <Divider />
       {comments ? (
-        comments?.map((comment, index) => (
-          <Box
-            key={index}
-            p={2}
-            px={4}
-            borderRadius={'md'}
-            mt={4}
-            bg={'gray.800'}
-          >
-            <Heading size={'md'}>
-              🤖{comment.user} 📫{comment.email}
-            </Heading>
-            <Box paddingStart={2}>⎆ {comment.comment}</Box>
-          </Box>
-        ))
+        comments?.map(
+          (
+            comment: { name: string; email: string; comment: string },
+            index: number,
+          ) => (
+            <Box
+              key={index}
+              p={2}
+              px={4}
+              borderRadius={'md'}
+              mt={4}
+              bg={'gray.800'}
+            >
+              <Heading size={'md'}>
+                🤖{comment.name} 📫{comment.email}
+              </Heading>
+              <Box paddingStart={2}>⎆ {comment.comment}</Box>
+            </Box>
+          ),
+        )
       ) : (
         <Text alignSelf={'start'} color={'gray.500'} p={4}>
           No Comments
@@ -79,7 +99,11 @@ const CommentBox = ({
           value={state.comment}
           onChange={(e) => setState({ ...state, comment: e.target.value })}
         />
-        <Button alignSelf={'start'} isDisabled={isDisabled}>
+        <Button
+          alignSelf={'start'}
+          isDisabled={isDisabled}
+          onClick={handleSubmit}
+        >
           Submit
         </Button>
       </VStack>

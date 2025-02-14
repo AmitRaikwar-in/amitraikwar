@@ -9,12 +9,17 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
   const { data } = useGetArticleData(articleKey);
 
   const mdString = useMemo(
-    () => (data as any)?.data?.rows?.[0].md_data,
+    () => (data as any)?.data?.rows?.[0]?.md_data ?? '',
     [data],
   );
 
-  const comments = useMemo(
-    () => (data as any)?.data?.rows?.[0].comments,
+  const likes = useMemo(
+    () => (data as any)?.data?.rows?.[0]?.likes ?? '',
+    [data],
+  );
+
+  const views = useMemo(
+    () => (data as any)?.data?.rows?.[0]?.views ?? '',
     [data],
   );
 
@@ -32,9 +37,9 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
     >
       <Box width={'80%'} id="md-preview-flex-box">
         <MdPreview mdString={mdString ?? ''} />
-        <CommentBox comments={JSON.parse(comments).comments} />
+        <CommentBox articleKey={articleKey} />
       </Box>
-      <SideViewer mdString={mdString ?? ''} />
+      <SideViewer mdString={mdString ?? ''} likes={likes} views={views} />
     </HStack>
   );
 };
