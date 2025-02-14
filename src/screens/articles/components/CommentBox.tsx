@@ -12,7 +12,7 @@ import { useAddComment, useGetComments } from '@services';
 import { useMemo, useState } from 'react';
 
 const CommentBox = ({ articleKey }: { articleKey: string }) => {
-  const { data, refetch } = useGetComments(articleKey);
+  const { data } = useGetComments(articleKey);
   const { mutate } = useAddComment();
 
   const comments = useMemo(() => (data as any)?.data?.rows, [data]);
@@ -36,7 +36,6 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
       },
     });
     setState({ email: '', name: '', comment: '' });
-    refetch();
   };
 
   return (

@@ -9,14 +9,16 @@ const useAddComment = () => {
   return useCallSBMutation({
     method: (data) => addComment(data),
     mutationOptions: {
-      onSuccess: () => {
+      onSuccess: (_data, variables: any) => {
         toast({
           title: 'Comment added.',
           status: 'success',
           duration: 3000,
           isClosable: true,
         });
-        queryClient.invalidateQueries({ queryKey: ['comments'] });
+        queryClient.invalidateQueries({
+          queryKey: ['comments', variables.articleKey],
+        });
       },
       onError: () => {
         toast({

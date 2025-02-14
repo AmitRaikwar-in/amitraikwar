@@ -4,15 +4,17 @@ import { HEADING_TYPE_REGEX } from './constants';
 import { useLikeArticleData } from '@services';
 
 const SideViewer = ({
+  articleKey,
   mdString,
   likes,
   views,
 }: {
+  articleKey: string;
   mdString: string;
   likes: number;
   views: number;
 }) => {
-  const { mutate } = useLikeArticleData();
+  const { mutate: likeArticle } = useLikeArticleData();
   // Extract headings from the markdown string and remove dots.
   const headings = useMemo(
     () =>
@@ -59,7 +61,7 @@ const SideViewer = ({
       <Divider />
 
       <HStack w={'100%'} justifyContent={'space-evenly'}>
-        <Button size={'sm'} onClick={mutate}>
+        <Button size={'sm'} onClick={() => likeArticle({ articleKey })}>
           Like Article👍
         </Button>
         <Button

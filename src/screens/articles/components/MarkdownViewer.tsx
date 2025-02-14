@@ -39,7 +39,12 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
         <MdPreview mdString={mdString ?? ''} />
         <CommentBox articleKey={articleKey} />
       </Box>
-      <SideViewer mdString={mdString ?? ''} likes={likes} views={views} />
+      <SideViewer
+        mdString={mdString ?? ''}
+        likes={likes}
+        views={views}
+        articleKey={articleKey}
+      />
     </HStack>
   );
 };
