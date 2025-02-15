@@ -9,4 +9,7 @@ export const ARTICLE_DEFAULT: ArticleWithContent = {
   author: '',
   group_id: '',
   group_name: '',
+  views: 0,
+  likes: 0,
+  last_updated: '',
 };

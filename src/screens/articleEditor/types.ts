@@ -7,4 +7,7 @@ export type ArticleWithContent = {
   author: string;
   group_id: string;
   group_name: string;
+  views: number;
+  likes: number;
+  last_updated: string;
 };

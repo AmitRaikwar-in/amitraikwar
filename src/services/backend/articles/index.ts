@@ -5,3 +5,5 @@ export { default as likePageArticleData } from './likePageArticleData';
 export { default as addArticle } from './addArticle';
 export { default as addComment } from './addComment';
 export { default as getComments } from './getComments';
+
+export { default as getEditorArticleData } from './getEditorArticleData';
