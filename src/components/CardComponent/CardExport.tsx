@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useCursor } from '../Cursor';
 import { CardBasic, Icon } from './Card';
 import { CardExportProps } from './types';
@@ -16,30 +16,71 @@ const Card = ({
   link,
 }: CardExportProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
   const { setCursorInsets } = useCursor();
+
   return (
     <Box
       ref={ref}
-      onMouseEnter={() =>
+      onMouseEnter={() => {
         setCursorInsets({
           height: 0,
           width: 0,
           top: 0,
           left: 0,
-        })
-      }
-      onMouseLeave={() => setCursorInsets(undefined)}
+        });
+        setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setCursorInsets(undefined);
+        setHovered(false);
+      }}
       className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-sm p-4 relative"
       style={{
         backdropFilter: 'blur(10px)',
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
       }}
+      animation={
+        hovered
+          ? `float 10s ease-in-out infinite alternate, wiggle 4s linear infinite alternate; /* Combined animations */`
+          : ''
+      }
     >
+      <style>
+        {`
+        @keyframes float {
+        0% { transform: translateY(0); } /* Start at original position */
+        50% { transform: translateY(-10px); } /* Move up 10px */
+        100% { transform: translateY(0); } /* Return to original position */
+        }
+        
+        @keyframes wiggle {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(1deg); } /* Wiggle slightly to the right */
+        50% { transform: rotate(0deg); }
+        75% { transform: rotate(-1deg); } /* Wiggle slightly to the left */
+        100% { transform: rotate(0deg); }
+        }
+        `}
+      </style>
+
       <CardBasic text={centerText} icon={icon && PROJECT_NAME_ICON_MAP[icon]} />
-      <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
-      <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
+      <Icon
+        className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black"
+        isHovered={hovered}
+      />
+      <Icon
+        className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black"
+        isHovered={hovered}
+      />
+      <Icon
+        className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black"
+        isHovered={hovered}
+      />
+      <Icon
+        className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black"
+        isHovered={hovered}
+      />
       <HStack
         justifyContent={'space-between'}
         width={'full'}

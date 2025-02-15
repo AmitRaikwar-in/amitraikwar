@@ -1,9 +1,13 @@
 import { useMotionValue } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SVGProps } from 'react';
 import { useMotionTemplate, motion } from 'framer-motion';
 import { Box } from '@chakra-ui/react';
 
-export const Icon = ({ className, ...rest }: any) => {
+export const Icon = ({
+  className,
+  isHovered,
+  ...rest
+}: SVGProps<SVGSVGElement> & { isHovered: boolean }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,8 +16,19 @@ export const Icon = ({ className, ...rest }: any) => {
       strokeWidth="1.5"
       stroke="currentColor"
       className={className}
+      style={{
+        transition: 'all 3s ease',
+        animation: isHovered ? 'spin 3s linear infinite' : 'none',
+      }}
       {...rest}
     >
+      <style>
+        {`@keyframes spin {
+        to {
+        transform: rotate(360deg);
+        }
+        }`}
+      </style>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
     </svg>
   );

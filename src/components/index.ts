@@ -1,5 +1,6 @@
 export * from './ArticleCard';
 export * from './animateModal';
+export * from './BorderAnimationContainer';
 export * from './Button';
 export * from './CardComponent';
 export * from './Chip';
