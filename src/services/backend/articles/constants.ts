@@ -15,3 +15,6 @@ export const ADD_COMMENT_URL = `/add_comment`;
 
 // Editor
 export const EDITOR_ARTICLES_URL = `/get_editor_article`;
+
+// Ping
+export const PING_URL = `/ping`;
