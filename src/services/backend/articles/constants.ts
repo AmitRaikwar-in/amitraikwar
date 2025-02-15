@@ -1,5 +1,5 @@
-// export const LEARNING_BACKEND_URL = 'https://amitraikwar-services.onrender.com';
-export const LEARNING_BACKEND_URL = 'http://localhost:3000';
+export const LEARNING_BACKEND_URL = 'https://amitraikwar-services.onrender.com';
+// export const LEARNING_BACKEND_URL = 'http://localhost:3000';
 
 // Query
 export const ALL_ARTICLES_URL = `/all_articles`;
