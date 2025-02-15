@@ -53,22 +53,59 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
       {comments ? (
         comments?.map(
           (
-            comment: { name: string; email: string; comment: string },
+            comment: {
+              name: string;
+              email: string;
+              comment: string;
+              date: string;
+            },
             index: number,
           ) => (
-            <Box
+            <VStack
               key={index}
               p={2}
-              px={4}
-              borderRadius={'md'}
+              borderRadius={'lg'}
               mt={4}
               bg={'gray.800'}
+              rowGap={2}
             >
-              <Heading size={'md'}>
-                🤖{comment.name} 📫{comment.email}
-              </Heading>
-              <Box paddingStart={2}>⎆ {comment.comment}</Box>
-            </Box>
+              <Box
+                w={'100%'}
+                p={1}
+                border={'1px solid gray'}
+                borderRadius={'md'}
+              >
+                <HStack
+                  w={'100%'}
+                  justifyContent={'space-between'}
+                  p={1}
+                  border={'1px solid gray'}
+                  borderRadius={'md'}
+                  borderStyle={'dashed'}
+                  mb={2}
+                >
+                  <Heading size={'md'}>
+                    🤖{comment.name} 📫{comment.email}
+                  </Heading>
+                  <Text
+                    as={'span'}
+                    fontSize={'md'}
+                    color={'gray.300'}
+                    fontWeight={'normal'}
+                  >
+                    {new Date(comment.date).toDateString()}
+                  </Text>
+                </HStack>
+                <Box
+                  w={'100%'}
+                  paddingStart={2}
+                  fontSize={'md'}
+                  color={'gray.300'}
+                >
+                  {comment.comment}
+                </Box>
+              </Box>
+            </VStack>
           ),
         )
       ) : (
