@@ -5,7 +5,7 @@ export const ARTICLE_DEFAULT: ArticleWithContent = {
   image: '',
   title: '',
   description: '',
-  md_data: '',
+  md_data: '# Default Article\n\nThis is a default article.',
   author: '',
   group_id: '',
   group_name: '',

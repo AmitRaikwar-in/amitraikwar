@@ -105,9 +105,7 @@ const NavigationBar = () => {
         bg={'rgba(255, 255, 255, 0.1)'}
         backdropFilter={'blur(20px)'}
         transition={'background-color 0.3s'}
-        display={
-          pathName !== BASE_URL_ROUTE + '/privateRoute' ? 'none' : 'flex'
-        }
+        display={pathName !== BASE_URL_ROUTE ? 'none' : 'flex'}
       >
         {NavigationLink.map(({ name, href }) => (
           <LinkButton
@@ -139,7 +137,9 @@ const NavigationBar = () => {
         onClick={() => {}} // eslint-disable-line
       >
         <HStack
-          display={pathName === BASE_URL_ROUTE ? 'none' : 'flex'}
+          display={
+            pathName !== BASE_URL_ROUTE + '/privateRoute' ? 'none' : 'flex'
+          }
           border={'1px solid gray'}
           p={2}
         >
