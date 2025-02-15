@@ -32,6 +32,7 @@ const WorkUIData = () => {
           const [isOpen, setIsOpen] = useState(false);
           return (
             <Box
+              w={'full'}
               padding={4}
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}

@@ -22,6 +22,7 @@ const TimelineContent = ({
 
       <motion.div
         style={{
+          width: '100%',
           border: `1px solid gray`, // Initial border color
           display: 'flex',
           alignItems: 'center',
