@@ -17,21 +17,25 @@
 
 .markdown h3 {
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: #ffffffa0;
 }
 
 .markdown h2 {
   cursor: pointer;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin-top: 2rem;
   color: #fffffff0;
 }
 
 .markdown h1 {
-  display: none;
+  cursor: pointer;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  color: #fffffff0;
 }
 
 .markdown div ul {

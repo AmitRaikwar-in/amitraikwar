@@ -5,6 +5,7 @@ export { default as MusicIcon } from './Music';
 export { default as MusicOffIcon } from './MusicOff';
 export { default as ArrowIcon } from './ArrowIcon';
 export { default as RobotIcon } from './Robot';
+export { default as RefreshIcon } from './RefreshIcon';
 export { default as LinkedInIcon } from './LinkedInIcon';
 export { default as GithubIcon } from './GithubIcon';
 export { default as GetInTouch } from './GetInTouch';

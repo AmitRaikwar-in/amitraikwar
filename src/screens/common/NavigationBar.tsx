@@ -1,7 +1,7 @@
-import { Box, HStack, Img, Spinner, Text } from '@chakra-ui/react';
+import { Box, HStack, IconButton, Img, Text } from '@chakra-ui/react';
 import { LinkButton, useCursor } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
-import { SearchIcon } from '@assets';
+import { RefreshIcon, SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const ArticleLink = {
 
 const NavigationBar = () => {
   const moveToTop = useMoveToTop();
-  const { data } = usePingTest();
+  const { data, refetch, isPending } = usePingTest();
   const location = useLocation();
   const pathName = location.pathname;
   const navigate = useNavigate();
@@ -138,13 +138,22 @@ const NavigationBar = () => {
       <HStack
         onClick={() => {}} // eslint-disable-line
       >
-        <Box
+        <HStack
           display={pathName === BASE_URL_ROUTE ? 'none' : 'flex'}
           border={'1px solid gray'}
+          p={2}
         >
-          <Text color={'white'} fontSize={'lg'} p={2}>
+          <IconButton
+            size={'sm'}
+            aria-label={''}
+            icon={<RefreshIcon />}
+            isDisabled={isPending}
+            isLoading={isPending}
+            onClick={() => refetch()}
+          />
+          <Text color={'white'} fontSize={'lg'}>
             Server :{' '}
-            {isUndefined(data) ? (
+            {isUndefined(data) || isPending ? (
               <>
                 <Box
                   as="span"
@@ -154,7 +163,6 @@ const NavigationBar = () => {
                   bg={'red.500'}
                   display="inline-block"
                 />
-                <Spinner size="xs" color="white" />
               </>
             ) : (
               <Box
@@ -167,7 +175,7 @@ const NavigationBar = () => {
               />
             )}
           </Text>
-        </Box>
+        </HStack>
         <Box
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

@@ -5,5 +5,6 @@ export { default as useLikeArticleData } from './useLikeArticleData';
 export { default as useAddArticle } from './useAddArticle';
 export { default as useAddComment } from './useAddComment';
 export { default as useGetComments } from './useGetComments';
+export { default as useUpdateArticle } from './useUpdateArticle';
 
 export { default as usePingTest } from './usePingTest';

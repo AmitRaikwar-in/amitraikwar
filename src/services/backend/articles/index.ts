@@ -7,5 +7,6 @@ export { default as addComment } from './addComment';
 export { default as getComments } from './getComments';
 
 export { default as getEditorArticleData } from './getEditorArticleData';
+export { default as updateArticle } from './updateArticle';
 
 export { default as pingTest } from './pingTest';

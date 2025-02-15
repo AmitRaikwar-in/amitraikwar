@@ -1,37 +1,57 @@
-import { Box, Button, HStack, Input, Text, VStack } from '@chakra-ui/react';
-import { MDXEditor } from '@mdxeditor/editor';
-import { ALL_PLUGINS } from './AllPlugins';
+import {
+  Box,
+  Button,
+  Divider,
+  HStack,
+  Input,
+  Radio,
+  RadioGroup,
+  Text,
+  Textarea,
+  VStack,
+} from '@chakra-ui/react';
 import '@mdxeditor/editor/style.css';
-import { ArticleCard, useCursor } from '@components';
+import { ArticleCard, MdPreview, useCursor } from '@components';
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { ARTICLE_DEFAULT } from './constants';
 import { ArticleWithContent } from './types';
 import { getRequestObject, isValidArticle } from './utils';
-import { useAddArticle, useGetEditorArticleData } from '@services';
-import ArticlePreviewDrawer from './ArticlePreviewDrawar';
+import {
+  useAddArticle,
+  useGetEditorArticleData,
+  useUpdateArticle,
+} from '@services';
 
 const ArticleEditor = () => {
   const { setCursorType } = useCursor();
   const [articleKey, setArticleKey] = useState<string>('');
+  const [articleType, setArticleType] = useState<'New' | 'Update'>('New');
   const [queryArticleKey, setQueryArticleKey] = useState<string>('');
   const [state, setState] = useState<ArticleWithContent>(ARTICLE_DEFAULT);
   const { data, isPending } = useGetEditorArticleData(queryArticleKey);
-  const { mutate } = useAddArticle();
+  const { mutate: addArticleMutation } = useAddArticle();
+  const { mutate: updateArticleMutation } = useUpdateArticle();
 
   useLayoutEffect(() => {
     setCursorType('none');
   }, [setCursorType]);
 
   const onSubmit = useCallback(() => {
-    mutate(getRequestObject(state));
-    console.log('Submitting article', state);
-  }, [mutate, state]);
+    console.log('State', articleType);
+
+    if (articleType === 'New') {
+      addArticleMutation(getRequestObject(state));
+      return;
+    }
+
+    updateArticleMutation(getRequestObject(state));
+  }, [addArticleMutation, articleType, state, updateArticleMutation]);
 
   useLayoutEffect(() => {
     if (data) {
-      console.log('Data', (data as any)?.data.rows[0]);
-      console.log('state', state);
-      setState((data as any)?.data.rows[0]);
+      const dataFromReq = (data as any)?.data.rows[0];
+      setState({ ...dataFromReq, author: JSON.parse(dataFromReq.author).name });
+      setQueryArticleKey('');
     }
   }, [data, state]);
 
@@ -55,6 +75,15 @@ const ArticleEditor = () => {
             >
               Article editor
             </Text>
+            <RadioGroup
+              value={articleType}
+              onChange={(value) => {
+                setArticleType(value as 'New' | 'Update');
+              }}
+            >
+              <Radio value="New">New Article</Radio>
+              <Radio value="Update">Update Article</Radio>
+            </RadioGroup>
             <Button
               onClick={() => {
                 setState(ARTICLE_DEFAULT);
@@ -144,7 +173,7 @@ const ArticleEditor = () => {
             onClick={onSubmit}
             isDisabled={!isValidArticle(state)}
           >
-            Submit Article
+            {articleType === 'New' ? 'Submit' : 'Update'} Article
           </Button>
         </VStack>
         <VStack borderLeft={'1px solid gray'} p={1}>
@@ -165,29 +194,38 @@ const ArticleEditor = () => {
           <ArticleCard {...state} />
         </VStack>
       </HStack>
-      <Box w={'100%'} h={'100%'} borderRadius={'md'}>
-        <ArticlePreviewDrawer mdString={state.md_data} />
-      </Box>
+      <Divider />
+      <Text fontSize={'xl'} fontWeight={'bold'} color={'white'}>
+        Article Content
+      </Text>
       <HStack
         width={'100%'}
+        height={'100%'}
         border={'1px solid white'}
         borderRadius={'md'}
         p={2}
         className=" min-h-[100vh]"
         align={'start'}
       >
-        <MDXEditor
-          className="bg-white"
-          markdown={state.md_data}
-          plugins={ALL_PLUGINS}
-          spellCheck={true}
-          contentEditableClassName="min-h-[100vh] px-6 py-6 prose"
-          onChange={(md) => {
+        <Box
+          w={'50%'}
+          height={'100%'}
+          minH={'100vh'}
+          borderRight={'1px solid white'}
+        >
+          <MdPreview mdString={state.md_data} />
+        </Box>
+        <Textarea
+          w={'50%'}
+          h={'100%'}
+          minH={'100vh'}
+          value={state.md_data}
+          onChange={(e) =>
             setState((prev) => ({
               ...prev,
-              md_data: md,
-            }));
-          }}
+              md_data: e.target.value,
+            }))
+          }
         />
       </HStack>
     </VStack>
