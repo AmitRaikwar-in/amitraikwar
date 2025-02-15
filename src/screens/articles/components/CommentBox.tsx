@@ -7,6 +7,8 @@ import {
   Button,
   VStack,
   Text,
+  Avatar,
+  Textarea,
 } from '@chakra-ui/react';
 import { useAddComment, useGetComments } from '@services';
 import { useMemo, useState } from 'react';
@@ -84,9 +86,12 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
                   borderStyle={'dashed'}
                   mb={2}
                 >
-                  <Heading size={'md'}>
-                    🤖{comment.name} 📫{comment.email}
-                  </Heading>
+                  <HStack>
+                    <Avatar name={comment.name} size={'sm'} bg="teal.500" />
+                    <Heading size={'sm'} verticalAlign={'middle'}>
+                      {comment.name} 📫{comment.email}
+                    </Heading>
+                  </HStack>
                   <Text
                     as={'span'}
                     fontSize={'md'}
@@ -117,20 +122,21 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
         <Divider />
         <Text alignSelf={'start'}>Add a Comment</Text>
         <HStack columnGap={4} w={'100%'}>
-          <Input
-            type="text"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={(e) => setState({ ...state, email: e.target.value })}
-          />
+          <Avatar size="sm" bg="gray.500" name={state.name} />
           <Input
             type="text"
             placeholder="Enter Name"
             value={state.name}
             onChange={(e) => setState({ ...state, name: e.target.value })}
           />
+          <Input
+            type="email"
+            placeholder="Enter email"
+            value={state.email}
+            onChange={(e) => setState({ ...state, email: e.target.value })}
+          />
         </HStack>
-        <Input
+        <Textarea
           placeholder="Add a comment"
           value={state.comment}
           onChange={(e) => setState({ ...state, comment: e.target.value })}

@@ -61,7 +61,11 @@ const SideViewer = ({
       <Divider />
 
       <HStack w={'100%'} justifyContent={'space-evenly'}>
-        <Button size={'sm'} onClick={() => likeArticle({ articleKey })}>
+        <Button
+          size={'sm'}
+          onClick={() => likeArticle({ articleKey })}
+          _active={{ bg: 'green.500' }}
+        >
           Like Article👍
         </Button>
         <Button

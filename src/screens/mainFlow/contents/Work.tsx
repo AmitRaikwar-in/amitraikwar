@@ -128,7 +128,14 @@ const WorkUIData = () => {
 const Work = () => {
   const { t } = useTranslation();
   return (
-    <Box zIndex={0} minH={'100vh'} width={'99vw'} id="work" paddingX={32}>
+    <Box
+      zIndex={0}
+      minH={'100vh'}
+      width={'99vw'}
+      id="work"
+      paddingX={32}
+      overflow={'clip'}
+    >
       <Heading position={'sticky'} top={'10vh'} zIndex={3}>
         {t('work.title')}
       </Heading>

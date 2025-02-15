@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createNoise3D } from 'simplex-noise';
+import { Noise } from '../Noise';
 
 const WavyBackground = ({
   children,
@@ -110,20 +111,21 @@ const WavyBackground = ({
     <div
       className={'flex flex-col items-center justify-center'}
       style={{
-        height: '15vh',
+        height: '50vh',
         zIndex: 0,
+        transform: 'translateY(-16vh)',
         overflowX: 'clip',
         mixBlendMode: 'lighten',
       }}
     >
+      <Noise />
       <canvas
         className="inset-0 z-0"
         ref={canvasRef}
         id="canvas"
         style={{
           zIndex: -1,
-          height: '100vh',
-          width: '100%',
+          width: '100vw',
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       ></canvas>

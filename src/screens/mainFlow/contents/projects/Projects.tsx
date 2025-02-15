@@ -30,7 +30,15 @@ const Projects = () => {
       >
         <WavyBackground />
       </motion.div>
-      <Wrap style={{ zIndex: 0 }} spacing={16} justify="center" mx={24} mb={24}>
+      <Wrap
+        style={{ zIndex: 0 }}
+        spacing={16}
+        justify="center"
+        mx={24}
+        mb={24}
+        transform="translateY(-50vh)"
+        marginBottom={'-30vh'}
+      >
         {PROJECT_DATA.map(({ title, tags, icon, description, link }, index) => (
           <Card
             key={index}

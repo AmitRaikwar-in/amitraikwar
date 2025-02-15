@@ -14,6 +14,7 @@ const HeroText = ({ opacity }: { opacity: MotionValue<number> }) => {
         top: '8vh',
         overflowX: 'hidden',
         fontSize: '5xl',
+        textShadow: '0 0 1rem #000',
       }}
     >
       <Text

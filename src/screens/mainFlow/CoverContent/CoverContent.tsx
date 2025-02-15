@@ -15,7 +15,7 @@ const MusicMap: Record<CharacterType, string> = {
 const CoverContent = () => {
   const { t } = useTranslation();
   const [characterType, setCharacterType] = useState<CharacterType>(
-    CharacterType.REAP,
+    CharacterType.COPERNICUS,
   );
 
   return (
