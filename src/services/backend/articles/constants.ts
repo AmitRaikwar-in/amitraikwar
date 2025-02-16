@@ -12,6 +12,7 @@ export const ADD_ARTICLE_URL = `/add_article`;
 export const DELETE_ARTICLE_URL = `/delete_article`;
 export const UPDATE_ARTICLE_URL = `/update_article`;
 export const ADD_COMMENT_URL = `/add_comment`;
+export const DELETE_COMMENT_URL = `/delete_comment`;
 
 // Editor
 export const EDITOR_ARTICLES_URL = `/get_editor_article`;

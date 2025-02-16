@@ -3,7 +3,7 @@
 exports[`MdPreview should render MdPreview 1`] = `
 <div>
   <div
-    class="css-1npfbn5"
+    class="css-uf6hy9"
     data-color-mode="dark"
   >
     <markdown-preview
@@ -16,7 +16,7 @@ exports[`MdPreview should render MdPreview 1`] = `
 exports[`MdPreview should render MdPreview 2`] = `
 <div>
   <div
-    class="css-1npfbn5"
+    class="css-uf6hy9"
     data-color-mode="dark"
   >
     <markdown-preview

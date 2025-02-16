@@ -1,7 +1,8 @@
 const Noise = ({ type = 'bg' }: { type?: 'bg' | 'fg' }) => {
   return (
     <div
-      className={`${type === 'bg' ? 'absolute inset-0 w-full h-full' : 'w-[100%] h-[100%]'} transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]`}
+      className={`${type === 'bg' ? 'absolute inset-0 w-full h-full' : 'w-[100%] h-[100%]'} transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]
+      z-0 pointer-events-none`}
       style={{
         backgroundImage: 'url(/noise.webp)',
         backgroundSize: '15%',

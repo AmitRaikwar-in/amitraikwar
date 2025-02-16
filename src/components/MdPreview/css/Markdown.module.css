@@ -5,13 +5,14 @@
   border-radius: 6px;
   font-size: 1rem;
   color: #fffffff0;
+  z-index: 10;
   background-color: transparent;
   line-height: 1.5;
 }
 
 .markdown a {
   color: #ffffffa0;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 600;
 }
 
