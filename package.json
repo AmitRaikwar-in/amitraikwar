@@ -1,6 +1,6 @@
 {
   "name": "amitraikwar-portfolio",
-  "version": "0.19.1",
+  "version": "0.19.2",
   "description": "Amit Raikwar Portfolio website",
   "main": "index.tsx",
   "scripts": {
