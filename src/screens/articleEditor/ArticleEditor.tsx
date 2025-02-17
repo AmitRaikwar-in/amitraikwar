@@ -150,15 +150,7 @@ const ArticleEditor = () => {
             >
               Article editor
             </Text>
-            <RadioGroup
-              value={articleType}
-              onChange={(value) => {
-                setArticleType(value as 'New' | 'Update');
-              }}
-            >
-              <Radio value="New">New Article</Radio>
-              <Radio value="Update">Update Article</Radio>
-            </RadioGroup>
+
             <Button
               onClick={() => {
                 setState(ARTICLE_DEFAULT);
@@ -252,6 +244,19 @@ const ArticleEditor = () => {
           </Button>
         </VStack>
         <VStack borderLeft={'1px solid gray'} p={1}>
+          <RadioGroup
+            value={articleType}
+            onChange={(value) => {
+              setArticleType(value as 'New' | 'Update');
+            }}
+          >
+            <Radio value="New" padding={2}>
+              New Article
+            </Radio>
+            <Radio value="Update" padding={2}>
+              Update Article
+            </Radio>
+          </RadioGroup>
           <HStack>
             <Input
               placeholder="Article Key"
@@ -279,7 +284,6 @@ const ArticleEditor = () => {
       </Text>
       <HStack
         width={'100%'}
-        height={'100%'}
         border={'1px solid white'}
         borderRadius={'md'}
         p={2}
@@ -289,15 +293,17 @@ const ArticleEditor = () => {
         <Box
           w={'50%'}
           height={'100%'}
-          minH={'100vh'}
+          minH={'200vh'}
           borderRight={'1px solid white'}
         >
           <MdPreview mdString={state.md_data} />
         </Box>
         <Textarea
           w={'50%'}
-          h={'100%'}
-          minH={'100vh'}
+          height={'200vh'}
+          resize={'none'}
+          bgSize={'cover'}
+          boxSizing="border-box"
           value={state.md_data}
           onChange={(e) =>
             setState((prev) => ({

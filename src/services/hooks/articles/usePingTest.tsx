@@ -6,8 +6,7 @@ const usePingTest = () => {
     method: () => pingTest(),
     queryOptions: {
       queryKey: ['ping'],
-      staleTime: 0,
-      gcTime: 0,
+      refetchInterval: 600000,
     },
   });
 };

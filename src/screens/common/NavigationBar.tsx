@@ -1,14 +1,13 @@
-import { Box, HStack, IconButton, Img, Text } from '@chakra-ui/react';
+import { Box, HStack, Img } from '@chakra-ui/react';
 import { LinkButton, useCursor } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
-import { RefreshIcon, SearchIcon } from '@assets';
+import { SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMoveToTop } from '@hooks';
 import { BASE_URL_ROUTE } from '@router';
-import { usePingTest } from '@services';
-import { isUndefined } from 'lodash';
+import PingTest from './PingTest';
 
 const NavigationLink = [
   {
@@ -36,7 +35,6 @@ const ArticleLink = {
 
 const NavigationBar = () => {
   const moveToTop = useMoveToTop();
-  const { data, refetch, isPending } = usePingTest();
   const location = useLocation();
   const pathName = location.pathname;
   const navigate = useNavigate();
@@ -136,46 +134,7 @@ const NavigationBar = () => {
       <HStack
         onClick={() => {}} // eslint-disable-line
       >
-        <HStack
-          display={
-            pathName !== BASE_URL_ROUTE + '/privateRoute' ? 'none' : 'flex'
-          }
-          border={'1px solid gray'}
-          p={2}
-        >
-          <IconButton
-            size={'sm'}
-            aria-label={''}
-            icon={<RefreshIcon />}
-            isDisabled={isPending}
-            isLoading={isPending}
-            onClick={() => refetch()}
-          />
-          <Text color={'white'} fontSize={'lg'}>
-            Server :{' '}
-            {isUndefined(data) || isPending ? (
-              <>
-                <Box
-                  as="span"
-                  w={3}
-                  h={3}
-                  borderRadius="50%"
-                  bg={'red.500'}
-                  display="inline-block"
-                />
-              </>
-            ) : (
-              <Box
-                as="span"
-                w={3}
-                h={3}
-                borderRadius="50%"
-                bg={'green.500'}
-                display="inline-block"
-              />
-            )}
-          </Text>
-        </HStack>
+        {pathName === BASE_URL_ROUTE + '/privateRoute' && <PingTest />}
         <Box
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
