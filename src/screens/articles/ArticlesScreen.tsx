@@ -2,10 +2,11 @@ import { Button, HStack, Text, VStack, Wrap } from '@chakra-ui/react';
 import { ArticleCard, LoadingSpinner } from '@components';
 import { useGetArticlesData } from '@services';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MarkdownViewer } from './components';
+import { MarkdownViewer, StreakStalker } from './components';
 import { useMemo, useState } from 'react';
-import { groupBy } from 'lodash';
+import { groupBy, sortBy } from 'lodash';
 import { BASE_NAV_ROUTE } from '@router';
+import SortBy, { SortByType } from './components/SortBy';
 
 const CategoryButton = ({
   category,
@@ -47,6 +48,7 @@ const ArticlesScreen = () => {
   const location = useLocation();
   const [category, setCategory] = useState('All');
   const secondPath = location.pathname.split('/')[3];
+  const [sortByName, setSortBy] = useState<SortByType>('none');
 
   const articles = useMemo(
     () =>
@@ -58,9 +60,28 @@ const ArticlesScreen = () => {
 
   const filteredArticles = groupBy(articles, 'group_name');
 
+  const articleToShow =
+    category && category !== 'All' ? filteredArticles[category] : articles;
+
+  const sortByApplied = useMemo(() => {
+    if (sortByName === 'none') {
+      return articleToShow;
+    } else if (sortByName === 'publishedAt') {
+      return sortBy(articleToShow, 'last_updated').reverse();
+    } else if (sortByName === 'a-z') {
+      return sortBy(articleToShow, 'title');
+    } else if (sortByName === 'z-a') {
+      return sortBy(articleToShow, 'title').reverse();
+    } else {
+      return articleToShow;
+    }
+  }, [articleToShow, sortByName]);
+
   if (!data) {
     return <LoadingSpinner />;
   }
+
+  const date = articles.map((article: any) => article.last_updated as string);
 
   return (
     <VStack bg={'black'} w={'100vw'} minH={'100vh'}>
@@ -95,6 +116,10 @@ const ArticlesScreen = () => {
           top={'12vh'}
           marginTop={'12vh'}
         >
+          <HStack>
+            <StreakStalker dates={date} />
+            <SortBy sortBy={sortByName} setSortBy={setSortBy} />
+          </HStack>
           <CategoryButton
             category={'All'}
             setCategory={setCategory}
@@ -128,10 +153,7 @@ const ArticlesScreen = () => {
               justify="start"
               justifyContent={'space-between'}
             >
-              {(category && category !== 'All'
-                ? filteredArticles[category]
-                : articles
-              )?.map((article: any) => (
+              {sortByApplied?.map((article: any) => (
                 <ArticleCard key={article.id} {...article} />
               ))}
             </Wrap>
