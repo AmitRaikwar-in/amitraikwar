@@ -1,8 +1,9 @@
 import { StateCreator } from 'zustand';
-import { ModalStateSlice } from '../slice';
+import { ModalStateSlice, SearchStateSlice } from '../slice';
 
 export interface AppStoreState {
   Modal: ModalStateSlice;
+  Search: SearchStateSlice;
 }
 
 export type AppStoreSlice<T> = StateCreator<

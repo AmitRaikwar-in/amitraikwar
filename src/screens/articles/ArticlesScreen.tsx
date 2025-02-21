@@ -1,4 +1,4 @@
-import { Button, HStack, Text, VStack, Wrap } from '@chakra-ui/react';
+import { HStack, Text, VStack, Wrap } from '@chakra-ui/react';
 import { ArticleCard, LoadingSpinner } from '@components';
 import { useGetArticlesData } from '@services';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useMemo, useState } from 'react';
 import { groupBy, sortBy } from 'lodash';
 import { BASE_NAV_ROUTE } from '@router';
 import SortBy, { SortByType } from './components/SortBy';
+import SearchFeature from './components/SearchFeature';
 
 const CategoryButton = ({
   category,
@@ -21,14 +22,13 @@ const CategoryButton = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <Button
+    <Text
       w={'100%'}
       color={'white'}
-      py={3}
+      py={1}
       px={5}
       bg={isSelected ? 'gray.800' : ''}
       fontSize={20}
-      variant={'ghost'}
       border={'1px solid gray'}
       _hover={{ bg: 'gray.600', cursor: 'pointer', color: 'violet' }}
       onClick={() => {
@@ -39,7 +39,7 @@ const CategoryButton = ({
       }}
     >
       {category}
-    </Button>
+    </Text>
   );
 };
 
@@ -92,12 +92,12 @@ const ArticlesScreen = () => {
         w={'100%'}
         textAlign={'center'}
         top={2}
-        zIndex={2}
         padding={2}
         textShadow={'2px 2px 4px #000000'}
         borderBottom={'1px solid gray'}
         bg={'rgba(0, 0, 0, 0.5)'}
         backdropFilter={'blur(10px)'}
+        zIndex={10}
       >
         Articles
       </Text>
@@ -119,30 +119,32 @@ const ArticlesScreen = () => {
           <HStack>
             <StreakStalker dates={date} />
             <SortBy sortBy={sortByName} setSortBy={setSortBy} />
+            <SearchFeature data={articles} />
           </HStack>
-          <CategoryButton
-            category={'All'}
-            setCategory={setCategory}
-            secondPath={secondPath}
-            isSelected={'All' === category}
-          />
-          {Object.keys(filteredArticles).map(
-            (group_name: any, index: number) => (
-              <CategoryButton
-                key={index}
-                category={group_name}
-                setCategory={setCategory}
-                secondPath={secondPath}
-                isSelected={group_name === category}
-              />
-            ),
-          )}
+          <VStack>
+            <CategoryButton
+              category={'All'}
+              setCategory={setCategory}
+              secondPath={secondPath}
+              isSelected={'All' === category}
+            />
+            {Object.keys(filteredArticles).map(
+              (group_name: any, index: number) => (
+                <CategoryButton
+                  key={index}
+                  category={group_name}
+                  setCategory={setCategory}
+                  secondPath={secondPath}
+                  isSelected={group_name === category}
+                />
+              ),
+            )}
+          </VStack>
         </VStack>
         <VStack
           w={'80%'}
           id="projects"
           rowGap={20}
-          bg={'black'}
           paddingTop={20}
           justifyContent={'flex-start'}
         >

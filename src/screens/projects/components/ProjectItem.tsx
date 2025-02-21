@@ -17,6 +17,7 @@ import { AnimatedModal, Chip, CardSpotlight } from '@components';
 import { ProjectItemType } from '@data';
 import CustomIconButton from './CustomIconButton';
 import { useMoveToTop } from '@hooks';
+import ReactPlayer from 'react-player';
 
 const ProjectItem = ({
   title,
@@ -156,11 +157,44 @@ const ProjectItem = ({
                 )}
                 {demoVideo && (
                   <AnimatedModal
-                    triggerText={'Demo'}
                     title={title}
-                    videoUrl={'../../' + demoVideo}
-                    websiteUrl={link}
-                  />
+                    triggerComponent={
+                      <Button
+                        variant="outline"
+                        colorScheme="white"
+                        boxShadow={'0 0 10px 2px #ffffff5a'}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          borderRadius: '0.5rem',
+                        }}
+                      >
+                        Demo
+                      </Button>
+                    }
+                    footer={
+                      <Button
+                        as="a"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28"
+                      >
+                        Visit website
+                      </Button>
+                    }
+                  >
+                    <ReactPlayer
+                      controls
+                      progressInterval={1000}
+                      previewTabIndex={0}
+                      url={'../../' + demoVideo}
+                      style={{
+                        justifyContent: 'center',
+                        flex: 1,
+                        borderRadius: '0.5rem',
+                      }}
+                    />
+                  </AnimatedModal>
                 )}
                 <CustomIconButton link={link} />
                 <CustomIconButton link={githubLink} />

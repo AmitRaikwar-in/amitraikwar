@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search slice should return search selector state and actions 1`] = `
+{
+  "resetSearchText": [Function],
+  "searchText": "",
+  "setSearchText": [Function],
+}
+`;
+
+exports[`Search slice should return search state on search data set setSearchText 1`] = `
+{
+  "resetSearchText": [Function],
+  "searchText": "search text",
+  "setSearchText": [Function],
+}
+`;
+
+exports[`Search slice should return search state with initial value 1`] = `
+{
+  "resetSearchText": [Function],
+  "searchText": "",
+  "setSearchText": [Function],
+}
+`;

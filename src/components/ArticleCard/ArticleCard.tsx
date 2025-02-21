@@ -32,14 +32,12 @@ const ArticleCard = ({
 
   return (
     <Box
-      zIndex={1}
       _hover={{
         transform: 'scale(1.02)',
         cursor: 'pointer',
       }}
       transition={'all 0.4s ease'}
-      bg={'rgba(0, 0, 0, 0.4)'}
-      backdropFilter={'blur(10px)'}
+      bg={'rgba(0, 0, 0, 0.2)'}
       padding={4}
       borderRadius={10}
       border={'1px solid gray'}

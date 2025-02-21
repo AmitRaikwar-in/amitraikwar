@@ -9,6 +9,11 @@ exports[`Modal slice should return modal selector state and actions 1`] = `
     "onModalClose": undefined,
     "openModal": [Function],
   },
+  "Search": {
+    "resetSearchText": [Function],
+    "searchText": "",
+    "setSearchText": [Function],
+  },
 }
 `;
 

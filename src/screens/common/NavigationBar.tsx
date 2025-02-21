@@ -1,5 +1,5 @@
 import { Box, HStack, Img } from '@chakra-ui/react';
-import { LinkButton, useCursor } from '@components';
+import { AnimatedModal, LinkButton, useCursor } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
@@ -75,11 +75,13 @@ const NavigationBar = () => {
       width={'100%'}
       paddingRight={14}
       paddingLeft={{ base: 14, '2xl': 32 }}
-      zIndex={10}
+      zIndex={11}
       justifyContent={'space-between'}
       bg={'linear-gradient(180deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 100%)'}
     >
       <Img
+        m={2}
+        zIndex={11}
         src={AmitRaikwarLogo}
         alt={'logo'}
         w={8}
@@ -94,7 +96,7 @@ const NavigationBar = () => {
         }}
       />
       <HStack
-        zIndex={1000}
+        zIndex={0}
         columnGap={3}
         top={6}
         border={'1px solid gray'}
@@ -135,24 +137,35 @@ const NavigationBar = () => {
         onClick={() => {}} // eslint-disable-line
       >
         {pathName === BASE_URL_ROUTE + '/privateRoute' && <PingTest />}
-        <Box
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          ref={ref}
-          border={'1px solid gray'}
-          padding="2.5"
-          color={'white'}
-          borderRadius="100px"
-          bg={'rgba(255, 255, 255, 0.1)'}
-          backdropFilter={'blur(20px)'}
-          transition={'all 0.3s'}
-          _hover={{
-            transform: 'scale(1.1)',
-            cursor: 'pointer',
-          }}
-        >
-          <SearchIcon />
-        </Box>
+        {pathName === BASE_URL_ROUTE && (
+          <AnimatedModal
+            triggerComponent={
+              <Box
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                ref={ref}
+                border={'1px solid gray'}
+                padding="2.5"
+                color={'white'}
+                borderRadius="100px"
+                bg={'rgba(255, 255, 255, 0.1)'}
+                backdropFilter={'blur(20px)'}
+                transition={'all 0.3s'}
+                _hover={{
+                  transform: 'scale(1.1)',
+                  cursor: 'pointer',
+                }}
+                p={2}
+              >
+                <SearchIcon />
+              </Box>
+            }
+            title="Search"
+            footer={<Box></Box>}
+          >
+            <Box></Box>
+          </AnimatedModal>
+        )}
       </HStack>
     </HStack>
   );

@@ -18,7 +18,7 @@ const AboutMe = () => {
         {t('about.title')}
       </Heading>
       <Box
-        zIndex={10}
+        zIndex={0}
         height={'45vh'}
         width={'100%'}
         paddingX={32}
