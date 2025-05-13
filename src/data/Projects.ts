@@ -136,7 +136,7 @@ This library has most of the UI components and hooks required for building hourc
     ],
   },
   {
-    title: 'Dashwave',
+    title: 'Growboard',
     icon: ProjectName.Dashwave,
     description: `A web app for managing stuffs in life like study, projects, expenses, secrets, passwords, writing journals, etc. A web app for managing stuff in life like study, projects, expenses, secrets, passwords, writing journals etc. 
       This project was started with a idea to manage everything at one place without maintaining something overwhelming or complicated.`,
@@ -152,6 +152,26 @@ This library has most of the UI components and hooks required for building hourc
       'Compatible with all devices and has a responsive design.',
       'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
       'Feature like project management, expense management, password management, journal writing, and more.',
+      'This project is still under development and more features are being added regularly.',
+    ],
+  },
+  {
+    title: 'TestCov.com',
+    icon: ProjectName.TestCov,
+    description: `A web platform for parsing the test results of code coverage tools like Jest, Mocha, and others. This platform is designed to help developers and teams analyze their code coverage reports in a more user-friendly way.
+      This project was started with the idea to make it easier for developers to understand their code coverage and improve their testing practices.`,
+    githubLink: 'https://github.com/TestCov-com',
+    link: 'https://testcov.com',
+    tags: [
+      Language.react,
+      Language.typescript,
+      Language.i18n,
+      Language.supabase,
+    ],
+    keyPoints: [
+      'This project is under development and more features are being added regularly.',
+      'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
+      'Feature like parsing the test results of code coverage tools like Jest, Mocha, and others.',
       'This project is still under development and more features are being added regularly.',
     ],
   },

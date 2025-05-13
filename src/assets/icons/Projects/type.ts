@@ -12,4 +12,5 @@ export enum ProjectName {
   TopAppAi = 'topAppAi',
   Dashwave = 'dashwave',
   GalaxyUI = 'galaxyUI',
+  TestCov = 'testcov',
 }

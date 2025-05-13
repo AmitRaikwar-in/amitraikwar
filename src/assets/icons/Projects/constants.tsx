@@ -32,4 +32,5 @@ export const PROJECT_NAME_ICON_MAP: Record<ProjectName, JSX.Element> = {
   [ProjectName.TopAppAi]: <TopAppAi width={SIZE} height={SIZE} />,
   [ProjectName.Dashwave]: <Dashwave width={SIZE} height={SIZE} />,
   [ProjectName.GalaxyUI]: <Galaxy width={SIZE} height={SIZE} color="white" />,
+  [ProjectName.TestCov]: <Galaxy width={SIZE} height={SIZE} color="white" />,
 };

@@ -95,11 +95,10 @@ export const ChipMap: Record<
 const Chip = ({ type, size = 'md' }: ChipProps) => {
   return (
     <HStack
-      boxShadow={'0 0 4px 2px #FFFFFFA0'}
+      boxShadow={'0 0 4px 1px #FFFFFFA0'}
       spacing={size === 'md' ? 1 : 0.1}
-      p={size === 'md' ? 1 : 0.3}
-      px={size === 'md' ? 1 : 0.6}
-      borderRadius="lg"
+      px={1}
+      borderRadius={size === 'md' ? '0.5rem' : '0.25rem'}
       border={`1px solid`}
       color="white"
       zIndex={0}

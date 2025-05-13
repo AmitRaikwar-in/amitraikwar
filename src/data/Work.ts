@@ -2,7 +2,7 @@ import { WorkType } from './types';
 
 export const WORK_DATA: WorkType = {
   '2025': {
-    title: 'Software Engineer III | React native ',
+    title: 'Software Lead | React / React Native',
     description:
       'Started with more responsibilities along with handling the mobile x-platform dev team. Helped deliver the IoT based app for the client and fixed crucial bugs.',
     keyPoints: [

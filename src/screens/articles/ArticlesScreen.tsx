@@ -47,7 +47,7 @@ const ArticlesScreen = () => {
   const { data } = useGetArticlesData();
   const location = useLocation();
   const [category, setCategory] = useState('All');
-  const secondPath = location.pathname.split('/')[3];
+  const secondPath = location.pathname.split('/')[2];
   const [sortByName, setSortBy] = useState<SortByType>('none');
 
   const articles = useMemo(

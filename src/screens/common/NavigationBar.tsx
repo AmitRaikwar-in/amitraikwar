@@ -1,10 +1,10 @@
-import { Box, HStack, Img } from '@chakra-ui/react';
+import { Box, Button, HStack, Img } from '@chakra-ui/react';
 import { AnimatedModal, LinkButton, useCursor } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMoveToTop } from '@hooks';
 import { BASE_URL_ROUTE } from '@router';
 import PingTest from './PingTest';
@@ -124,18 +124,25 @@ const NavigationBar = () => {
           backdropFilter={'blur(20px)'}
           transition={'background-color 0.3s'}
         >
-          <LinkButton
+          <Button
             key={ArticleLink.name}
-            text={t(ArticleLink.name)}
-            href={BASE_URL_ROUTE + '/' + ArticleLink.href}
+            as={Link}
+            to={'/' + ArticleLink.href}
             fontSize={'lg'}
-            animationOnHover
-          />
+            color={'white'}
+            colorScheme="violet"
+            _hover={{
+              transform: 'scale(1.02)',
+              cursor: 'pointer',
+              transition: 'transform 0.2s',
+              textDecoration: 'none',
+            }}
+          >
+            {t(ArticleLink.name)}
+          </Button>
         </Box>
       </HStack>
-      <HStack
-        onClick={() => {}} // eslint-disable-line
-      >
+      <HStack>
         {pathName === BASE_URL_ROUTE + '/privateRoute' && <PingTest />}
         {pathName === BASE_URL_ROUTE && (
           <AnimatedModal

@@ -12,7 +12,7 @@ import ArticlesScreen from '../screens/articles/ArticlesScreen';
 import ProjectsScreen from '../screens/projects/ProjectsScreen';
 import ArticleEditor from '@screens/articleEditor/ArticleEditor';
 
-export const BASE_URL = 'secret_path';
+export const BASE_URL = '';
 export const BASE_URL_ROUTE = isEmpty(BASE_URL) ? '/' : `/${BASE_URL}`;
 export const BASE_NAV_ROUTE = isEmpty(BASE_URL) ? '/' : `/${BASE_URL}/`;
 
@@ -32,7 +32,7 @@ const publicRouter = createBrowserRouter(
         <Route path="articles" element={<ArticlesScreen />}>
           <Route path=":id" element={<ArticlesScreen />} />
         </Route>
-        <Route path="privateRoute" element={<ArticleEditor />} />
+        <Route path="add_article29" element={<ArticleEditor />} />
         <Route path="projects" element={<ProjectsScreen />}>
           <Route path=":id" element={<ProjectsScreen />} />
         </Route>

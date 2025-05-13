@@ -11,6 +11,7 @@ import {
   Tooltip,
   Box,
   Text,
+  VStack,
 } from '@chakra-ui/react';
 import { Noise } from '@components';
 import { range } from 'lodash';
@@ -68,44 +69,51 @@ const StreakStalker = ({ dates }: { dates: string[] }) => {
           <Noise />
           <DrawerCloseButton />
           <DrawerHeader>Activity Tracker, 2025</DrawerHeader>
-          <DrawerBody p={0}>
+          <DrawerBody p={0} m={2}>
             <Box
               display={'grid'}
-              gridTemplateRows={'repeat(7, 1fr)'}
               flexDirection={'row'}
               p={5}
               gridAutoFlow={'column'}
             >
               {Object.entries(MonthDaysMap).map(([month, daysInMonth]) => (
-                <>
-                  <Text aria-colspan={5} fontSize={10} textAlign={'center'}>
+                <VStack key={month} spacing={0}>
+                  <Text fontSize={10} textAlign={'center'}>
                     {MONTH_NUMBER_NAME_MAP[month]}
                   </Text>
-                  {range(1, daysInMonth + 1).map((dayOfMonth) => (
-                    <Tooltip
-                      key={dayOfMonth + 1}
-                      label={`${dayOfMonth + 1} ${MONTH_NUMBER_NAME_MAP[month]}`}
-                      hasArrow
-                    >
-                      <Box
-                        m={'1px'}
-                        borderRadius={3}
-                        color={'white'}
-                        fontSize={10}
-                        border={'1px solid gray'}
-                        bg={
-                          dateMap?.[month]?.includes(dayOfMonth)
-                            ? 'green.600'
-                            : 'gray.900'
-                        }
-                        textAlign={'center'}
-                        h={5}
-                        w={5}
-                        onClick={() => console.log('clicked')}
-                      />
-                    </Tooltip>
-                  ))}
-                </>
+                  <Box
+                    display={'grid'}
+                    gridTemplateRows={'repeat(7, 2fr)'}
+                    flexDirection={'row'}
+                    p={5}
+                    gridAutoFlow={'column'}
+                  >
+                    {range(1, daysInMonth + 1).map((dayOfMonth) => (
+                      <Tooltip
+                        key={dayOfMonth + 1}
+                        label={`${dayOfMonth + 1} ${MONTH_NUMBER_NAME_MAP[month]}`}
+                        hasArrow
+                      >
+                        <Box
+                          m={'1px'}
+                          borderRadius={3}
+                          color={'white'}
+                          fontSize={10}
+                          border={'1px solid gray'}
+                          bg={
+                            dateMap?.[month]?.includes(dayOfMonth)
+                              ? 'green.600'
+                              : 'gray.900'
+                          }
+                          textAlign={'center'}
+                          h={5}
+                          w={5}
+                          onClick={() => console.log('clicked')}
+                        />
+                      </Tooltip>
+                    ))}
+                  </Box>
+                </VStack>
               ))}
             </Box>
           </DrawerBody>
