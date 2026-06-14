@@ -21,3 +21,4 @@ export * from './TypeWriterText';
 export * from './FallingText';
 export * from './ShinyText';
 export * from './WavyBackground';
+export * from './GlassBox';
