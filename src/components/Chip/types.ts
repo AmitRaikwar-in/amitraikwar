@@ -14,10 +14,13 @@ export enum Skills {
   jest = 'jest',
   html = 'html',
   css = 'css',
+  rust = 'rust',
+  electron = 'electron',
+  tauri = 'tauri',
   more = 'more',
 }
 
 export type ChipProps = {
-  size?: 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md';
   type: Skills;
 };
