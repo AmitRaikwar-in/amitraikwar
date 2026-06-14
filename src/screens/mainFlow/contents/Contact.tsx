@@ -1,6 +1,6 @@
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { DotPattern } from '@components';
+import { DotField } from '@components';
 import { EmailIcon, GetInTouch } from '@assets';
 import { CONTACT } from '@data';
 import { useRef } from 'react';
@@ -13,24 +13,34 @@ const Contact = () => {
 
   const isContactContainerIntersecting = useIsIntersecting(ref);
   return (
-    <Box minH={'100vh'} width={'99vw'} id="contact">
+    <Box minH={'100vh'} width={'100%'} id="contact">
       <Heading
         textAlign={'start'}
         position={'sticky'}
         top={'10vh'}
-        paddingX={32}
+        paddingX={{ base: 4, md: 8, lg: 20, xl: 32 }}
       >
         {t('contact.title')}
       </Heading>
-      <VStack top={'10vh'} position={'sticky'}>
-        <DotPattern
-          className={
-            '[mask-image:radial-gradient(350px_circle_at_center,white,transparent)] h-[90vh] absolute z-0'
-          }
+      <VStack
+        top={'10vh'}
+        position={'sticky'}
+        h={0}
+        w={'full'}
+        zIndex={0}
+        pointerEvents={'none'}
+      >
+        <DotField
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '90vh',
+            pointerEvents: 'none',
+          }}
         />
       </VStack>
-      <VStack w={'100%'} marginTop={'30vh'} align={'start'} spacing={8} px={32}>
-        <Text fontSize={'3xl'} width={'50%'}>
+      <VStack w={'100%'} marginTop={'30vh'} align={'start'} spacing={8} px={{ base: 4, md: 8, lg: 20, xl: 32 }}>
+        <Text fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} width={{ base: '100%', lg: '60%', xl: '50%' }}>
           {t('contact.description')}
         </Text>
         <Button
@@ -40,14 +50,21 @@ const Contact = () => {
           variant={'outline'}
           colorScheme={'violet'}
           size={'lg'}
-          px={2}
+          px={4}
           ref={ref}
         >
           {CONTACT.email}
         </Button>
         <AnimatePresence initial={false}>
           {isContactContainerIntersecting && (
-            <motion.div
+            <Box
+              display={{ base: 'none', lg: 'flex' }}
+              flexDirection="column"
+              position="fixed"
+              bottom="40vh"
+              right={150}
+              alignItems="end"
+              as={motion.div}
               initial="collapsed"
               animate="open"
               exit="collapsed"
@@ -58,19 +75,11 @@ const Contact = () => {
               transition={{
                 duration: 0.5,
                 ease: [0.04, 0.62, 0.23, 0.98],
-              }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'fixed',
-                bottom: 180,
-                right: 150,
-                alignItems: 'end',
-              }}
+              } as any}
             >
               <GetInTouch width={56} height={56} />
               <Text>{t('contact.getInTouch')}</Text>
-            </motion.div>
+            </Box>
           )}
         </AnimatePresence>
       </VStack>

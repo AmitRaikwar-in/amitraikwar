@@ -1,48 +1,137 @@
-import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { useSpringMousePosition } from '../../hooks';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useCursor } from './CursorProvider';
+import GlassBox from '../GlassBox/GlassBox';
+
+const SPRING_FAST = { damping: 40, stiffness: 1000, mass: 0.1 };
+const SPRING_SLOW = { damping: 35, stiffness: 600, mass: 0.3 };
 
 const FollowCursor = () => {
   const { insets } = useCursor();
-  const ref = useRef<HTMLDivElement>(null);
-  const { x, y } = useSpringMousePosition(ref);
-
-  const { width, height, top, left, borderRadius } = insets ?? {
-    width: 32,
-    height: 32,
-    top: 0,
-    left: 0,
-    borderRadius: '5px',
-  };
-  const props = {
-    boxShadow: '0 0 50px 10px violet',
-    width: width,
-    height: height,
-    transition: !insets ? 'all 0.0s ease' : 'all 0.5s ease',
-    borderRadius: insets ? borderRadius ?? '5px' : '50%',
-  };
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Initial position
-    ref.current!.style.transform = `translate(${x}px, ${y}px)`;
-  }, [x, y, insets]);
+    const checkVisibility = () => {
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 992; // 992px is Chakra's lg breakpoint
+      setIsVisible(!isTouch && !isSmallScreen);
+    };
+
+    checkVisibility();
+    window.addEventListener('resize', checkVisibility, { passive: true });
+    return () => window.removeEventListener('resize', checkVisibility);
+  }, []);
+
+  // Target positions (centered on the mouse pointer)
+  const dotTargetX = useMotionValue(window.innerWidth / 2);
+  const dotTargetY = useMotionValue(window.innerHeight / 2);
+  const ringTargetX = useMotionValue(window.innerWidth / 2);
+  const ringTargetY = useMotionValue(window.innerHeight / 2);
+
+  // Springs
+  const dotX = useSpring(dotTargetX, SPRING_FAST);
+  const dotY = useSpring(dotTargetY, SPRING_FAST);
+  const ringX = useSpring(ringTargetX, SPRING_SLOW);
+  const ringY = useSpring(ringTargetY, SPRING_SLOW);
+
+  const hasInsets = !!insets;
+  const isHovering = hasInsets && insets.width > 0 && insets.height > 0;
+  const shouldHide = hasInsets && (insets.width === 0 || insets.height === 0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      dotTargetX.set(e.clientX);
+      dotTargetY.set(e.clientY);
+      ringTargetX.set(e.clientX);
+      ringTargetY.set(e.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [dotTargetX, dotTargetY, ringTargetX, ringTargetY]);
+
+  const ringSize = shouldHide ? 0 : (isHovering ? 48 : 36);
+  const ringWidth = ringSize;
+  const ringHeight = ringSize;
+  const ringBorderRadius = '50%';
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
-    <motion.div
-      className="cursor"
-      ref={ref}
-      style={{
-        x: top === 0 ? x : left,
-        y: top === 0 ? y : top,
-        backgroundColor: '#FFFFFFC5',
-        mixBlendMode: 'difference',
-        zIndex: 1,
-        position: 'fixed',
-        pointerEvents: 'none',
-        ...props,
-      }}
-    />
+    <>
+      {/* Inner solid pointing dot */}
+      <motion.div
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          backgroundColor: '#ffffff',
+          mixBlendMode: 'difference',
+          zIndex: 99999,
+          pointerEvents: 'none',
+          x: dotX,
+          y: dotY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+        animate={{
+          opacity: (isHovering || shouldHide) ? 0 : 1,
+          scale: (isHovering || shouldHide) ? 0 : 1,
+        }}
+        transition={{ duration: 0.15 }}
+      />
+
+      {/* Outer morphing glass lens container */}
+      <motion.div
+        animate={{
+          width: ringWidth,
+          height: ringHeight,
+          borderRadius: ringBorderRadius,
+          opacity: shouldHide ? 0 : 1,
+          scale: shouldHide ? 0.5 : 1,
+        }}
+        transition={{
+          type: 'spring',
+          damping: 25,
+          stiffness: 160,
+          mass: 0.7,
+        }}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          zIndex: 99998,
+          pointerEvents: 'none',
+          x: ringX,
+          y: ringY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      >
+        <GlassBox
+          width="100%"
+          height="100%"
+          borderRadius={isHovering ? 24 : 18}
+          borderWidth={isHovering ? 0.12 : 0.15}
+          blur={isHovering ? 5 : 3}
+          displace={isHovering ? 1.2 : 0.8}
+          backgroundOpacity={isHovering ? 0.02 : 0.01}
+          saturation={isHovering ? 1.8 : 1.4}
+          distortionScale={isHovering ? 24 : 16}
+          brightness={100}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+          }}
+        />
+      </motion.div>
+    </>
   );
 };
 

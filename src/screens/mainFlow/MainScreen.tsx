@@ -7,7 +7,7 @@ const MainScreen = () => {
     <TitleBoxContainer
       title={'Amit Raikwar | Portfolio'}
       bg={'black'}
-      minW={'99vw'}
+      width={'100%'}
       display={'flex'}
       flexDir={'column'}
       alignItems={'center'}

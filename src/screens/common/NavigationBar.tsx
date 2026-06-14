@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Img } from '@chakra-ui/react';
-import { AnimatedModal, LinkButton, useCursor } from '@components';
+import { AnimatedModal, LinkButton, useCursor, GlassBox } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
 import { useRef } from 'react';
@@ -67,112 +67,212 @@ const NavigationBar = () => {
     }
   };
 
-  return (
-    <HStack
-      position={'fixed'}
-      paddingTop={{ md: 2, xl: 4 }}
-      paddingBottom={4}
-      width={'100%'}
-      paddingRight={14}
-      paddingLeft={{ base: 14, '2xl': 32 }}
-      zIndex={11}
-      justifyContent={'space-between'}
-      bg={'linear-gradient(180deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0.01) 100%)'}
-    >
-      <Img
-        m={2}
-        zIndex={11}
-        src={AmitRaikwarLogo}
-        alt={'logo'}
-        w={8}
+  if (pathName.startsWith('/projects') || pathName.startsWith('/articles')) {
+    return (
+      <Box
+        position="fixed"
+        top={{ base: 4, md: 6 }}
+        left={{ base: 4, md: 8 }}
+        zIndex={1000}
+        p={2.5}
+        borderRadius="50%"
+        border="1px solid rgba(255, 255, 255, 0.15)"
+        boxShadow="0 8px 32px 0 rgba(0, 0, 0, 0.37)"
+        overflow="hidden"
+        cursor="pointer"
         onClick={() => {
           navigate(BASE_URL_ROUTE);
           moveToTop();
         }}
         _hover={{
-          transform: 'scale(1.3)',
-          transition: 'transform 0.5s',
-          cursor: 'pointer',
+          transform: 'scale(1.1)',
         }}
-      />
-      <HStack
-        zIndex={0}
-        columnGap={3}
-        top={6}
-        border={'1px solid gray'}
-        padding="2"
-        borderRadius="100px"
-        bg={'rgba(255, 255, 255, 0.1)'}
-        backdropFilter={'blur(20px)'}
-        transition={'background-color 0.3s'}
-        display={pathName !== BASE_URL_ROUTE ? 'none' : 'flex'}
+        transition="all 0.3s"
       >
-        {NavigationLink.map(({ name, href }) => (
-          <LinkButton
-            key={name}
-            text={t(name)}
-            href={`#${href}`}
-            fontSize={'lg'}
-            animationOnHover
-            onClick={() => scrollToComponent(href)}
-          />
-        ))}
-        <Box
-          padding="0.2"
-          borderRadius="100px"
-          bg={'rgba(255, 255, 255, 0.1)'}
-          backdropFilter={'blur(20px)'}
-          transition={'background-color 0.3s'}
-        >
-          <Button
-            key={ArticleLink.name}
-            as={Link}
-            to={'/' + ArticleLink.href}
-            fontSize={'lg'}
-            color={'white'}
-            colorScheme="violet"
-            _hover={{
-              transform: 'scale(1.02)',
-              cursor: 'pointer',
-              transition: 'transform 0.2s',
-              textDecoration: 'none',
-            }}
-          >
-            {t(ArticleLink.name)}
-          </Button>
-        </Box>
-      </HStack>
-      <HStack>
-        {pathName === BASE_URL_ROUTE + '/privateRoute' && <PingTest />}
+        <GlassBox
+          width="100%"
+          height="100%"
+          borderRadius={50}
+          borderWidth={0.15}
+          blur={4}
+          displace={1.2}
+          distortionScale={40}
+          yChannel="B"
+          backgroundOpacity={0.005}
+          saturation={1}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: -1,
+            pointerEvents: 'none',
+          }}
+        />
+        <Img
+          src={AmitRaikwarLogo}
+          alt={'logo'}
+          w={7}
+          _hover={{
+            transform: 'scale(1.05)',
+            transition: 'transform 0.3s',
+          }}
+        />
+      </Box>
+    );
+  }
+
+  return (
+    <HStack
+      position={'fixed'}
+      paddingTop={{ base: 2, md: 4, xl: 6 }}
+      paddingBottom={4}
+      width={'100%'}
+      zIndex={1000}
+      justifyContent={'center'}
+      bg={
+        'linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%)'
+      }
+      pointerEvents="none"
+    >
+      <HStack
+        position="relative"
+        zIndex={0}
+        columnGap={{ base: 1.5, sm: 3, md: 6 }}
+        border={'1px solid rgba(255, 255, 255, 0.1)'}
+        boxShadow={'0 8px 32px 0 rgba(0, 0, 0, 0.6)'}
+        paddingX={{ base: 2, md: 3 }}
+        paddingY="0.5"
+        borderRadius="24px"
+        overflow="hidden"
+        alignItems="center"
+        justifyContent="space-between"
+        pointerEvents="auto"
+        width={{ base: '90%', md: '60%' }}
+        maxWidth="1400px"
+      >
+        <GlassBox
+          width="100%"
+          height="100%"
+          borderRadius={24}
+          borderWidth={0.15}
+          blur={2}
+          displace={1}
+          distortionScale={40}
+          yChannel="B"
+          backgroundOpacity={0.005}
+          saturation={1}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: -1,
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Left: Logo */}
+        <Img
+          m={1}
+          src={AmitRaikwarLogo}
+          alt={'logo'}
+          w={{ base: 5, md: 7 }}
+          onClick={() => {
+            navigate(BASE_URL_ROUTE);
+            moveToTop();
+          }}
+          _hover={{
+            transform: 'scale(1.2)',
+            transition: 'transform 0.3s',
+            cursor: 'pointer',
+          }}
+        />
+
+        {/* Center: Navigation Links */}
         {pathName === BASE_URL_ROUTE && (
-          <AnimatedModal
-            triggerComponent={
-              <Box
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                ref={ref}
-                border={'1px solid gray'}
-                padding="2.5"
-                color={'white'}
-                borderRadius="100px"
-                bg={'rgba(255, 255, 255, 0.1)'}
-                backdropFilter={'blur(20px)'}
-                transition={'all 0.3s'}
-                _hover={{
-                  transform: 'scale(1.1)',
-                  cursor: 'pointer',
+          <HStack columnGap={{ base: 1, sm: 2, md: 3 }}>
+            {NavigationLink.map(({ name, href }) => (
+              <LinkButton
+                key={name}
+                text={t(name)}
+                href={`#${href}`}
+                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                onClick={() => scrollToComponent(href)}
+              />
+            ))}
+            <Box
+              position="relative"
+              padding={{ base: '0.1', md: '0.2' }}
+              border={'1px solid rgba(255, 255, 255, 0.1)'}
+              borderRadius="12px"
+              overflow="hidden"
+            >
+              <GlassBox
+                width="100%"
+                height="100%"
+                borderRadius={12}
+                borderWidth={0.1}
+                blur={2}
+                displace={1.2}
+                distortionScale={40}
+                yChannel="B"
+                backgroundOpacity={0.005}
+                saturation={1}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  zIndex: -1,
+                  pointerEvents: 'none',
                 }}
-                p={2}
+              />
+              <Button
+                key={ArticleLink.name}
+                as={Link}
+                to={'/' + ArticleLink.href}
+                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                size={{ base: 'xs', sm: 'sm', md: 'md' }}
+                color={'white'}
+                colorScheme="violet"
+                _hover={{
+                  transform: 'scale(1.02)',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s',
+                  textDecoration: 'none',
+                }}
               >
-                <SearchIcon />
-              </Box>
-            }
-            title="Search"
-            footer={<Box></Box>}
-          >
-            <Box></Box>
-          </AnimatedModal>
+                {t(ArticleLink.name)}
+              </Button>
+            </Box>
+          </HStack>
         )}
+
+        {/* Right: Search / Private route trigger */}
+        <HStack spacing={2} alignItems="center">
+          {pathName === BASE_URL_ROUTE + '/privateRoute' && <PingTest />}
+          {pathName === BASE_URL_ROUTE && (
+            <AnimatedModal
+              triggerComponent={
+                <Box
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  ref={ref}
+                  position="relative"
+                  color={'white'}
+                  borderRadius="100px"
+                  cursor="pointer"
+                  p={2}
+                  _hover={{
+                    transform: 'scale(1.1)',
+                  }}
+                  transition="all 0.2s"
+                >
+                  <SearchIcon />
+                </Box>
+              }
+              title="Search"
+              footer={<Box></Box>}
+            >
+              <Box></Box>
+            </AnimatedModal>
+          )}
+        </HStack>
       </HStack>
     </HStack>
   );

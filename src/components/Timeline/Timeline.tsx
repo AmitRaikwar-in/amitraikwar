@@ -21,11 +21,12 @@ const TimelineContent = ({
       </div>
 
       <motion.div
+        className="ml-14 md:ml-0 flex-1 md:w-full"
         style={{
-          width: '100%',
           border: `1px solid gray`, // Initial border color
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: 'column',
+          alignItems: 'stretch',
           justifyContent: 'center',
         }}
         animate={{
@@ -39,7 +40,7 @@ const TimelineContent = ({
           repeatType: 'reverse',
         }}
       >
-        <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
+        <h3 className="md:hidden block text-xl mb-3 text-left font-bold text-neutral-500 dark:text-neutral-500">
           {title}
         </h3>
         {content}

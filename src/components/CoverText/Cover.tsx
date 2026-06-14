@@ -125,7 +125,7 @@ export const Cover = ({ children }: { children?: React.ReactNode }) => {
           },
         }}
         className={
-          'dark:text-white inline-block text-neutral-900 relative z-1 group-hover/cover:text-white transition duration-200'
+          'text-white inline-block relative z-1 transition duration-200'
         }
       >
         {children}

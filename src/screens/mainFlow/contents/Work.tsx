@@ -14,6 +14,7 @@ const CustomHeading = ({ title }: { title: string }) => {
       color="brand.500"
       marginTop={2}
       borderBottom={'1px solid'}
+      fontSize={{ base: 'xs', md: 'sm' }}
     >
       {title}
     </Text>
@@ -33,19 +34,21 @@ const WorkUIData = () => {
           return (
             <Box
               w={'full'}
-              padding={4}
+              padding={{ base: 3, md: 4 }}
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
+              onClick={() => setIsOpen(!isOpen)}
+              cursor="pointer"
             >
               <Text
-                fontSize="2xl"
+                fontSize={{ base: 'xl', md: '2xl' }}
                 fontWeight="bold"
                 color="brand.500"
                 marginBottom={2}
               >
                 {title}
               </Text>
-              <Text>{description}</Text>
+              <Text fontSize={{ base: 'sm', md: 'md' }}>{description}</Text>
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.section
@@ -66,11 +69,12 @@ const WorkUIData = () => {
                     )}
                     {keyPoints.map((point, index) => (
                       <Text
-                        marginStart={10}
+                        marginStart={{ base: 4, md: 10 }}
                         key={index}
                         marginTop={2}
                         fontWeight="500"
                         color="brand.500"
+                        fontSize={{ base: 'xs', md: 'sm' }}
                       >
                         {point}
                       </Text>
@@ -78,10 +82,11 @@ const WorkUIData = () => {
                     {tags && tags.length > 0 && (
                       <CustomHeading title="Skills acquired:" />
                     )}
-                    <Wrap spacingX={2}>
+                    <Wrap spacingX={2} spacingY={1.5}>
                       {tags.map((tag, index) => (
                         <Text
-                          px={1}
+                          px={1.5}
+                          py={0.5}
                           _hover={{
                             transform: 'scale(1.05)',
                             cursor: 'pointer',
@@ -89,9 +94,10 @@ const WorkUIData = () => {
                           transition={'transform 0.4s'}
                           outline={'1px solid'}
                           key={index}
-                          marginTop={2}
+                          marginTop={1.5}
                           fontWeight="500"
                           color="brand.500"
+                          fontSize={{ base: 'xs', md: 'sm' }}
                         >
                           {tag}
                         </Text>
@@ -99,17 +105,17 @@ const WorkUIData = () => {
                     </Wrap>
                     <HStack>
                       <CustomHeading title="Important Links:" />
-                      <Wrap spacingX={5}>
+                      <Wrap spacingX={4} spacingY={1.5}>
                         {links.map(({ title, link }, index) => (
                           <Text
                             key={index}
                             as="a"
                             href={link}
                             target="_blank"
-                            marginTop={2}
+                            marginTop={1.5}
                             color="brand.500"
                             fontWeight="bold"
-                            fontSize="md"
+                            fontSize={{ base: 'xs', md: 'md' }}
                           >
                             {title}
                           </Text>
@@ -132,9 +138,9 @@ const Work = () => {
     <Box
       zIndex={0}
       minH={'100vh'}
-      width={'99vw'}
+      width={'100%'}
       id="work"
-      paddingX={32}
+      paddingX={{ base: 4, md: 8, lg: 20, xl: 32 }}
       overflow={'clip'}
     >
       <Heading position={'sticky'} top={'10vh'} zIndex={3}>
