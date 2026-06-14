@@ -12,12 +12,7 @@ const CoverText = ({
   role: string;
 }) => {
   return (
-    <Box
-      position={'relative'}
-      textAlign={'center'}
-      zIndex={1}
-      width={'100%'}
-    >
+    <Box position={'relative'} textAlign={'center'} zIndex={1} width={'100%'}>
       <Heading className="text-2xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto mt-2 relative z-1 py-2 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 via-white to-white">
         <Text className="text-xl md:text-3xl lg:text-4xl pb-2">{text}</Text>
         <Cover>{highlightedText}</Cover>

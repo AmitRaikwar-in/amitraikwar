@@ -50,7 +50,7 @@ const FollowCursor = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [dotTargetX, dotTargetY, ringTargetX, ringTargetY]);
 
-  const ringSize = shouldHide ? 0 : (isHovering ? 48 : 36);
+  const ringSize = shouldHide ? 0 : isHovering ? 48 : 36;
   const ringWidth = ringSize;
   const ringHeight = ringSize;
   const ringBorderRadius = '50%';
@@ -80,8 +80,8 @@ const FollowCursor = () => {
           translateY: '-50%',
         }}
         animate={{
-          opacity: (isHovering || shouldHide) ? 0 : 1,
-          scale: (isHovering || shouldHide) ? 0 : 1,
+          opacity: isHovering || shouldHide ? 0 : 1,
+          scale: isHovering || shouldHide ? 0 : 1,
         }}
         transition={{ duration: 0.15 }}
       />

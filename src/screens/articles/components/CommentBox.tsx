@@ -94,7 +94,12 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
                     <Avatar name={comment.name} size={'sm'} bg="teal.500" />
                     <Heading size={'xs'} verticalAlign={'middle'}>
                       {comment.name}{' '}
-                      <Text as="span" fontSize="xs" color="gray.400" fontWeight="normal">
+                      <Text
+                        as="span"
+                        fontSize="xs"
+                        color="gray.400"
+                        fontWeight="normal"
+                      >
                         📫 {comment.email}
                       </Text>
                     </Heading>
@@ -128,7 +133,12 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
       <VStack p={4} borderRadius={'md'} mt={4} rowGap={3}>
         <Divider />
         <Text alignSelf={'start'}>Add a Comment</Text>
-        <Stack direction={{ base: 'column', md: 'row' }} spacing={4} w={'100%'} alignItems="center">
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          spacing={4}
+          w={'100%'}
+          alignItems="center"
+        >
           <Avatar size="sm" bg="gray.500" name={state.name} />
           <Input
             type="text"

@@ -181,7 +181,16 @@ const GlassBox: React.FC<GlassSurfaceProps> = ({
     `;
 
     return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
-  }, [borderWidth, redGradId, blueGradId, borderRadius, mixBlendMode, brightness, opacity, blur]);
+  }, [
+    borderWidth,
+    redGradId,
+    blueGradId,
+    borderRadius,
+    mixBlendMode,
+    brightness,
+    opacity,
+    blur,
+  ]);
 
   const lastMapRef = useRef<string>('');
   const timeoutRef = useRef<any>(null);

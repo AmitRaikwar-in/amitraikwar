@@ -119,10 +119,7 @@ Core idea of this project is to build a place on the internet where coders can f
     description: `InstaPilot is a Python-based social media automation scheduling tool (part of the insta-pilot suite). It automates reading posting schedules, downloading content from Google Drive, uploading to multiple social networks (Instagram, Facebook, Pinterest, etc.), logging progress, and notifying via Slack.`,
     githubLink: 'https://github.com/insta-pilot/insta-pilot',
     link: 'https://github.com/insta-pilot/insta-pilot',
-    tags: [
-      Language.python,
-      Language.git,
-    ],
+    tags: [Language.python, Language.git],
     keyPoints: [
       'Automates reading posting schedules to streamline content planning and execution.',
       'Downloads media assets directly from Google Drive folders.',

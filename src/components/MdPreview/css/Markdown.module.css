@@ -51,7 +51,7 @@
 }
 
 .markdown div ol {
-  width: '100vw';
+  max-width: 100%;
   background-color: light-dark(#ddffaa, #39422c);
   box-shadow:
     0 0 0 1px #ffffffc0,
@@ -63,7 +63,7 @@
 }
 
 .markdown table {
-  width: 'fit-content';
+  width: fit-content;
   border-collapse: collapse;
   border-spacing: 0;
   margin: 1rem;

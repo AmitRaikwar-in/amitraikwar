@@ -38,7 +38,7 @@ GlassBox produces its effect in three layers stacked inside a single `<div>`:
 └─────────────────────────────────────────┘
 ```
 
-The SVG filter is referenced by `backdrop-filter: url(#glass-filter-…)`. The browser feeds *whatever is painted behind the element* through the filter before compositing it — producing genuine optical distortion, not just blur.
+The SVG filter is referenced by `backdrop-filter: url(#glass-filter-…)`. The browser feeds _whatever is painted behind the element_ through the filter before compositing it — producing genuine optical distortion, not just blur.
 
 ---
 
@@ -46,11 +46,11 @@ The SVG filter is referenced by `backdrop-filter: url(#glass-filter-…)`. The b
 
 The component detects capabilities at mount time and picks the best available tier:
 
-| Tier | Condition | Effect |
-|------|-----------|--------|
-| **SVG** (full) | Chromium-based browser + `backdrop-filter: url(…)` supported | SVG displacement-map refracts background; full chromatic aberration, inner glow, and inset shadows |
-| **CSS fallback** | Safari / Firefox with `backdrop-filter: blur()` | `blur(12px) saturate(1.8) brightness(1.2/1.1)` + semi-transparent background |
-| **Static fallback** | No backdrop-filter support at all | Opaque frosted-looking background with inset border highlight |
+| Tier                | Condition                                                    | Effect                                                                                             |
+| ------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| **SVG** (full)      | Chromium-based browser + `backdrop-filter: url(…)` supported | SVG displacement-map refracts background; full chromatic aberration, inner glow, and inset shadows |
+| **CSS fallback**    | Safari / Firefox with `backdrop-filter: blur()`              | `blur(12px) saturate(1.8) brightness(1.2/1.1)` + semi-transparent background                       |
+| **Static fallback** | No backdrop-filter support at all                            | Opaque frosted-looking background with inset border highlight                                      |
 
 The tier is chosen **once** on mount (`useEffect`) and stored in `svgSupported` state. Each tier also adapts its colours to the system **dark/light mode** via the `useDarkMode` hook (listens to `prefers-color-scheme`).
 
@@ -76,44 +76,44 @@ All props are optional. Omit any you don't need — sensible defaults are applie
 
 ### Layout & shape
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `width` | `number \| string` | `200` | Width of the glass pane. Pass a number for px, or any CSS string (`"100%"`, `"auto"`, `"50vw"`, …). |
-| `height` | `number \| string` | `80` | Height of the glass pane. Same rules as `width`. |
-| `borderRadius` | `number` | `20` | Corner radius in **px**. Applied to the outer container, the inner SVG displacement-map rects, and the children wrapper (`rounded-[inherit]`). |
+| Prop           | Type               | Default | Description                                                                                                                                    |
+| -------------- | ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `width`        | `number \| string` | `200`   | Width of the glass pane. Pass a number for px, or any CSS string (`"100%"`, `"auto"`, `"50vw"`, …).                                            |
+| `height`       | `number \| string` | `80`    | Height of the glass pane. Same rules as `width`.                                                                                               |
+| `borderRadius` | `number`           | `20`    | Corner radius in **px**. Applied to the outer container, the inner SVG displacement-map rects, and the children wrapper (`rounded-[inherit]`). |
 
 ### Displacement map — form of the glass
 
 These props control the **SVG displacement-map image** that is baked as a `data:image/svg+xml` URL and fed into `<feImage>`. Changing them forces the map to regenerate.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `borderWidth` | `number` | `0.07` | Thickness of the gradient edge band as a **fraction of the shorter dimension** (e.g. `0.07` → 3.5 % of `min(w, h)`). Controls how wide the refractive "rim" of the glass is. Raise it for a thicker, lens-like edge. |
-| `brightness` | `number` | `100` | Lightness (HSL %) of the frosted inner rect drawn on the displacement map. `100` = white, `0` = black. Affects how "milky" the centre of the glass looks when `opacity > 0`. |
-| `opacity` | `number` | `0` | Alpha of the frosted inner rect (`0`–`1`). `0` = completely transparent centre (pure refraction only); `1` = fully opaque frosted fill. Use small values like `0.05`–`0.15` for a subtle frost. |
-| `blur` | `number` | `10` | `blur()` applied to the frosted inner rect **inside the SVG**. Softens the transition between the edge band and the centre. |
-| `mixBlendMode` | see below | `'screen'` | Blend mode used when the blue gradient is composited over the red gradient in the displacement map. Controls the colour of the edge refraction. |
+| Prop           | Type      | Default    | Description                                                                                                                                                                                                          |
+| -------------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `borderWidth`  | `number`  | `0.07`     | Thickness of the gradient edge band as a **fraction of the shorter dimension** (e.g. `0.07` → 3.5 % of `min(w, h)`). Controls how wide the refractive "rim" of the glass is. Raise it for a thicker, lens-like edge. |
+| `brightness`   | `number`  | `100`      | Lightness (HSL %) of the frosted inner rect drawn on the displacement map. `100` = white, `0` = black. Affects how "milky" the centre of the glass looks when `opacity > 0`.                                         |
+| `opacity`      | `number`  | `0`        | Alpha of the frosted inner rect (`0`–`1`). `0` = completely transparent centre (pure refraction only); `1` = fully opaque frosted fill. Use small values like `0.05`–`0.15` for a subtle frost.                      |
+| `blur`         | `number`  | `10`       | `blur()` applied to the frosted inner rect **inside the SVG**. Softens the transition between the edge band and the centre.                                                                                          |
+| `mixBlendMode` | see below | `'screen'` | Blend mode used when the blue gradient is composited over the red gradient in the displacement map. Controls the colour of the edge refraction.                                                                      |
 
 ### SVG filter — chromatic aberration & displacement
 
 These props are applied directly to the `<feDisplacementMap>` and `<feGaussianBlur>` filter primitives via `ref.current.setAttribute(…)` after mount.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `distortionScale` | `number` | `20` | Base displacement scale for all three colour channels. Positive = right-down warp, negative = left-up warp. The magnitude is in SVG user-units (roughly pixels). |
-| `redOffset` | `number` | `0` | Added to `distortionScale` for the **red** channel only. Use a non-zero value to shift red independently, creating chromatic aberration. |
-| `greenOffset` | `number` | `0` | Same for the **green** channel. |
-| `blueOffset` | `number` | `0` | Same for the **blue** channel. `blueOffset = 20` with `distortionScale = -180` (old default) created a strong blue-shifted rim. |
-| `xChannel` | `'R' \| 'G' \| 'B'` | `'R'` | Which colour channel of the displacement map image drives horizontal displacement. |
-| `yChannel` | `'R' \| 'G' \| 'B'` | `'G'` | Which channel drives vertical displacement. |
-| `displace` | `number` | `3` | `stdDeviation` of the final `<feGaussianBlur>` applied after RGB channel blending. Softens the overall refraction (not the same as CSS `blur`). Higher = smudgier glass. |
+| Prop              | Type                | Default | Description                                                                                                                                                              |
+| ----------------- | ------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `distortionScale` | `number`            | `20`    | Base displacement scale for all three colour channels. Positive = right-down warp, negative = left-up warp. The magnitude is in SVG user-units (roughly pixels).         |
+| `redOffset`       | `number`            | `0`     | Added to `distortionScale` for the **red** channel only. Use a non-zero value to shift red independently, creating chromatic aberration.                                 |
+| `greenOffset`     | `number`            | `0`     | Same for the **green** channel.                                                                                                                                          |
+| `blueOffset`      | `number`            | `0`     | Same for the **blue** channel. `blueOffset = 20` with `distortionScale = -180` (old default) created a strong blue-shifted rim.                                          |
+| `xChannel`        | `'R' \| 'G' \| 'B'` | `'R'`   | Which colour channel of the displacement map image drives horizontal displacement.                                                                                       |
+| `yChannel`        | `'R' \| 'G' \| 'B'` | `'G'`   | Which channel drives vertical displacement.                                                                                                                              |
+| `displace`        | `number`            | `3`     | `stdDeviation` of the final `<feGaussianBlur>` applied after RGB channel blending. Softens the overall refraction (not the same as CSS `blur`). Higher = smudgier glass. |
 
 ### Visual finish
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `backgroundOpacity` | `number` | `0` | Alpha of the tinted background fill in **SVG mode** (`0`–`1`). In dark mode the fill is `hsl(0 0% 0% / backgroundOpacity)`; in light mode `hsl(0 0% 100% / backgroundOpacity)`. Exposes the `--glass-frost` CSS custom property. |
-| `saturation` | `number` | `2` | `saturate(n)` appended to `backdrop-filter` in SVG mode. `1` = natural, `>1` = more vivid colours through the glass. Exposes the `--glass-saturation` CSS custom property. |
+| Prop                | Type     | Default | Description                                                                                                                                                                                                                      |
+| ------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `backgroundOpacity` | `number` | `0`     | Alpha of the tinted background fill in **SVG mode** (`0`–`1`). In dark mode the fill is `hsl(0 0% 0% / backgroundOpacity)`; in light mode `hsl(0 0% 100% / backgroundOpacity)`. Exposes the `--glass-frost` CSS custom property. |
+| `saturation`        | `number` | `2`     | `saturate(n)` appended to `backdrop-filter` in SVG mode. `1` = natural, `>1` = more vivid colours through the glass. Exposes the `--glass-saturation` CSS custom property.                                                       |
 
 ### `mixBlendMode` values
 
@@ -126,11 +126,11 @@ These props are applied directly to the `<feDisplacementMap>` and `<feGaussianBl
 
 ### DOM pass-through
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | `''` | Extra classes added to the outer container (alongside the internal Tailwind utility classes). Use for reveal animations, hover states, etc. |
-| `style` | `React.CSSProperties` | `{}` | Inline styles merged **before** the computed glass styles. Useful for `minHeight`, `display`, `position`, etc. Note: glass-specific properties (`background`, `backdropFilter`, `boxShadow`, `borderRadius`, `width`, `height`) will be overwritten by the component. |
-| `children` | `React.ReactNode` | — | Rendered inside a full-size `div` with `z-index: 10` and `rounded-[inherit]`. |
+| Prop        | Type                  | Default | Description                                                                                                                                                                                                                                                           |
+| ----------- | --------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `className` | `string`              | `''`    | Extra classes added to the outer container (alongside the internal Tailwind utility classes). Use for reveal animations, hover states, etc.                                                                                                                           |
+| `style`     | `React.CSSProperties` | `{}`    | Inline styles merged **before** the computed glass styles. Useful for `minHeight`, `display`, `position`, etc. Note: glass-specific properties (`background`, `backdropFilter`, `boxShadow`, `borderRadius`, `width`, `height`) will be overwritten by the component. |
+| `children`  | `React.ReactNode`     | —       | Rendered inside a full-size `div` with `z-index: 10` and `rounded-[inherit]`.                                                                                                                                                                                         |
 
 ---
 
@@ -162,23 +162,23 @@ Each colour channel is displaced independently using the same `<feImage>` displa
 
 ```tsx
 // Current defaults (as of last update)
-borderRadius    = 20
-borderWidth     = 0.07
-brightness      = 100
-opacity         = 0
-blur            = 10
-displace        = 3
-backgroundOpacity = 0
-saturation      = 2
-distortionScale = 20
-redOffset       = 0
-greenOffset     = 0
-blueOffset      = 0
-xChannel        = 'R'
-yChannel        = 'G'
-mixBlendMode    = 'screen'
-width           = 200
-height          = 80
+borderRadius = 20;
+borderWidth = 0.07;
+brightness = 100;
+opacity = 0;
+blur = 10;
+displace = 3;
+backgroundOpacity = 0;
+saturation = 2;
+distortionScale = 20;
+redOffset = 0;
+greenOffset = 0;
+blueOffset = 0;
+xChannel = 'R';
+yChannel = 'G';
+mixBlendMode = 'screen';
+width = 200;
+height = 80;
 ```
 
 ---
@@ -208,7 +208,9 @@ height          = 80
 >
   <VStack align="start" p={6} gap={4}>
     <Icon type={IconType.SYNC} size="20px" />
-    <Heading as="h3" size="sm">Engineered for Synchronization</Heading>
+    <Heading as="h3" size="sm">
+      Engineered for Synchronization
+    </Heading>
     <Text fontSize="xs">…</Text>
   </VStack>
 </GlassBox>
@@ -269,10 +271,10 @@ height          = 80
 
 The component exposes two CSS custom properties on the outer element that can be read by child CSS:
 
-| Property | Value | Description |
-|----------|-------|-------------|
-| `--glass-frost` | `backgroundOpacity` | The opacity of the tinted fill layer |
-| `--glass-saturation` | `saturation` | The saturation multiplier applied via backdrop-filter |
+| Property             | Value               | Description                                           |
+| -------------------- | ------------------- | ----------------------------------------------------- |
+| `--glass-frost`      | `backgroundOpacity` | The opacity of the tinted fill layer                  |
+| `--glass-saturation` | `saturation`        | The saturation multiplier applied via backdrop-filter |
 
 ---
 
@@ -291,11 +293,11 @@ The component exposes two CSS custom properties on the outer element that can be
 
 ## Browser support
 
-| Browser | Tier | Notes |
-|---------|------|-------|
-| Chrome / Edge 76+ | SVG (full) | Full displacement-map + chromatic aberration |
-| Chrome / Edge < 76 | Static fallback | No backdrop-filter support |
-| Safari 9+ | CSS fallback | `backdrop-filter: blur()` supported but `url(#…)` not |
-| Firefox | CSS fallback | Same as Safari |
-| Firefox < 70 | Static fallback | No backdrop-filter |
-| SSR / Node | Static fallback | All browser APIs disabled |
+| Browser            | Tier            | Notes                                                 |
+| ------------------ | --------------- | ----------------------------------------------------- |
+| Chrome / Edge 76+  | SVG (full)      | Full displacement-map + chromatic aberration          |
+| Chrome / Edge < 76 | Static fallback | No backdrop-filter support                            |
+| Safari 9+          | CSS fallback    | `backdrop-filter: blur()` supported but `url(#…)` not |
+| Firefox            | CSS fallback    | Same as Safari                                        |
+| Firefox < 70       | Static fallback | No backdrop-filter                                    |
+| SSR / Node         | Static fallback | All browser APIs disabled                             |

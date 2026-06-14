@@ -40,7 +40,6 @@ const Projects = () => {
       {filteredProjects.map((project, index) => (
         <ProjectItem key={index} index={index} {...project} />
       ))}
-      );
     </VStack>
   );
 };

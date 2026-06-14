@@ -33,7 +33,7 @@ const HoverBorderGradient = ({ children }: { children: React.ReactNode }) => {
   };
   return (
     <div
-      className="m-40 flex justify-center text-center"
+      className="m-2 md:m-4 flex justify-center text-center"
       ref={ref}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

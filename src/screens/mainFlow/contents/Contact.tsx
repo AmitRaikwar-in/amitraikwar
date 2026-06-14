@@ -39,8 +39,17 @@ const Contact = () => {
           }}
         />
       </VStack>
-      <VStack w={'100%'} marginTop={'30vh'} align={'start'} spacing={8} px={{ base: 4, md: 8, lg: 20, xl: 32 }}>
-        <Text fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} width={{ base: '100%', lg: '60%', xl: '50%' }}>
+      <VStack
+        w={'100%'}
+        marginTop={'30vh'}
+        align={'start'}
+        spacing={8}
+        px={{ base: 4, md: 8, lg: 20, xl: 32 }}
+      >
+        <Text
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          width={{ base: '100%', lg: '60%', xl: '50%' }}
+        >
           {t('contact.description')}
         </Text>
         <Button
@@ -72,10 +81,12 @@ const Contact = () => {
                 open: { opacity: 1, height: 'auto' },
                 collapsed: { opacity: 0, height: 0 },
               }}
-              transition={{
-                duration: 0.5,
-                ease: [0.04, 0.62, 0.23, 0.98],
-              } as any}
+              transition={
+                {
+                  duration: 0.5,
+                  ease: [0.04, 0.62, 0.23, 0.98],
+                } as any
+              }
             >
               <GetInTouch width={56} height={56} />
               <Text>{t('contact.getInTouch')}</Text>
