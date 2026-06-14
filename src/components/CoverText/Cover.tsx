@@ -27,6 +27,8 @@ export const Cover = ({ children }: { children?: React.ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current]);
 
+const SafeAnimatePresence = AnimatePresence as any;
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -34,7 +36,7 @@ export const Cover = ({ children }: { children?: React.ReactNode }) => {
       ref={ref}
       className="relative hover:bg-neutral-900  group/cover inline-block dark:bg-neutral-900 bg-neutral-100 px-2 py-2  transition duration-200 rounded-sm"
     >
-      <AnimatePresence>
+      <SafeAnimatePresence>
         {hovered && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -79,7 +81,7 @@ export const Cover = ({ children }: { children?: React.ReactNode }) => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </SafeAnimatePresence>
       {beamPositions.map((position, index) => (
         <Beam
           key={index}

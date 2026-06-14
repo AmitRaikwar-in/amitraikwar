@@ -79,8 +79,10 @@ export const ModalBody = ({
   const { setOpen } = useModal();
   useOutsideClick(modalRef, () => setOpen(false));
 
+const SafeAnimatePresence = AnimatePresence as any;
+
   return (
-    <AnimatePresence>
+    <SafeAnimatePresence>
       {open && (
         <motion.div
           initial={{
@@ -133,7 +135,7 @@ export const ModalBody = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </SafeAnimatePresence>
   );
 };
 

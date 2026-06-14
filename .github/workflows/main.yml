@@ -7,7 +7,7 @@ on:
     branches: ['development']
 
 jobs:
-  lint:
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,8 +16,30 @@ jobs:
         with:
           node-version: 22.x
           cache: 'yarn'
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install
+
+  lint:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Linting
         run: yarn lint
 
@@ -30,9 +52,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'yarn'
-      - name: Install Dependencies
-        run: yarn install
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Test
         run: yarn test:cov
       - name: Upload coverage reports to Codecov
@@ -49,8 +73,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'yarn'
-      - name: Install Dependencies
-        run: yarn install
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Build
         run: yarn build --if-present
