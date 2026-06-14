@@ -4,7 +4,7 @@ import { useCallSBMutationArgs } from './types';
 const useCallSBMutation = <TRequest extends object, TResponse extends object>({
   method,
   mutationOptions,
-}: useCallSBMutationArgs<TResponse, TRequest>) =>
+}: useCallSBMutationArgs<TRequest, TResponse>) =>
   useMutation({
     ...mutationOptions,
     mutationFn: (request) => method(request),

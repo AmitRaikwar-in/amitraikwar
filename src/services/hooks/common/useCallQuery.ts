@@ -10,7 +10,7 @@ import { useCallSBQueryArgs } from './types';
 const useCallQuery = <TRequest extends object, TResponse extends object>({
   method,
   queryOptions,
-}: useCallSBQueryArgs<TResponse, TRequest>) =>
+}: useCallSBQueryArgs<TRequest, TResponse>) =>
   useQuery({
     ...queryOptions,
     queryFn: (request) => method(request),
