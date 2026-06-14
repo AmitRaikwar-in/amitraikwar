@@ -1,6 +1,19 @@
 import { WorkType } from './types';
 
 export const WORK_DATA: WorkType = {
+  '2026': {
+    title: 'Software Lead | IoT | Rust',
+    description:
+      'Started this year with rust learning and independently working on new technology(RUST) for hardware firmware requirement.',
+    keyPoints: [
+      'Taking more responsibilities along with deliverables and also learning new technology (Rust) for hardware firmware project.',
+      'Mentoring the new team members, improved the app performance and fixing the critical bugs.',
+      'Brainstorming many big code design and architecture decisions with the team.',
+      'Implementing many design patterns, best practices, and improved the app performance along with fixing the bugs',
+    ],
+    tags: ['Rust', 'gRPC', 'MicroServices', 'AWS', 'IoT'],
+    links: [{ title: 'Span.io', link: 'https://www.span.io/' }],
+  },
   '2025': {
     title: 'Software Lead | React / React Native',
     description:

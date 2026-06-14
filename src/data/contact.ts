@@ -3,5 +3,5 @@ export const CONTACT = {
   github: 'https://github.com/ar1603',
   linkedIn: 'https://www.linkedin.com/in/amitrai1603/',
   medium: 'https://amitraikwar.medium.com/',
-  instagram: 'https://www.instagram.com/amit1629a/',
+  leetcode: 'https://leetcode.com/u/ar1603/',
 };
