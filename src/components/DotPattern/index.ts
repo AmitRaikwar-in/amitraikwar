@@ -1,1 +1,1 @@
-export { DotPattern } from './DotPattern';
+export { default as DotField } from './DotPattern';
