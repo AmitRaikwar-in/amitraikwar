@@ -13,3 +13,6 @@ export { Supabase } from './Supabase';
 export { Typescript } from './Typescript';
 export { Tanstack } from './Tanstack';
 export { Zustand } from './Zustand';
+export { Rust } from './Rust';
+export { Electron } from './Electron';
+export { Tauri } from './Tauri';
