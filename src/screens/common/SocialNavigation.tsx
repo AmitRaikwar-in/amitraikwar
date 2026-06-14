@@ -1,14 +1,5 @@
-import {
-  GithubIcon,
-  LeetcodeIcon,
-  LinkedInIcon,
-  MediumIcon,
-} from '@assets';
-import {
-  IconButton,
-  VStack,
-  Box,
-} from '@chakra-ui/react';
+import { GithubIcon, LeetcodeIcon, LinkedInIcon, MediumIcon } from '@assets';
+import { IconButton, VStack, Box } from '@chakra-ui/react';
 import { useCursor, GlassBox } from '@components';
 import { RefObject, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -63,13 +54,15 @@ const SocialNavigation = () => {
   const { setCursorInsets } = useCursor();
   const [isOpen, setIsOpen] = useState(false);
 
-  if (location.pathname.startsWith('/projects') || location.pathname.startsWith('/articles')) {
+  if (
+    location.pathname.startsWith('/projects') ||
+    location.pathname.startsWith('/articles')
+  ) {
     return null;
   }
-  
+
   const onMouseEnter =
-    (ref: RefObject<HTMLDivElement>, radius: string) =>
-    () => {
+    (ref: RefObject<HTMLDivElement>, radius: string) => () => {
       const { width, height, top, left } =
         ref.current?.getBoundingClientRect() || {
           width: 56,
@@ -179,7 +172,11 @@ const SocialNavigation = () => {
             <motion.div
               animate={{ rotate: isOpen ? 135 : 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
               <PlusIcon />
             </motion.div>

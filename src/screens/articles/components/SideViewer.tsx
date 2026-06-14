@@ -261,7 +261,14 @@ const SideViewer = ({
         </Text>
 
         {headings.length > 0 ? (
-          <Box position="relative" mt={1} flex={1} overflow="hidden" display="flex" flexDir="column">
+          <Box
+            position="relative"
+            mt={1}
+            flex={1}
+            overflow="hidden"
+            display="flex"
+            flexDir="column"
+          >
             {/* Vertical track line */}
             <Box
               position="absolute"

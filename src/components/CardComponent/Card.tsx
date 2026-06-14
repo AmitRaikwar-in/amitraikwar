@@ -63,7 +63,7 @@ export const CardBasic = ({
   return (
     <Box
       width={'full'}
-      height={{ base: '36', md: '44', lg: '64' }}
+      height={{ base: '20', md: '24', lg: '32' }}
       className={
         'p-0.5  bg-transparent aspect-square  flex items-center justify-center relative'
       }
@@ -79,7 +79,7 @@ export const CardBasic = ({
         />
         <div className="relative z-0 flex items-center justify-center">
           <div className="absolute z=0 w-full h-full bg-black/[0.8] rounded-full blur-md" />
-          <div className="relative h-28 w-28  rounded-full flex items-center justify-center text-white font-bold text-4xl">
+          <div className="relative h-20 w-20  rounded-full flex items-center justify-center text-white font-bold text-4xl">
             {icon ? (
               icon
             ) : (
@@ -95,7 +95,7 @@ export const CardBasic = ({
 };
 
 function CardPattern({ mouseX, mouseY, randomString }: any) {
-  const maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
+  const maskImage = useMotionTemplate`radial-gradient(150px at ${mouseX}px ${mouseY}px, white, transparent)`;
   const style = { maskImage, WebkitMaskImage: maskImage };
 
   return (

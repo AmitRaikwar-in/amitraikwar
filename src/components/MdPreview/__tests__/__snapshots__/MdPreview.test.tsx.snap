@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MdPreview should render MdPreview 1`] = `
+exports[`MdPreview should render MdPreview with content 1`] = `
 <div>
   <div
-    class="css-uf6hy9"
+    class="css-pl5zoc"
     data-color-mode="dark"
   >
     <markdown-preview
-      source=""
+      source="test"
     />
   </div>
 </div>
 `;
 
-exports[`MdPreview should render MdPreview 2`] = `
+exports[`MdPreview should render MdPreview with empty string 1`] = `
 <div>
   <div
-    class="css-uf6hy9"
+    class="css-pl5zoc"
     data-color-mode="dark"
   >
     <markdown-preview
-      source="test"
+      source=""
     />
   </div>
 </div>

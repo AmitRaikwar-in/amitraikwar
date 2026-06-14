@@ -31,3 +31,18 @@ jest.mock('@uiw/react-markdown-preview', () => ({
   __esModule: true,
   default: 'markdown-preview',
 }));
+
+// Mock ogl
+jest.mock('ogl', () => ({
+  Renderer: jest.fn().mockImplementation(() => ({
+    gl: {
+      canvas: document.createElement('canvas'),
+      getExtension: jest.fn(),
+    },
+    setSize: jest.fn(),
+    render: jest.fn(),
+  })),
+  Program: jest.fn(),
+  Triangle: jest.fn(),
+  Mesh: jest.fn(),
+}));

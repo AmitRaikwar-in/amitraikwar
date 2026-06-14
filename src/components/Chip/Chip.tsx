@@ -131,11 +131,15 @@ const Chip = ({ type, size = 'md' }: ChipProps) => {
         borderColor: 'rgba(255, 255, 255, 0.2)',
         color: 'white',
         transform: 'translateY(-1px)',
-        boxShadow: '0 6px 16px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+        boxShadow:
+          '0 6px 16px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
       }}
     >
       {type !== Skills.more && (
-        <Icon width={isMd ? 16 : isSm ? 12 : 9} height={isMd ? 16 : isSm ? 12 : 9} />
+        <Icon
+          width={isMd ? 16 : isSm ? 12 : 9}
+          height={isMd ? 16 : isSm ? 12 : 9}
+        />
       )}
       <Text
         fontSize={isMd ? 'sm' : isSm ? 'xs' : '9px'}

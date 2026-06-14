@@ -2,7 +2,7 @@ import { Button, Text } from '@chakra-ui/react';
 import { LinkButtonProps } from './types';
 import { ArrowIcon } from '@assets';
 import { useCursor } from '../../Cursor';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const LinkButton = ({
   text,
@@ -15,7 +15,6 @@ const LinkButton = ({
 }: LinkButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const { setCursorInsets } = useCursor();
-  const [isHovered, setIsHovered] = useState(false);
 
   const onMouseEnter = () => {
     const { width, height, top, left } =
@@ -29,23 +28,11 @@ const LinkButton = ({
     setTimeout(() => {
       setCursorInsets({ height, width, top, left, borderRadius: '5px' });
     }, 0);
-    setIsHovered(true);
   };
 
   const onMouseLeave = () => {
     setCursorInsets(undefined);
-    setIsHovered(false);
   };
-
-  const translationProps = isHovered
-    ? {
-        transform: 'translateY(16px)',
-        transition: 'transform 0.2s',
-      }
-    : {
-        transform: 'translateY(-15px)',
-        transition: 'transform 0.2s',
-      };
 
   return (
     <Button
@@ -70,17 +57,7 @@ const LinkButton = ({
       rowGap={2}
       {...(!onClick ? { as: 'a', href } : {})}
     >
-      <Text
-        pointerEvents={'none'}
-        {...(animationOnHover ? translationProps : {})}
-      >
-        {text}
-      </Text>
-      {animationOnHover && (
-        <Text pointerEvents={'none'} {...translationProps}>
-          {text}
-        </Text>
-      )}
+      <Text pointerEvents={'none'}>{text}</Text>
     </Button>
   );
 };

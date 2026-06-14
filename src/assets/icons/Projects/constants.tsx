@@ -37,7 +37,9 @@ export const PROJECT_NAME_ICON_MAP: Record<ProjectName, JSX.Element> = {
   [ProjectName.GalaxyUI]: <Galaxy width={SIZE} height={SIZE} color="white" />,
   [ProjectName.TestCov]: <TestCov width={SIZE} height={SIZE} />,
   [ProjectName.AudioMesh]: <AudioMesh width={SIZE} height={SIZE} />,
-  [ProjectName.WorldOfTech]: <WorldOfTech width={SIZE} height={SIZE} color="violet" />,
+  [ProjectName.WorldOfTech]: (
+    <WorldOfTech width={SIZE} height={SIZE} color="violet" />
+  ),
   [ProjectName.InstaPilot]: <InstaPilot width={SIZE} height={SIZE} />,
   [ProjectName.FastDeck]: <FastDeck width={SIZE} height={SIZE} />,
 };
