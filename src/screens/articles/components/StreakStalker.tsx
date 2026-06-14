@@ -7,13 +7,12 @@ import {
   DrawerHeader,
   DrawerBody,
   useDisclosure,
-  IconButton,
   Tooltip,
   Box,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { Noise } from '@components';
+import { Noise, GlassBox } from '@components';
 import { range } from 'lodash';
 import { useRef } from 'react';
 import { MONTH_NUMBER_NAME_MAP, MonthDaysMap } from './constants';
@@ -39,18 +38,45 @@ const StreakStalker = ({ dates }: { dates: string[] }) => {
   return (
     <>
       <Tooltip label="Activity" placement="top" hasArrow>
-        <IconButton
-          variant={'ghost'}
-          ref={btnRef}
+        <Box
+          as="button"
+          ref={btnRef as any}
           onClick={onOpen}
-          aria-label={''}
-          color={'gray.300'}
-          _hover={{ color: 'white' }}
-          _active={{ color: 'white' }}
-          icon={<StreakIcon width={32} height={32} />}
+          aria-label="Activity Tracker"
+          position="relative"
+          border={'1px solid gray'}
+          padding="2.5"
+          color={'white'}
+          borderRadius="100px"
+          overflow="hidden"
+          transition={'all 0.3s'}
+          _hover={{
+            transform: 'scale(1.1)',
+            cursor: 'pointer',
+          }}
+          p={2}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          Streak Stalker
-        </IconButton>
+          <GlassBox
+            width="100%"
+            height="100%"
+            borderRadius={100}
+            borderWidth={0.02}
+            blur={20}
+            displace={1}
+            backgroundOpacity={0.06}
+            saturation={1.5}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: -1,
+              pointerEvents: 'none',
+            }}
+          />
+          <StreakIcon width={24} height={24} />
+        </Box>
       </Tooltip>
       <Drawer
         size={'xl'}

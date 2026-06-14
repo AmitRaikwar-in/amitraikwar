@@ -1,9 +1,23 @@
-import { HStack, Text, VStack, Wrap } from '@chakra-ui/react';
-import { ArticleCard, LoadingSpinner } from '@components';
+import {
+  Box,
+  HStack,
+  Text,
+  VStack,
+  Wrap,
+  Stack,
+  SimpleGrid,
+} from '@chakra-ui/react';
+import {
+  ArticleCard,
+  LoadingSpinner,
+  GlassBox,
+  useCursor,
+  Noise,
+} from '@components';
 import { useGetArticlesData } from '@services';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MarkdownViewer, StreakStalker } from './components';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { groupBy, sortBy } from 'lodash';
 import { BASE_NAV_ROUTE } from '@router';
 import SortBy, { SortByType } from './components/SortBy';
@@ -23,12 +37,14 @@ const CategoryButton = ({
   const navigate = useNavigate();
   return (
     <Text
-      w={'100%'}
+      w={{ base: 'auto', md: '100%' }}
+      textAlign="center"
       color={'white'}
-      py={1}
-      px={5}
+      py={{ base: 1, md: 1 }}
+      px={{ base: 3, md: 5 }}
       bg={isSelected ? 'gray.800' : ''}
-      fontSize={20}
+      fontSize={{ base: 'sm', md: 'md' }}
+      borderRadius={{ base: 'full', md: 'none' }}
       border={'1px solid gray'}
       _hover={{ bg: 'gray.600', cursor: 'pointer', color: 'violet' }}
       onClick={() => {
@@ -46,9 +62,15 @@ const CategoryButton = ({
 const ArticlesScreen = () => {
   const { data } = useGetArticlesData();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { setCursorType } = useCursor();
   const [category, setCategory] = useState('All');
   const secondPath = location.pathname.split('/')[2];
   const [sortByName, setSortBy] = useState<SortByType>('none');
+
+  useEffect(() => {
+    setCursorType('follow');
+  }, [setCursorType]);
 
   const articles = useMemo(
     () =>
@@ -84,24 +106,65 @@ const ArticlesScreen = () => {
   const date = articles.map((article: any) => article.last_updated as string);
 
   return (
-    <VStack bg={'black'} w={'100vw'} minH={'100vh'}>
-      <Text
-        color={'white'}
-        fontSize={30}
+    <VStack
+      bg={'black'}
+      w={'100%'}
+      minH={'100vh'}
+      paddingX={{ base: 1, md: 6 }}
+      position="relative"
+    >
+      <Noise type="bg" opacity={0.26} baseFrequency={7.5} />
+      <Box
         position={'fixed'}
-        w={'100%'}
-        textAlign={'center'}
-        top={2}
-        padding={2}
-        textShadow={'2px 2px 4px #000000'}
-        borderBottom={'1px solid gray'}
-        bg={'rgba(0, 0, 0, 0.5)'}
-        backdropFilter={'blur(10px)'}
+        top={{ base: 3, md: 5 }}
         zIndex={10}
+        left="50%"
+        transform="translateX(-50%)"
+        border={'1px solid rgba(255, 255, 255, 0.1)'}
+        boxShadow={'0 8px 32px 0 rgba(0, 0, 0, 0.6)'}
+        borderRadius="20px"
+        overflow="hidden"
+        px={6}
+        py={2}
+        cursor="pointer"
+        onClick={() => {
+          navigate(BASE_NAV_ROUTE + 'articles');
+        }}
+        _hover={{
+          transform: 'translateX(-50%) scale(1.05)',
+        }}
+        transition="all 0.3s"
       >
-        Articles
-      </Text>
-      <HStack
+        <GlassBox
+          width="100%"
+          height="100%"
+          borderRadius={20}
+          borderWidth={0.15}
+          blur={2}
+          displace={1}
+          distortionScale={40}
+          yChannel="B"
+          backgroundOpacity={0.005}
+          saturation={1}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: -1,
+            pointerEvents: 'none',
+          }}
+        />
+        <Text
+          color={'white'}
+          fontSize={{ base: 'lg', md: 'xl' }}
+          fontWeight="bold"
+          textAlign="center"
+          letterSpacing="wide"
+        >
+          Articles
+        </Text>
+      </Box>
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
         w={'100%'}
         bg={'black'}
         minH={'100vh'}
@@ -109,19 +172,32 @@ const ArticlesScreen = () => {
         alignItems={'flex-start'}
       >
         <VStack
-          mx={2}
-          width={'20%'}
-          minH={'100vh'}
-          position={'sticky'}
-          top={'12vh'}
-          marginTop={'12vh'}
+          mx={{ base: 0, md: 2 }}
+          width={{ base: '100%', md: '25%', lg: '20%' }}
+          minH={{ base: 'auto', md: '100vh' }}
+          position={{ base: 'relative', md: 'sticky' }}
+          top={{ base: '0', md: '12vh' }}
+          marginTop={{ base: '14vh', md: '12vh' }}
+          paddingX={{ base: 4, md: 0 }}
+          alignItems={{ base: 'center', md: 'flex-start' }}
+          spacing={4}
+          display={secondPath ? { base: 'none', md: 'flex' } : 'flex'}
         >
-          <HStack>
-            <StreakStalker dates={date} />
+          <HStack
+            w="100%"
+            justifyContent={{ base: 'center', md: 'flex-start' }}
+            spacing={3}
+          >
             <SortBy sortBy={sortByName} setSortBy={setSortBy} />
             <SearchFeature data={articles} />
+            <StreakStalker dates={date} />
           </HStack>
-          <VStack>
+          <Wrap
+            spacing={2}
+            justify={{ base: 'center', md: 'start' }}
+            width="100%"
+            paddingX={{ base: 2, md: 0 }}
+          >
             <CategoryButton
               category={'All'}
               setCategory={setCategory}
@@ -139,30 +215,31 @@ const ArticlesScreen = () => {
                 />
               ),
             )}
-          </VStack>
+          </Wrap>
         </VStack>
         <VStack
-          w={'80%'}
+          w={{ base: '100%', md: '75%', lg: '80%' }}
           id="projects"
-          rowGap={20}
-          paddingTop={20}
+          rowGap={{ base: 8, md: 20 }}
+          paddingTop={{ base: secondPath ? '80px' : 8, md: 20 }}
+          paddingX={{ base: 2, md: 8 }}
           justifyContent={'flex-start'}
         >
           {!secondPath && (
-            <Wrap
+            <SimpleGrid
+              columns={{ base: 2, sm: 2, lg: 3 }}
+              spacing={{ base: 3, md: 8 }}
               width={'100%'}
-              spacing="40px"
-              justify="start"
-              justifyContent={'space-between'}
+              justifyItems="center"
             >
               {sortByApplied?.map((article: any) => (
                 <ArticleCard key={article.id} {...article} />
               ))}
-            </Wrap>
+            </SimpleGrid>
           )}
           {secondPath && <MarkdownViewer articleKey={secondPath} />}
         </VStack>
-      </HStack>
+      </Stack>
     </VStack>
   );
 };
