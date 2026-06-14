@@ -22,3 +22,5 @@ export * from './FallingText';
 export * from './ShinyText';
 export * from './WavyBackground';
 export * from './GlassBox';
+export * from './Orb';
+export * from './LightPillar';
