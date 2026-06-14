@@ -1,15 +1,13 @@
 import {
-  MutationFunction,
-  QueryFunction,
   UseMutationOptions,
   UseQueryOptions,
 } from '@tanstack/react-query';
 
 export type useCallSBMutationArgs<
-  TRequest extends object,
-  TResponse extends object,
+  TRequest,
+  TResponse,
 > = {
-  method: MutationFunction<TResponse, TRequest>;
+  method: (request: TRequest) => Promise<TResponse>;
   mutationOptions?: Omit<
     UseMutationOptions<TResponse, Error, TRequest>,
     'mutationFn'
@@ -17,9 +15,9 @@ export type useCallSBMutationArgs<
 };
 
 export type useCallSBQueryArgs<
-  TRequest extends object,
-  TResponse extends object,
+  TRequest,
+  TResponse,
 > = {
-  method: QueryFunction<TResponse>;
+  method: (request: any) => Promise<TResponse> | TResponse;
   queryOptions: Omit<UseQueryOptions<TResponse, Error, TRequest>, 'queryFn'>;
 };

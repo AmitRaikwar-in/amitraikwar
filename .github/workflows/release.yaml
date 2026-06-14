@@ -7,28 +7,57 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  release_and_deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
     steps:
       - name: checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.PA_TOKEN }}
+          
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Install Dependencies
+        run: yarn install
+        
+      - name: Build
+        run: yarn build --if-present
+        
+      - name: Linting
+        run: yarn lint
+        
+      - name: Test
+        run: yarn test:cov
+        
+      - name: 📂 Sync files (Deploy)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.AMITRAIKWAR_FTP_SERVER }}
+          username: ${{ secrets.AMITRAIKWAR_FTP_ACCOUNT }}
+          password: ${{ secrets.AMITRAIKWAR_FTP_PASSWORD }}
+          local-dir: ./build/
+          server-dir: ./
+          
       - name: conventional changelog action
         id: changelog
         # https://github.com/TriPSs/conventional-changelog-action
         uses: TriPSs/conventional-changelog-action@latest
         with:
-          # you can also create separate token to trace action
           github-token: '${{ secrets.PA_TOKEN }}'
-          git-user-name: 'AR mac Bot'
+          git-user-name: 'AR portfolio bot'
           output-file: false
+          
       - name: create release
         # https://github.com/actions/create-release
         uses: softprops/action-gh-release@v1
         if: ${{steps.changelog.outputs.skipped == 'false'}}
         env:
-          # This token is provided by Actions, you do not need to create your own token
           GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
         with:
           tag_name: ${{ steps.changelog.outputs.tag }}

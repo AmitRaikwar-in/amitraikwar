@@ -80,6 +80,8 @@ const SocialNavigation = () => {
     setCursorInsets(undefined);
   };
 
+const SafeAnimatePresence = AnimatePresence as any;
+
   return (
     <>
       {/* Desktop Version */}
@@ -197,7 +199,7 @@ const SocialNavigation = () => {
           }}
           transition="all 0.2s"
         />
-        <AnimatePresence>
+        <SafeAnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -278,7 +280,7 @@ const SocialNavigation = () => {
               </VStack>
             </motion.div>
           )}
-        </AnimatePresence>
+        </SafeAnimatePresence>
       </Box>
     </>
   );

@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCallSBMutationArgs } from './types';
 
-const useCallSBMutation = <TRequest extends object, TResponse extends object>({
+const useCallSBMutation = <TRequest, TResponse>({
   method,
   mutationOptions,
-}: useCallSBMutationArgs<TResponse, TRequest>) =>
+}: useCallSBMutationArgs<TRequest, TResponse>) =>
   useMutation({
     ...mutationOptions,
     mutationFn: (request) => method(request),

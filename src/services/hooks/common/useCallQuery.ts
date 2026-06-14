@@ -7,10 +7,10 @@ import { useCallSBQueryArgs } from './types';
  * @param mutationOptions - The options for the mutation.
  * @returns useQuery result.
  */
-const useCallQuery = <TRequest extends object, TResponse extends object>({
+const useCallQuery = <TRequest, TResponse>({
   method,
   queryOptions,
-}: useCallSBQueryArgs<TResponse, TRequest>) =>
+}: useCallSBQueryArgs<TRequest, TResponse>) =>
   useQuery({
     ...queryOptions,
     queryFn: (request) => method(request),

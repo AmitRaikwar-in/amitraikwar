@@ -12,6 +12,8 @@ const Contact = () => {
   const ref = useRef<HTMLButtonElement>(null);
 
   const isContactContainerIntersecting = useIsIntersecting(ref);
+const SafeAnimatePresence = AnimatePresence as any;
+
   return (
     <Box minH={'100vh'} width={'100%'} id="contact">
       <Heading
@@ -64,7 +66,7 @@ const Contact = () => {
         >
           {CONTACT.email}
         </Button>
-        <AnimatePresence initial={false}>
+        <SafeAnimatePresence initial={false}>
           {isContactContainerIntersecting && (
             <Box
               display={{ base: 'none', lg: 'flex' }}
@@ -92,7 +94,7 @@ const Contact = () => {
               <Text>{t('contact.getInTouch')}</Text>
             </Box>
           )}
-        </AnimatePresence>
+        </SafeAnimatePresence>
       </VStack>
     </Box>
   );
