@@ -6,22 +6,22 @@ const AboutMe = () => {
   const { t } = useTranslation();
 
   return (
-    <VStack minH={'100vh'} id="about" width={'99vw'}>
+    <VStack minH={'100vh'} id="about" width={'100%'}>
       <Heading
         width={'100%'}
         textAlign={'start'}
         position={'sticky'}
         top={'10vh'}
         zIndex={10}
-        paddingX={32}
+        paddingX={{ base: 4, md: 8, lg: 20, xl: 32 }}
       >
         {t('about.title')}
       </Heading>
       <Box
         zIndex={0}
-        height={'45vh'}
+        height={{ base: 'auto', md: '45vh' }}
         width={'100%'}
-        paddingX={32}
+        paddingX={{ base: 4, md: 8, lg: 20, xl: 32 }}
         marginTop={'10vh'}
       >
         <FallingText

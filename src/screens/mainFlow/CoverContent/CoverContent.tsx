@@ -1,42 +1,43 @@
-import { useState } from 'react';
-import { CoverText, Lights, MeteorsEffect } from '@components';
-import { CharacterType, RobotScene1, RobotScene2 } from '../scene';
-import { SocialNavigation } from '../components';
+import { CoverText, Orb } from '@components';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@chakra-ui/react';
 
-const MusicMap: Record<CharacterType, string> = {
-  [CharacterType.ADAM]: '/music/dream.mp3',
-  [CharacterType.LIEUTENANT]: '/music/horror.mp3',
-  [CharacterType.COPERNICUS]: '/music/bg1.mp3',
-  [CharacterType.REAP]: '/music/electro.mp3',
-};
-
 const CoverContent = () => {
   const { t } = useTranslation();
-  const [characterType, setCharacterType] = useState<CharacterType>(
-    CharacterType.COPERNICUS,
-  );
 
   return (
-    <Box minH={'100vh'}>
-      <MeteorsEffect number={30} />
-      {characterType === CharacterType.REAP ? (
-        <RobotScene2 />
-      ) : (
-        <RobotScene1 type={characterType} />
-      )}
+    <Box
+      minH={'100vh'}
+      width={'100%'}
+      position={'relative'}
+      overflow={'hidden'}
+      display={'flex'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      flexDirection={'column'}
+    >
+      <Box
+        position={'absolute'}
+        top={20}
+        bottom={0}
+        left={0}
+        right={0}
+        width={'100vw'}
+        height={'80vh'}
+        pointerEvents={'none'}
+        zIndex={0}
+      >
+        <Orb
+          hoverIntensity={0.5}
+          rotateOnHover={true}
+          hue={0}
+          forceHoverState={false}
+        />
+      </Box>
       <CoverText
         text={t('coverText.greeting')}
         highlightedText={t('coverText.name')}
         role={t('coverText.role')}
-      />
-      <Lights />
-      <SocialNavigation
-        audioSource={MusicMap[characterType]}
-        handleCharacterClick={(type) => {
-          setCharacterType(type);
-        }}
       />
     </Box>
   );

@@ -14,7 +14,6 @@ const Contents = () => {
       justifyContent={'center'}
       width={'100%'}
       bg={'black'}
-      paddingX={32}
       color={'white'}
     >
       <Projects />
