@@ -24,3 +24,4 @@ export * from './WavyBackground';
 export * from './GlassBox';
 export * from './Orb';
 export * from './LightPillar';
+export * from './BorderGlow';

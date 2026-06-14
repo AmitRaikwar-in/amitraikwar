@@ -33,7 +33,7 @@ const CardSpotlight = ({
   return (
     <div
       className={
-        'group/spotlight p-10 rounded-md relative border border-neutral-800 bg-black dark:border-neutral-800 '
+        'group/spotlight p-4 md:p-10 rounded-md relative border border-neutral-800 bg-black dark:border-neutral-800 '
       }
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
