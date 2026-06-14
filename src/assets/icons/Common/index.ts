@@ -11,6 +11,7 @@ export { default as GithubIcon } from './GithubIcon';
 export { default as GetInTouch } from './GetInTouch';
 export { default as MediumIcon } from './MediumIcon';
 export { default as InstagramIcon } from './InstagramIcon';
+export { default as LeetcodeIcon } from './LeetcodeIcon';
 export { default as StarIcon } from './Star';
 export { default as StarTrekIcon } from './Startrek';
 export { default as Redirect } from './Redirect';
