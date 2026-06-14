@@ -1,14 +1,48 @@
-import { Language } from '@components';
-import { ProjectItemType } from './types';
+import { Skills as Language } from '../components/Chip/types';
+import { ProjectItemType, Status } from './types';
 import { ProjectName } from '@assets';
 
 export const PROJECT_DATA: ProjectItemType[] = [
   {
-    title: 'Hourcoding.com',
+    title: 'Telegramonic',
+    icon: ProjectName.Telegramonic,
+    status: Status.LIVE,
+    description:
+      'A high-performance, minimalist cloud storage solution for digital craftsmen, developers, and tech professionals. The platform provides a fast, secure, and ergonomic workspace to organize and manage digital assets.',
+    githubLink: 'https://www.github.com/telegramonic/telegramonic',
+    image: [
+      'telegramonic/web/landing_page.png',
+      'telegramonic/web/doc.png',
+      'telegramonic/web/download.png',
+      'telegramonic/desktop/Landing.png',
+      'telegramonic/desktop/Upload.png',
+    ],
+    link: 'https://telegramonic.com',
+    tags: [
+      Language.tauri,
+      Language.rust,
+      Language.electron,
+      Language.chakra,
+      Language.i18n,
+      Language.zustand,
+      Language.tanstack,
+    ],
+    keyPoints: [
+      'Built as a secure, minimalist cloud storage workspace using the Telegram MTProto protocol as the backend storage platform.',
+      'Features a multi-layered monorepo architecture with support for Electron desktop app, Tauri mobile (iOS/Android) app, and a React web portal.',
+      'Powered by a high-performance Rust server backend using Axum for fast HTTP gateway bridging.',
+      'Includes a secure 4-step authentication wizard for phone number, API credentials, and OTP verification.',
+      'Supports direct file streaming to disk via IPC bridge, bypassing standard browser download limitations to ensure security.',
+    ],
+    demoVideo: '',
+  },
+  {
+    title: 'Hourcoding',
     icon: ProjectName.Hourcoding,
+    status: Status.LIVE,
     description: `Hourcoding is a responsive web app which hosts various types of coding tutorials, tools, cheatsheets, projects etc. Currently this website has more than 300 language, framework and library tutorials.
 Core idea of this project is to build a place on the internet where coders can find everything related to coding like cheat sheets, roadmaps, projects, coding tools, tutorials etc.`,
-    githubLink: 'https://www.github.com/onemanfighter/hourcoding-main',
+    githubLink: 'https://github.com/HourCoding-com',
     image: [
       'hourcoding/hourcoding_main1.png',
       'hourcoding/hourcoding_main2.png',
@@ -37,11 +71,12 @@ Core idea of this project is to build a place on the internet where coders can f
     demoVideo: 'hourcoding/hourcoding_main.webm',
   },
   {
-    title: 'Mac OS App',
+    title: 'MacMock',
     icon: ProjectName.MacOs,
+    status: Status.LIVE,
     description:
       'A web app that inspired by Mac OS UI built using React, ChakraUi, Tailwind CSS, Zustand. This project was started as a challenge to myself for building something complex and fancy in web development using react.',
-    githubLink: 'https://www.github.com/onemanfighter/mac-os-app',
+    githubLink: 'https://github.com/AmitRaikwar-in/MacMock',
     image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
     link: 'https://mac.amitraikwar.in',
     tags: [
@@ -61,52 +96,76 @@ Core idea of this project is to build a place on the internet where coders can f
     demoVideo: 'mac/AR_Mac.webm',
   },
   {
-    title: 'Top Apps AI',
-    icon: ProjectName.TopAppAi,
+    title: 'WorldOfTech',
+    icon: ProjectName.WorldOfTech,
+    status: Status.LIVE,
     description:
-      'Web app for AI enthusiasts to find top AI applications and agents on the internet. This app has more than 2000 AI applications listed and various features like listing new AI, search engines.',
-    githubLink: 'https://www.github.com/onemanfighter/mac-os-app',
-    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
-    link: 'https://topappsai.com',
-    tags: [Language.react, Language.typescript, Language.chakra],
+      'A comprehensive, curated directory and web platform listing free tech resources, software, tools, infrastructure patterns, and security protocols available on the internet. Designed as a central catalog for developers, designers, and tech enthusiasts to discover high-fidelity tools and assets.',
+    githubLink: 'https://github.com/WorldOfTech0/WOT',
+    link: 'https://worldoftech.co.in',
+    tags: [Language.react, Language.typescript, Language.i18n],
     keyPoints: [
-      'Top App AI helps you to find top AI applications available in the market.',
-      'It has more than 2000 AI applications listed.',
-      'Top App AI supports various features like searching, filtering, and news letters.',
+      'Built as a highly organized directory cataloging free tools across media, AI, privacy, books, and system utilities.',
+      'Features a responsive glassmorphic UI with quick category filters and a fast local search/filter system.',
+      'Includes sub-sections for media resources, AI tools, downloading/torrenting guides, and educational materials.',
+      'Catalogs tech stacks, system/file utilities, social tools, audio engineering, and developer ecosystems.',
+      'Includes a multilingual section indexing global archives and resources in over 30 languages.',
+    ],
+  },
+  {
+    title: 'InstaPilot',
+    icon: ProjectName.InstaPilot,
+    status: Status.LIVE,
+    description: `InstaPilot is a Python-based social media automation scheduling tool (part of the insta-pilot suite). It automates reading posting schedules, downloading content from Google Drive, uploading to multiple social networks (Instagram, Facebook, Pinterest, etc.), logging progress, and notifying via Slack.`,
+    githubLink: 'https://github.com/insta-pilot/insta-pilot',
+    link: 'https://github.com/insta-pilot/insta-pilot',
+    tags: [
+      Language.python,
+      Language.git,
+    ],
+    keyPoints: [
+      'Automates reading posting schedules to streamline content planning and execution.',
+      'Downloads media assets directly from Google Drive folders.',
+      'Automatically uploads content to multiple social networks including Instagram, Facebook, and Pinterest.',
+      'Logs operations progress and notifies the team in real-time via Slack integrations.',
+    ],
+  },
+  {
+    title: 'AudioMesh',
+    icon: ProjectName.AudioMesh,
+    status: Status.DEVELOPMENT,
+    description:
+      'A hardware-agnostic audio-networking application that turns nearby computers, smartphones, and tablets into a synchronized, unified speaker system using local Wi-Fi and Bluetooth protocols.',
+    githubLink: 'https://github.com/AmitRaikwar-in/AudioMesh',
+    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
+    link: 'https://audiomesh.amitraikwar.in/',
+    tags: [
+      Language.rust,
+      Language.react,
+      Language.electron,
+      Language.tauri,
+      Language.typescript,
+      Language.chakra,
+      Language.zustand,
+      Language.i18n,
+    ],
+    keyPoints: [
+      'AudioMesh is a hardware-agnostic audio-networking application that synchronizes nearby devices into a unified speaker system.',
+      'Features a multi-layered monorepo structure with support for Electron desktop app, Tauri mobile (iOS/Android) app, and a React web portal.',
+      'Powered by a local gateway daemon written in Rust, which manages network routing, audio buffer queues, and peer-to-device synchronization.',
+      'Utilizes local Wi-Fi and Bluetooth protocols to establish high-performance synchronized audio networks.',
     ],
     demoVideo: 'mac/AR_Mac.webm',
   },
   {
-    title: 'Telegramonic.com',
-    icon: ProjectName.Telegramonic,
-    description:
-      'Web app for listing telegram channels, groups, bots, stickers, etc. This app has more than 3000 telegram channels and groups listed and was started to implement the idea of listing most popular telegram related information.',
-    githubLink: 'https://www.github.com/onemanfighter/telegramonic',
-    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'], // Update
-    link: 'https://telegramonic.com',
-    tags: [
-      Language.react,
-      Language.typescript,
-      Language.chakra,
-      Language.i18n,
-      Language.zustand,
-      Language.tanstack,
-    ],
-    keyPoints: [
-      'Telegramonic helps you to find telegram channels, groups, bots, stickers, games etc.',
-      'It has more than 3000 telegram channels and groups listed.',
-      'Telegramonic supports various features like fuzzy searching, filtering, categories, and Social sharing. ',
-      'Currently working on adding more content and improving the design.',
-    ],
-    demoVideo: 'mac/AR_Mac.webm', // Update
-  },
-  {
     title: 'Hourcoding UI Library',
     icon: ProjectName.HourcodingUI,
+    status: Status.LIVE,
     description: `Developed a react typescript UI library for Hourcoding.com and its subdomain projects. This is currently hosted on NPM and is being used in various projects.
 This library has most of the UI components and hooks required for building hourcoding.com and its subdomains.`,
-    githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
-    link: 'https://www.npmjs.com/package/@hourcoding/hourcoding-ui',
+    githubLink: 'https://www.github.com/hourcoding-com/hourcoding-ui',
+    npmLink: 'https://www.npmjs.com/package/@hourcoding/hourcoding-ui',
+    link: 'https://hourcoding-ui.netlify.app/',
     tags: [
       Language.react,
       Language.zustand,
@@ -123,10 +182,12 @@ This library has most of the UI components and hooks required for building hourc
   {
     title: 'Galaxy UI Library',
     icon: ProjectName.GalaxyUI,
+    status: Status.DEVELOPMENT,
     description:
       'React typescript UI library for building web apps. Idea is to create a very fancy web application using this library. This library is currently hosted on NPM and is updated with new components and features regularly.',
     githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
-    link: 'https://www.npmjs.com/package/@galaxy_ui/ui',
+    link: 'http://galaxy-ui.netlify.com/',
+    npmLink: 'https://www.npmjs.com/package/@galaxy_ui/ui',
     tags: [Language.react, Language.typescript, Language.i18n],
     keyPoints: [
       'This website is designed for coding tutorials and programming articles.',
@@ -138,6 +199,7 @@ This library has most of the UI components and hooks required for building hourc
   {
     title: 'Growboard',
     icon: ProjectName.Dashwave,
+    status: Status.DEVELOPMENT,
     description: `A web app for managing stuffs in life like study, projects, expenses, secrets, passwords, writing journals, etc. A web app for managing stuff in life like study, projects, expenses, secrets, passwords, writing journals etc. 
       This project was started with a idea to manage everything at one place without maintaining something overwhelming or complicated.`,
     githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
@@ -156,12 +218,13 @@ This library has most of the UI components and hooks required for building hourc
     ],
   },
   {
-    title: 'TestCov.com',
+    title: 'TestCov',
     icon: ProjectName.TestCov,
-    description: `A web platform for parsing the test results of code coverage tools like Jest, Mocha, and others. This platform is designed to help developers and teams analyze their code coverage reports in a more user-friendly way.
-      This project was started with the idea to make it easier for developers to understand their code coverage and improve their testing practices.`,
+    status: Status.DEVELOPMENT,
+    description: `TestCov provides robust, easy-to-integrate tools designed to give you deep visibility into your code's health. Like a shield for your codebase, TestCov ensures that every deployment is backed by solid test coverage with visual line-by-line dashboards.`,
     githubLink: 'https://github.com/TestCov-com',
     link: 'https://testcov.com',
+    image: ['testcov/main.png'],
     tags: [
       Language.react,
       Language.typescript,
@@ -169,10 +232,54 @@ This library has most of the UI components and hooks required for building hourc
       Language.supabase,
     ],
     keyPoints: [
-      'This project is under development and more features are being added regularly.',
-      'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
-      'Feature like parsing the test results of code coverage tools like Jest, Mocha, and others.',
-      'This project is still under development and more features are being added regularly.',
+      'Empowers developers and teams to ship reliable code with confidence by making test coverage analysis clear, accessible, and highly actionable.',
+      'Works effortlessly with favorite CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins, CircleCI).',
+      'Enables line-by-line visualization of untested code segments via an intuitive project dashboard.',
+      'Blocks regressions by automatically enforcing pull request coverage thresholds.',
+      'Supports multiple languages including Python, JavaScript, Go, Java, C++, and Ruby, with historical tracking of coverage trends.',
+    ],
+  },
+  // {
+  //   title: 'SDPrimer',
+  //   icon: ProjectName.SdPrimer,
+  //   status: Status.IDEAPHASE,
+  //   description: `A web platform for parsing the test results of code coverage tools like Jest, Mocha, and others. This platform is designed to help developers and teams analyze their code coverage reports in a more user-friendly way.
+  //     This project was started with the idea to make it easier for developers to understand their code coverage and improve their testing practices.`,
+  //   githubLink: 'https://github.com/TestCov-com',
+  //   link: 'https://testcov.com',
+  //   tags: [
+  //     Language.react,
+  //     Language.typescript,
+  //     Language.i18n,
+  //     Language.supabase,
+  //   ],
+  //   keyPoints: [
+  //     'This project is under development and more features are being added regularly.',
+  //     'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
+  //     'Feature like parsing the test results of code coverage tools like Jest, Mocha, and others.',
+  //     'This project is still under development and more features are being added regularly.',
+  //   ],
+  // },
+  {
+    title: 'FastDeck',
+    icon: ProjectName.FastDeck,
+    status: Status.DEVELOPMENT,
+    description: `FastDeck is an open-source, high-performance macro console designed for streamers, developers, and power users. By bridging the gap between tactile hardware and complex software automation, FastDeck allows you to execute multi-step workflows with a single tap.`,
+    githubLink: 'https://github.com/fastdeck/fastdeck',
+    link: 'https://amitraikwar.in', //Update later
+    tags: [
+      Language.rust,
+      Language.tauri,
+      Language.electron,
+      Language.react,
+      Language.i18n,
+      Language.supabase,
+    ],
+    keyPoints: [
+      'Multi-step workflow execution with a single tap.',
+      'Bridges the gap between tactile hardware and complex software automation.',
+      'Designed as an open-source, high-performance macro console for streamers, developers, and power users.',
+      'Cross-platform desktop application built with Rust and Tauri for speed, and React for a modern UI.',
     ],
   },
 ];
