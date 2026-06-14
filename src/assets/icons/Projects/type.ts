@@ -9,8 +9,11 @@ export enum ProjectName {
   // Non Hourcoding projects
   MacOs = 'macos',
   Telegramonic = 'telegramonic',
-  TopAppAi = 'topAppAi',
   Dashwave = 'dashwave',
   GalaxyUI = 'galaxyUI',
   TestCov = 'testcov',
+  AudioMesh = 'audiomesh',
+  WorldOfTech = 'worldOfTech',
+  InstaPilot = 'instaPilot',
+  FastDeck = 'fastDeck',
 }

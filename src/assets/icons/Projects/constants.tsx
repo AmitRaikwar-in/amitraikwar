@@ -1,9 +1,13 @@
 import Apple from './Apple';
+import AudioMesh from './AudioMesh';
 import Dashwave from './Dashwave';
 import Galaxy from './Galaxy';
 import Hourcoding from './Hourcoding';
 import Telegramonic from './Telegramonic';
-import TopAppAi from './TopAppAi';
+import WorldOfTech from './WorldOfTech';
+import InstaPilot from './InstaPilot';
+import TestCov from './TestCov';
+import FastDeck from './FastDeck';
 import { ProjectName } from './type';
 
 const SIZE = 72;
@@ -29,8 +33,11 @@ export const PROJECT_NAME_ICON_MAP: Record<ProjectName, JSX.Element> = {
   ),
   [ProjectName.MacOs]: <Apple width={SIZE} height={SIZE} color="white" />,
   [ProjectName.Telegramonic]: <Telegramonic width={SIZE} height={SIZE} />,
-  [ProjectName.TopAppAi]: <TopAppAi width={SIZE} height={SIZE} />,
   [ProjectName.Dashwave]: <Dashwave width={SIZE} height={SIZE} />,
   [ProjectName.GalaxyUI]: <Galaxy width={SIZE} height={SIZE} color="white" />,
-  [ProjectName.TestCov]: <Galaxy width={SIZE} height={SIZE} color="white" />,
+  [ProjectName.TestCov]: <TestCov width={SIZE} height={SIZE} />,
+  [ProjectName.AudioMesh]: <AudioMesh width={SIZE} height={SIZE} />,
+  [ProjectName.WorldOfTech]: <WorldOfTech width={SIZE} height={SIZE} color="violet" />,
+  [ProjectName.InstaPilot]: <InstaPilot width={SIZE} height={SIZE} />,
+  [ProjectName.FastDeck]: <FastDeck width={SIZE} height={SIZE} />,
 };
