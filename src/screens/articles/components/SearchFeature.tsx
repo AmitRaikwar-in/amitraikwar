@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { AnimatedModal } from '@components';
+import { AnimatedModal, GlassBox } from '@components';
 import { BASE_NAV_ROUTE } from '@router';
 import {
   resetSearchTextSelector,
@@ -34,12 +34,12 @@ const SearchFeature = ({ data }: { data: any }) => {
     <AnimatedModal
       triggerComponent={
         <Box
+          position="relative"
           border={'1px solid gray'}
           padding="2.5"
           color={'white'}
           borderRadius="100px"
-          bg={'rgba(255, 255, 255, 0.1)'}
-          backdropFilter={'blur(20px)'}
+          overflow="hidden"
           transition={'all 0.3s'}
           _hover={{
             transform: 'scale(1.1)',
@@ -47,6 +47,22 @@ const SearchFeature = ({ data }: { data: any }) => {
           }}
           p={2}
         >
+          <GlassBox
+            width="100%"
+            height="100%"
+            borderRadius={100}
+            borderWidth={0.02}
+            blur={20}
+            displace={1}
+            backgroundOpacity={0.06}
+            saturation={1.5}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: -1,
+              pointerEvents: 'none',
+            }}
+          />
           <SearchIcon />
         </Box>
       }

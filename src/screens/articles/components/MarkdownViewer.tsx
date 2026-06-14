@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 import { LoadingSpinner, MdPreview } from '@components';
 import { useGetArticleData } from '@services';
 import { useMemo } from 'react';
@@ -28,14 +28,16 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
   }
 
   return (
-    <HStack
+    <Stack
+      direction={{ base: 'column-reverse', md: 'row' }}
       w={'100%'}
       minH={'100vh'}
       color={'white'}
       justifyContent={'start'}
       alignItems={'start'}
+      spacing={{ base: 6, md: 8 }}
     >
-      <Box width={'80%'} id="md-preview-flex-box">
+      <Box width={{ base: '100%', md: '72%' }} id="md-preview-flex-box">
         <MdPreview mdString={mdString ?? ''} />
         <CommentBox articleKey={articleKey} />
       </Box>
@@ -45,7 +47,7 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
         views={views}
         articleKey={articleKey}
       />
-    </HStack>
+    </Stack>
   );
 };
 

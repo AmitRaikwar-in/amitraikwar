@@ -9,6 +9,7 @@ import {
   Text,
   Avatar,
   Textarea,
+  Stack,
 } from '@chakra-ui/react';
 import { useAddComment, useGetComments } from '@services';
 import { useMemo, useState } from 'react';
@@ -77,30 +78,36 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
                 border={'1px solid gray'}
                 borderRadius={'md'}
               >
-                <HStack
+                <Stack
+                  direction={{ base: 'column', sm: 'row' }}
                   w={'100%'}
                   justifyContent={'space-between'}
-                  p={1}
+                  alignItems={{ base: 'flex-start', sm: 'center' }}
+                  p={2}
                   border={'1px solid gray'}
                   borderRadius={'md'}
                   borderStyle={'dashed'}
                   mb={2}
+                  spacing={2}
                 >
-                  <HStack>
+                  <HStack flexWrap="wrap">
                     <Avatar name={comment.name} size={'sm'} bg="teal.500" />
-                    <Heading size={'sm'} verticalAlign={'middle'}>
-                      {comment.name} 📫{comment.email}
+                    <Heading size={'xs'} verticalAlign={'middle'}>
+                      {comment.name}{' '}
+                      <Text as="span" fontSize="xs" color="gray.400" fontWeight="normal">
+                        📫 {comment.email}
+                      </Text>
                     </Heading>
                   </HStack>
                   <Text
                     as={'span'}
-                    fontSize={'md'}
-                    color={'gray.300'}
+                    fontSize={'xs'}
+                    color={'gray.400'}
                     fontWeight={'normal'}
                   >
                     {new Date(comment.date).toDateString()}
                   </Text>
-                </HStack>
+                </Stack>
                 <Box
                   w={'100%'}
                   paddingStart={2}
@@ -121,7 +128,7 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
       <VStack p={4} borderRadius={'md'} mt={4} rowGap={3}>
         <Divider />
         <Text alignSelf={'start'}>Add a Comment</Text>
-        <HStack columnGap={4} w={'100%'}>
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={4} w={'100%'} alignItems="center">
           <Avatar size="sm" bg="gray.500" name={state.name} />
           <Input
             type="text"
@@ -135,7 +142,7 @@ const CommentBox = ({ articleKey }: { articleKey: string }) => {
             value={state.email}
             onChange={(e) => setState({ ...state, email: e.target.value })}
           />
-        </HStack>
+        </Stack>
         <Textarea
           placeholder="Add a comment"
           value={state.comment}
