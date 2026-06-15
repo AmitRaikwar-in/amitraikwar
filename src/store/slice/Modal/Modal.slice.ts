@@ -7,7 +7,7 @@ const initialAlertState: ModalState = {
   modalOpenState: ModalOpenState.CLOSE,
 };
 
-const createModalSlice: AppStoreSlice<ModalStateSlice> = (set) => ({
+const createModalSlice: AppStoreSlice<ModalStateSlice> = (set, get) => ({
   ...initialAlertState,
   openModal: (modalData) => {
     set((state) => {
@@ -17,12 +17,18 @@ const createModalSlice: AppStoreSlice<ModalStateSlice> = (set) => ({
     });
   },
   closeModal: () => {
+    const onModalClose = get().Modal.onModalClose;
+    if (onModalClose) {
+      onModalClose();
+    }
     set((state) => {
       state.Modal.modalOpenState = ModalOpenState.CLOSE;
     });
     setTimeout(() => {
       set((state) => {
         state.Modal.modalOpenState = initialAlertState.modalOpenState;
+        state.Modal.modalID = initialAlertState.modalID;
+        state.Modal.onModalClose = initialAlertState.onModalClose;
       });
     }, 500 /* 0.5s */);
   },

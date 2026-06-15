@@ -33,7 +33,7 @@ describe('Modal slice', () => {
     expect(result.current.Modal).toMatchSnapshot();
   });
 
-  it.skip('should reset and close modal state on modal data set using closeModal', () => {
+  it('should reset and close modal state on modal data set using closeModal', () => {
     const modalData: ModalState = {
       modalID: ModalIDs.SEARCH,
       onModalClose: onModalCloseMock,
