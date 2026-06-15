@@ -30,7 +30,9 @@ const ShinyText = ({
             'linear-gradient(120deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 60%)',
           backgroundSize: '200% 100%',
           WebkitBackgroundClip: 'text',
-          animation: disabled ? 'none' : `shine ${animationDuration} linear infinite`,
+          animation: disabled
+            ? 'none'
+            : `shine ${animationDuration} linear infinite`,
         }}
       >
         {text}

@@ -31,102 +31,102 @@ const WorkUIData = () => {
         content: (() => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const [isOpen, setIsOpen] = useState(false);
-const SafeAnimatePresence = AnimatePresence as any;
+          const SafeAnimatePresence = AnimatePresence as any;
 
-              return (
-                <Box
-                  w={'full'}
-                  padding={{ base: 3, md: 4 }}
-                  onMouseEnter={() => setIsOpen(true)}
-                  onMouseLeave={() => setIsOpen(false)}
-                  onClick={() => setIsOpen(!isOpen)}
-                  cursor="pointer"
-                >
-                  <Text
-                    fontSize={{ base: 'xl', md: '2xl' }}
-                    fontWeight="bold"
-                    color="brand.500"
-                    marginBottom={2}
+          return (
+            <Box
+              w={'full'}
+              padding={{ base: 3, md: 4 }}
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+              onClick={() => setIsOpen(!isOpen)}
+              cursor="pointer"
+            >
+              <Text
+                fontSize={{ base: 'xl', md: '2xl' }}
+                fontWeight="bold"
+                color="brand.500"
+                marginBottom={2}
+              >
+                {title}
+              </Text>
+              <Text fontSize={{ base: 'sm', md: 'md' }}>{description}</Text>
+              <SafeAnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.section
+                    initial="collapsed"
+                    animate="open"
+                    exit="collapsed"
+                    variants={{
+                      open: { opacity: 1, height: 'auto' },
+                      collapsed: { opacity: 0, height: 0 },
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
                   >
-                    {title}
-                  </Text>
-                  <Text fontSize={{ base: 'sm', md: 'md' }}>{description}</Text>
-                  <SafeAnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.section
-                        initial="collapsed"
-                        animate="open"
-                        exit="collapsed"
-                        variants={{
-                          open: { opacity: 1, height: 'auto' },
-                          collapsed: { opacity: 0, height: 0 },
-                        }}
-                        transition={{
-                          duration: 0.5,
-                          ease: [0.04, 0.62, 0.23, 0.98],
-                        }}
+                    {keyPoints && keyPoints.length > 0 && (
+                      <CustomHeading title="Key points:" />
+                    )}
+                    {keyPoints.map((point, index) => (
+                      <Text
+                        marginStart={{ base: 4, md: 10 }}
+                        key={index}
+                        marginTop={2}
+                        fontWeight="500"
+                        color="brand.500"
+                        fontSize={{ base: 'xs', md: 'sm' }}
                       >
-                        {keyPoints && keyPoints.length > 0 && (
-                          <CustomHeading title="Key points:" />
-                        )}
-                        {keyPoints.map((point, index) => (
+                        {point}
+                      </Text>
+                    ))}
+                    {tags && tags.length > 0 && (
+                      <CustomHeading title="Skills acquired:" />
+                    )}
+                    <Wrap spacingX={2} spacingY={1.5}>
+                      {tags.map((tag, index) => (
+                        <Text
+                          px={1.5}
+                          py={0.5}
+                          _hover={{
+                            transform: 'scale(1.05)',
+                            cursor: 'pointer',
+                          }}
+                          transition={'transform 0.4s'}
+                          outline={'1px solid'}
+                          key={index}
+                          marginTop={1.5}
+                          fontWeight="500"
+                          color="brand.500"
+                          fontSize={{ base: 'xs', md: 'sm' }}
+                        >
+                          {tag}
+                        </Text>
+                      ))}
+                    </Wrap>
+                    <HStack>
+                      <CustomHeading title="Important Links:" />
+                      <Wrap spacingX={4} spacingY={1.5}>
+                        {links.map(({ title, link }, index) => (
                           <Text
-                            marginStart={{ base: 4, md: 10 }}
                             key={index}
-                            marginTop={2}
-                            fontWeight="500"
+                            as="a"
+                            href={link}
+                            target="_blank"
+                            marginTop={1.5}
                             color="brand.500"
-                            fontSize={{ base: 'xs', md: 'sm' }}
+                            fontWeight="bold"
+                            fontSize={{ base: 'xs', md: 'md' }}
                           >
-                            {point}
+                            {title}
                           </Text>
                         ))}
-                        {tags && tags.length > 0 && (
-                          <CustomHeading title="Skills acquired:" />
-                        )}
-                        <Wrap spacingX={2} spacingY={1.5}>
-                          {tags.map((tag, index) => (
-                            <Text
-                              px={1.5}
-                              py={0.5}
-                              _hover={{
-                                transform: 'scale(1.05)',
-                                cursor: 'pointer',
-                              }}
-                              transition={'transform 0.4s'}
-                              outline={'1px solid'}
-                              key={index}
-                              marginTop={1.5}
-                              fontWeight="500"
-                              color="brand.500"
-                              fontSize={{ base: 'xs', md: 'sm' }}
-                            >
-                              {tag}
-                            </Text>
-                          ))}
-                        </Wrap>
-                        <HStack>
-                          <CustomHeading title="Important Links:" />
-                          <Wrap spacingX={4} spacingY={1.5}>
-                            {links.map(({ title, link }, index) => (
-                              <Text
-                                key={index}
-                                as="a"
-                                href={link}
-                                target="_blank"
-                                marginTop={1.5}
-                                color="brand.500"
-                                fontWeight="bold"
-                                fontSize={{ base: 'xs', md: 'md' }}
-                              >
-                                {title}
-                              </Text>
-                            ))}
-                          </Wrap>
-                        </HStack>
-                      </motion.section>
-                    )}
-                  </SafeAnimatePresence>
+                      </Wrap>
+                    </HStack>
+                  </motion.section>
+                )}
+              </SafeAnimatePresence>
             </Box>
           );
         })(),

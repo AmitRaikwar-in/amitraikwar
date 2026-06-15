@@ -27,7 +27,7 @@ export const Cover = ({ children }: { children?: React.ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current]);
 
-const SafeAnimatePresence = AnimatePresence as any;
+  const SafeAnimatePresence = AnimatePresence as any;
 
   return (
     <div

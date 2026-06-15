@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { LazyComponentProviderProps } from './types';
-import { LoadingSpinner } from '@components';
+import { WebsiteLoader } from '@components';
 
 const LazyComponentProvider = (props: LazyComponentProviderProps) => {
   return (
-    <React.Suspense fallback={<LoadingSpinner />}>
+    <React.Suspense fallback={<WebsiteLoader />}>
       {props.children}
     </React.Suspense>
   );

@@ -17,7 +17,7 @@ const CoverText = ({
         <Text className="text-xl md:text-3xl lg:text-4xl pb-2">{text}</Text>
         <Cover>{highlightedText}</Cover>
       </Heading>
-      <ShinyText className="text-xl md:text-3xl lg:text-6xl pt-4" text={role} />
+      <ShinyText className="text-xl md:text-4xl lg:text-5xl pt-4" text={role} />
     </Box>
   );
 };

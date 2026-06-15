@@ -1,5 +1,5 @@
 import { Box, Stack } from '@chakra-ui/react';
-import { LoadingSpinner, MdPreview } from '@components';
+import { WebsiteLoader, MdPreview } from '@components';
 import { useGetArticleData } from '@services';
 import { useMemo } from 'react';
 import SideViewer from './SideViewer';
@@ -24,7 +24,7 @@ const MarkdownViewer = ({ articleKey }: { articleKey: string }) => {
   );
 
   if (!data) {
-    return <LoadingSpinner />;
+    return <WebsiteLoader />;
   }
 
   return (

@@ -12,7 +12,7 @@ const Contact = () => {
   const ref = useRef<HTMLButtonElement>(null);
 
   const isContactContainerIntersecting = useIsIntersecting(ref);
-const SafeAnimatePresence = AnimatePresence as any;
+  const SafeAnimatePresence = AnimatePresence as any;
 
   return (
     <Box minH={'100vh'} width={'100%'} id="contact">

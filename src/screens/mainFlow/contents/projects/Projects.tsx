@@ -33,7 +33,7 @@ const Projects = () => {
           topColor="#5227ff"
           bottomColor="#ff9ffc"
           intensity={2}
-          rotationSpeed={0.2}
+          rotationSpeed={0.3}
           glowAmount={0.003}
           pillarWidth={3}
           pillarHeight={1.0}
@@ -46,10 +46,10 @@ const Projects = () => {
       </motion.div>
       <Box style={{ height: '40vh', width: '100%' }} />
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3 }}
+        columns={{ base: 2, md: 4, lg: 4 }}
         spacing={8}
         justifyItems="center"
-        mx={{ base: 4, md: 8, lg: 24 }}
+        mx={{ base: 4, md: 8, lg: 20 }}
         mb={{ base: 8, md: 24 }}
         transform={{
           base: 'translateY(-20vh)',
