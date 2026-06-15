@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
+const SafeAnimatePresence = AnimatePresence as any;
+
 interface WebsiteLoaderProps {
   onComplete?: () => void;
 }
@@ -426,7 +428,7 @@ export const WebsiteLoader = ({ onComplete }: WebsiteLoaderProps) => {
 
         {/* Dynamic cycling subtitle */}
         <div className="h-6 flex items-center justify-center">
-          <AnimatePresence mode="wait">
+          <SafeAnimatePresence mode="wait">
             <motion.div
               key={currentSubtitle}
               initial={{ opacity: 0, y: 5 }}
@@ -437,7 +439,7 @@ export const WebsiteLoader = ({ onComplete }: WebsiteLoaderProps) => {
             >
               {currentSubtitle}
             </motion.div>
-          </AnimatePresence>
+          </SafeAnimatePresence>
         </div>
       </div>
 
