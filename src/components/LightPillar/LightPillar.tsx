@@ -86,6 +86,15 @@ const LightPillar: React.FC<LightPillarProps> = ({
     if (!containerRef.current || !webGLSupported) return;
 
     const container = containerRef.current;
+    const isVisibleRef = { current: true };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+
     const width = container.clientWidth;
     const height = container.clientHeight;
 
@@ -365,6 +374,11 @@ const LightPillar: React.FC<LightPillarProps> = ({
       )
         return;
 
+      if (!isVisibleRef.current) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
       const deltaTime = currentTime - lastTime;
 
       if (deltaTime >= frameTime) {
@@ -413,6 +427,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
 
     // Cleanup
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);

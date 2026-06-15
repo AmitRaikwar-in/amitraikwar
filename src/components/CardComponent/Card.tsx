@@ -1,5 +1,5 @@
 import { useMotionValue } from 'framer-motion';
-import { useState, useEffect, SVGProps } from 'react';
+import { useState, SVGProps } from 'react';
 import { useMotionTemplate, motion } from 'framer-motion';
 import { Box } from '@chakra-ui/react';
 
@@ -45,11 +45,6 @@ export const CardBasic = ({
   const mouseY = useMotionValue(0);
 
   const [randomString, setRandomString] = useState('');
-
-  useEffect(() => {
-    const str = generateRandomString(1500);
-    setRandomString(str);
-  }, []);
 
   function onMouseMove({ currentTarget, clientX, clientY }: any) {
     const { left, top } = currentTarget.getBoundingClientRect();

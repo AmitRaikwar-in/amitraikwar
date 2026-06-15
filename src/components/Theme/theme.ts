@@ -4,7 +4,7 @@ import { fontSize, fontWeight, lineHeight, zIndices } from './fonts';
 import '@fontsource/space-mono';
 
 const config: ThemeConfig = {
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   useSystemColorMode: false,
   disableTransitionOnChange: false,
 };

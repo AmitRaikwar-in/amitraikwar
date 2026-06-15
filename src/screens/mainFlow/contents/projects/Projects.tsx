@@ -17,6 +17,7 @@ const Projects = () => {
       rowGap={20}
       ref={ref}
       pos="relative"
+      bg="black"
     >
       <HeroText />
       <motion.div

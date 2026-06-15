@@ -33,7 +33,6 @@ const Card = ({
       glowRadius={32}
       glowIntensity={1.2}
       coneSpread={20}
-      animated
       className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[240px] lg:max-w-[220px]"
     >
       <div

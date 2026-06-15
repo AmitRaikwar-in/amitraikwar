@@ -82,6 +82,16 @@ const DotField = memo(
       const canvas = canvasRef.current;
       const glowEl = glowRef.current;
       if (!canvas) return;
+
+      const isVisibleRef = { current: true };
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisibleRef.current = entry.isIntersecting;
+        },
+        { threshold: 0.01 }
+      );
+      observer.observe(canvas.parentElement || canvas);
+
       const ctx = canvas.getContext('2d', { alpha: true });
       if (!ctx) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -164,6 +174,10 @@ const DotField = memo(
       let frameCount = 0;
 
       function tick() {
+        if (!isVisibleRef.current) {
+          rafRef.current = requestAnimationFrame(tick);
+          return;
+        }
         frameCount++;
         const dots = dotsRef.current;
         const m = mouseRef.current;
@@ -274,6 +288,7 @@ const DotField = memo(
       };
 
       return () => {
+        observer.disconnect();
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         clearInterval(speedInterval);
         clearTimeout(resizeTimer);
