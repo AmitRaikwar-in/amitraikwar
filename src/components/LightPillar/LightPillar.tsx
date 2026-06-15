@@ -42,6 +42,8 @@ const LightPillar: React.FC<LightPillarProps> = ({
   const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
   const timeRef = useRef(0);
   const rotationSpeedRef = useRef(rotationSpeed);
+  const isHoveredRef = useRef(false);
+  const currentSpeedMultiplierRef = useRef(1.0);
   const [webGLSupported, setWebGLSupported] = useState<boolean>(true);
 
   const propsRef = useRef({
@@ -215,13 +217,15 @@ const LightPillar: React.FC<LightPillarProps> = ({
         float maxDepth = 50.0;
         float depth = 0.1;
 
-        // Use pre-computed rotation values (or mouse-based)
+        // Use pre-computed rotation values
         float rotCos = uRotCos;
         float rotSin = uRotSin;
-        if(uInteractive && length(uMouse) > 0.0) {
-          float mouseAngle = uMouse.x * PI * 2.0;
-          rotCos = cos(mouseAngle);
-          rotSin = sin(mouseAngle);
+        if (uInteractive && length(uMouse) > 0.0) {
+          float mouseAngle = uMouse.x * PI * 0.5;
+          float c = cos(mouseAngle);
+          float s = sin(mouseAngle);
+          rotCos = uRotCos * c - uRotSin * s;
+          rotSin = uRotSin * c + uRotCos * s;
         }
 
         vec3 color = vec3(0.0);
@@ -364,7 +368,11 @@ const LightPillar: React.FC<LightPillarProps> = ({
       const deltaTime = currentTime - lastTime;
 
       if (deltaTime >= frameTime) {
-        timeRef.current += 0.016 * rotationSpeedRef.current;
+        // Smoothly scale speed multiplier on interaction
+        const targetMultiplier = (propsRef.current.interactive && isHoveredRef.current) ? 4.0 : 1.0;
+        currentSpeedMultiplierRef.current += (targetMultiplier - currentSpeedMultiplierRef.current) * 0.08;
+
+        timeRef.current += 0.016 * rotationSpeedRef.current * currentSpeedMultiplierRef.current;
         materialRef.current.uniforms.uTime.value = timeRef.current;
 
         // Pre-compute rotation on CPU
@@ -432,18 +440,31 @@ const LightPillar: React.FC<LightPillarProps> = ({
     };
   }, [webGLSupported, quality]);
 
-  // Separate effect for mouse interaction to avoid recreating WebGL context when interactive mode toggles
+  // Handle mouse interaction events
   useEffect(() => {
-    if (!interactive || !containerRef.current) return;
+    if (!interactive || !containerRef.current) {
+      isHoveredRef.current = false;
+      return;
+    }
     const container = containerRef.current;
+
+    const handleMouseEnter = () => {
+      isHoveredRef.current = true;
+    };
+
+    const handleMouseLeave = () => {
+      isHoveredRef.current = false;
+      mouseRef.current.set(0, 0);
+    };
 
     let mouseMoveTimeout: number | null = null;
     const handleMouseMove = (event: MouseEvent) => {
+      isHoveredRef.current = true;
       if (mouseMoveTimeout) return;
 
       mouseMoveTimeout = window.setTimeout(() => {
         mouseMoveTimeout = null;
-      }, 16); // ~60fps throttle
+      }, 16);
 
       const rect = container.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -451,14 +472,25 @@ const LightPillar: React.FC<LightPillarProps> = ({
       mouseRef.current.set(x, y);
     };
 
+    container.addEventListener('mouseenter', handleMouseEnter, { passive: true });
+    container.addEventListener('mouseleave', handleMouseLeave, { passive: true });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
     return () => {
       if (mouseMoveTimeout) {
         clearTimeout(mouseMoveTimeout);
       }
+      container.removeEventListener('mouseenter', handleMouseEnter);
+      container.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [interactive]);
+
+  useEffect(() => {
+    if (!materialRef.current) return;
+    materialRef.current.uniforms.uInteractive.value = interactive;
+  }, [interactive]);
+
 
   useEffect(() => {
     rotationSpeedRef.current = rotationSpeed;
@@ -487,10 +519,6 @@ const LightPillar: React.FC<LightPillarProps> = ({
     materialRef.current.uniforms.uIntensity.value = intensity;
   }, [intensity]);
 
-  useEffect(() => {
-    if (!materialRef.current) return;
-    materialRef.current.uniforms.uInteractive.value = interactive;
-  }, [interactive]);
 
   useEffect(() => {
     if (!materialRef.current) return;

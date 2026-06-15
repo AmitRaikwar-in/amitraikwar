@@ -80,7 +80,7 @@ const SocialNavigation = () => {
     setCursorInsets(undefined);
   };
 
-const SafeAnimatePresence = AnimatePresence as any;
+  const SafeAnimatePresence = AnimatePresence as any;
 
   return (
     <>

@@ -26,7 +26,9 @@ describe('ShinyText', () => {
   });
 
   it('should disable animation when disabled is true', () => {
-    const { container } = render(<ShinyText text="Disabled Animation" disabled={true} />);
+    const { container } = render(
+      <ShinyText text="Disabled Animation" disabled={true} />,
+    );
     const element = screen.getByText('Disabled Animation');
     expect(element).toHaveStyle({
       animation: 'none',

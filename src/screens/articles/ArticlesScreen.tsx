@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import {
   ArticleCard,
-  LoadingSpinner,
+  WebsiteLoader,
   GlassBox,
   useCursor,
   Noise,
@@ -100,7 +100,7 @@ const ArticlesScreen = () => {
   }, [articleToShow, sortByName]);
 
   if (!data) {
-    return <LoadingSpinner />;
+    return <WebsiteLoader />;
   }
 
   const date = articles.map((article: any) => article.last_updated as string);

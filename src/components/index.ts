@@ -6,8 +6,6 @@ export * from './Chip';
 export * from './CoverText';
 export * from './Cursor';
 export * from './DotPattern';
-export * from './LoadingSpinner';
-
 export * from './MdPreview';
 export * from './LightPillar';
 export * from './Marquee';
@@ -21,3 +19,4 @@ export * from './ShinyText';
 export * from './GlassBox';
 export * from './BorderGlow';
 export * from './Orb';
+export * from './WebsiteLoader';

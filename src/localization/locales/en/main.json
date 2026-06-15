@@ -2,7 +2,9 @@
   "coverText": {
     "greeting": "Hello, I am ",
     "name": "Amit Raikwar",
-    "role": "Full stack developer"
+    "role": "Software Engineer",
+    "ctaProjects": "Explore Projects",
+    "ctaContact": "Get in Touch"
   },
   "navigation": {
     "about": "About",
@@ -16,7 +18,7 @@
     "quoteHeading": "Crafting digital experiences that inspire",
     "quoteSubheading": "Let your imagination run wild.",
     "title": "About Me",
-    "aboutMe": "I'm a full-stack developer driven by a passion for crafting exceptional digital experiences. My expertise lies in React and React Native, enabling me to seamlessly build robust and engaging applications from the ground up. Driven by curiosity, I always try to explore and learn new things."
+    "aboutMe": "I'm a full-stack developer with 5 years of experience driven by a passion for crafting exceptional digital experiences. My expertise lies in React and React Native, enabling me to seamlessly build robust and engaging applications from the ground up. Driven by curiosity, I always try to explore and learn new things."
   },
   "work": {
     "title": "Work Experience",
@@ -39,5 +41,12 @@
   "footer": {
     "copyrightText": "© {{year}} Amit Raikwar | All Rights Reserved",
     "text": "Made with ❤️ by Amit Raikwar"
+  },
+  "loader": {
+    "loading": "Loading",
+    "developer": "DEVELOPER",
+    "designer": "DESIGNER",
+    "creator": "CREATOR",
+    "targetText": "SYSTEM_ONLINE // LINK_ESTABLISHED"
   }
 }
