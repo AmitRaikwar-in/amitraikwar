@@ -1,6 +1,4 @@
-import { useMotionValue } from 'framer-motion';
-import { useState, SVGProps } from 'react';
-import { useMotionTemplate, motion } from 'framer-motion';
+import { useCallback, SVGProps } from 'react';
 import { Box } from '@chakra-ui/react';
 
 export const Icon = ({
@@ -19,16 +17,10 @@ export const Icon = ({
       style={{
         transition: 'all 3s ease',
         animation: isHovered ? 'spin 3s linear infinite' : 'none',
+        willChange: 'transform',
       }}
       {...rest}
     >
-      <style>
-        {`@keyframes spin {
-        to {
-        transform: rotate(360deg);
-        }
-        }`}
-      </style>
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
     </svg>
   );
@@ -41,19 +33,13 @@ export const CardBasic = ({
   text?: string;
   icon?: React.ReactNode;
 }) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const [randomString, setRandomString] = useState('');
-
-  function onMouseMove({ currentTarget, clientX, clientY }: any) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-
-    const str = generateRandomString(1500);
-    setRandomString(str);
-  }
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  }, []);
 
   return (
     <Box
@@ -67,11 +53,7 @@ export const CardBasic = ({
         onMouseMove={onMouseMove}
         className="group/card rounded-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
       >
-        <CardPattern
-          mouseX={mouseX}
-          mouseY={mouseY}
-          randomString={randomString}
-        />
+        <CardPattern />
         <div className="relative z-0 flex items-center justify-center">
           <div className="absolute z=0 w-full h-full bg-black/[0.8] rounded-full blur-md" />
           <div className="relative h-20 w-20  rounded-full flex items-center justify-center text-white font-bold text-4xl">
@@ -89,35 +71,19 @@ export const CardBasic = ({
   );
 };
 
-function CardPattern({ mouseX, mouseY, randomString }: any) {
-  const maskImage = useMotionTemplate`radial-gradient(150px at ${mouseX}px ${mouseY}px, white, transparent)`;
-  const style = { maskImage, WebkitMaskImage: maskImage };
-
+function CardPattern() {
   return (
-    <div className="pointer-events-none ">
-      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-0  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
-        style={style}
+    <div className="pointer-events-none absolute inset-0">
+      <div className="absolute inset-0 rounded-2xl [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
+      <div
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500 to-blue-700 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"
+        style={{
+          maskImage:
+            'radial-gradient(150px at var(--mouse-x, -999px) var(--mouse-y, -999px), white, transparent)',
+          WebkitMaskImage:
+            'radial-gradient(150px at var(--mouse-x, -999px) var(--mouse-y, -999px), white, transparent)',
+        }}
       />
-      <motion.div
-        className="absolute inset-0 px-0 rounded-2xl opacity-0 mix-blend-overlay  group-hover/card:opacity-100"
-        style={style}
-      >
-        <p className="absolute inset-[0] text-xs h-full break-words text-white font-mono font-bold transition duration-500">
-          {randomString}
-        </p>
-      </motion.div>
     </div>
   );
 }
-
-const characters =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-export const generateRandomString = (length: number) => {
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-};

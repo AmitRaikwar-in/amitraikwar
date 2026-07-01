@@ -47,9 +47,11 @@ describe('WebsiteLoader', () => {
     });
 
     expect(screen.getByText('100%')).toBeInTheDocument();
-    
+
     // Decrypting matrix text should be fully resolved at 100%
-    expect(screen.getByText('SYSTEM_ONLINE // LINK_ESTABLISHED')).toBeInTheDocument();
+    expect(
+      screen.getByText('SYSTEM_ONLINE // LINK_ESTABLISHED'),
+    ).toBeInTheDocument();
 
     // Advance the remaining hold delay to trigger onComplete
     act(() => {

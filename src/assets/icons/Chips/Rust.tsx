@@ -4,9 +4,9 @@ export function Rust(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       className="svg-icon"
+      width="1em"
+      height="1em"
       style={{
-        width: '1em',
-        height: '1em',
         verticalAlign: 'middle',
         fill: 'currentColor',
         overflow: 'hidden',
