@@ -16,6 +16,8 @@ interface BorderGlowProps {
   style?: React.CSSProperties;
 }
 
+const DEFAULT_COLORS = ['#c084fc', '#f472b6', '#38bdf8'];
+
 const BorderGlow: React.FC<BorderGlowProps> = ({
   children,
   className = '',
@@ -24,14 +26,18 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   glowRadius = 40,
   glowIntensity = 1.0,
   animated = false,
-  colors = ['#c084fc', '#f472b6', '#38bdf8'],
+  colors = DEFAULT_COLORS,
   style = {},
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const gradientColors =
-    colors.length > 0 ? colors : ['#c084fc', '#f472b6', '#38bdf8'];
-  const conicColors = [...gradientColors, gradientColors[0]].join(', ');
+  const gradientColors = useMemo(() => {
+    return colors.length > 0 ? colors : DEFAULT_COLORS;
+  }, [colors]);
+
+  const conicColors = useMemo(() => {
+    return [...gradientColors, gradientColors[0]].join(', ');
+  }, [gradientColors]);
 
   const glowBg = useMemo(() => {
     if (gradientColors.length === 1) return gradientColors[0];
