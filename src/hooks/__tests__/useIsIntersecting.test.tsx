@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderHook } from '@testing-library/react';
 import useIsIntersecting from '../useIsIntersecting';
 import { act } from 'react';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderHook, fireEvent } from '@testing-library/react';
 import useSpringMousePosition from '../useSpringMousePosition';
 import { act } from 'react';

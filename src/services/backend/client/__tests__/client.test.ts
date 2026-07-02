@@ -26,7 +26,9 @@ describe('backend client', () => {
 
     it('should log error and return undefined on failure', async () => {
       const error = new Error('get-failed');
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(jest.fn());
       mockGet.mockRejectedValueOnce(error);
 
       const result = await GetRequest('/test-url');
@@ -41,12 +43,16 @@ describe('backend client', () => {
     it('should return data on successful post', async () => {
       mockPost.mockResolvedValueOnce({ data: 'success-post' });
       const result = await PostRequest('/test-post-url', { payload: 'data' });
-      expect(mockPost).toHaveBeenCalledWith('/test-post-url', { payload: 'data' }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+      expect(mockPost).toHaveBeenCalledWith(
+        '/test-post-url',
+        { payload: 'data' },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
         },
-      });
+      );
       expect(result).toBe('success-post');
     });
   });
