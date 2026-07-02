@@ -10,7 +10,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleDirectories: ['node_modules', 'src'],
-  coverageReporters: ['lcov'],
+  coverageReporters: ['json', 'lcov', 'text', 'clover', 'json-summary'],
   coverageDirectory: './coverage',
   collectCoverageFrom: [
     'src/**/*.ts',
@@ -45,12 +45,12 @@ module.exports = {
     '.+\\.(css|scss|png|jpg|svg)$': 'jest-transform-stub',
     '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 50,
-  //     functions: 70,
-  //     lines: 70,
-  //     statements: -70,
-  //   },
-  // },
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
 };

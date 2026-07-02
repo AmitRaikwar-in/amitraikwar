@@ -53,7 +53,7 @@ All user-facing copy strings (headings, paragraphs, labels, button texts, toolti
 
 ## 🧪 Testing Guidelines
 
-Always add or update the unit tests (and their snapshots) to align with the requested feature implementations or changes. Run the test suite using `yarn test` to verify that all changes are fully covered, correct, and pass successfully.
+Always add or update the unit tests (and their snapshots) to align with the requested feature implementations or changes. The project enforces a strict minimum test coverage bar of **80%** globally (across statements, branches, functions, and lines). Run the test suite with coverage reporting using `yarn test:cov`. For writing tests, refer to the custom [Unit Test Agent](/test) ruleset.
 
 ---
 

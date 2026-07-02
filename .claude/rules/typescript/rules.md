@@ -61,6 +61,7 @@ These rules govern all TypeScript and React component code within the repository
 ### 9. Testing Requirements
 
 - **Mandatory Tests**: Every component, utility function, and service/business logic module **MUST** have accompanying tests.
+- **Coverage Threshold**: The project enforces a strict minimum test coverage bar of **80%** globally (across statements, branches, functions, and lines). Jest configuration enforces this threshold during continuous integration and verification runs.
 - **Test Location**: Tests must be placed in a `__tests__/` folder inside the corresponding component or module folder. Do **not** place test files alongside source files.
 - **Test File Naming**: Name test files after the source file they test, with a `.test.ts` or `.test.tsx` suffix (e.g., `ProfileForm.test.tsx`, `util.test.ts`).
 - **Coverage Scope**:
@@ -68,6 +69,7 @@ These rules govern all TypeScript and React component code within the repository
   - **Utility functions** (`util.ts`): Test all exported functions with unit tests covering normal cases, edge cases, and error paths.
   - **Business logic / Services**: Test all public methods with mocked dependencies.
 - **No Empty Test Files**: Every test file must contain at least one meaningful test assertion. Placeholder or skipped-only test files are not allowed.
+- **Unit Test Agent**: Reference the [/test](file:///Users/mr.robot/z-stash/AmitRaikwar-in/amitraikwar/.claude/agents/UNIT_TEST.md) agent guidelines when writing or updating tests to ensure conformity to established testing patterns and best practices.
 
 ### 10. Icon Library Usage
 
