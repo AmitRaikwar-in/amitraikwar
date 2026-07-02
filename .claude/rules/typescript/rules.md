@@ -1,0 +1,305 @@
+---
+glob: src/**/*.{ts,tsx}
+---
+
+# TypeScript & React Component Rules
+
+## Context
+
+These rules govern all TypeScript and React component code within the repository to ensure strict type safety, clean folder structures, uniform naming conventions, and compliance with the project's UI standards.
+
+## Rules
+
+### 1. Type Safety
+
+- **No `any`**: The use of `any` (both as a type annotation and as a type assertion like `as any`) is **totally prohibited**. All code must be strictly and explicitly typed or rely on correct TypeScript type inference.
+
+### 2. Imports Management
+
+- **No Unused Imports**: Always remove all unused imports immediately after adding or modifying any code. Keep imports clean and sorted.
+
+### 3. Component Design & Extensions
+
+- **Single Component per File**: Each `.tsx` file MUST contain exactly a single React component.
+- **Component Syntax**: Write all components as arrow functions using the following syntax:
+  ```tsx
+  const ComponentName = ({ prop1 }: ComponentNameProps) => {
+    // ...
+  };
+  ```
+- **React.FC Avoidance**: Never use `React.FC` or `React.FunctionComponent`. Type props directly in the parameters.
+- **Component Naming**: Component names must be in `PascalCase`.
+
+### 4. Folder Layout & Components Separation
+
+- **Component Sub-folders**: If a component has complex layout or sub-sections, break it down into smaller sub-components. Place these sub-components in a `components/` subfolder inside the component's folder.
+- **No Nested Components Folders**: The `components/` subfolder **cannot be nested** (i.e. you cannot have a `components/` folder inside another `components/` folder).
+- **Scope of Sub-components**: The `components/` subfolder must only contain sub-components specific to the parent component.
+- **Common Components**: If a component is reusable/common across screens, it must be placed in `src/components/`.
+- **Index Exports**: Every directory (including `components/` subfolders) MUST contain an `index.ts` file that manages and routes all exports. Exports must always be done through this `index.ts` file.
+
+### 5. UI Library Compliance (Chakra UI)
+
+- **Chakra UI Only**: We **cannot use UI components other than what is offered by Chakra UI** for visual controls, inputs, layout grids, or structure. Do not import UI controls from other component libraries.
+
+### 6. Separation of Logic & Utils
+
+- **Business/Non-TSX Logic**: Move all helper functions, calculations, or non-TSX business logic into a `util.ts` file in the corresponding component/screen folder.
+- **Common Utilities**: Reusable utility functions must be placed in `src/util/`.
+- **Redundancy Checks**: Always inspect `src/components/` and `src/util/` before adding any new component or helper function to prevent redundant code.
+
+### 7. Variables & Constants Naming
+
+- **Constants**: Always name constants in `SCREAMING_SNAKE_CASE` (e.g., `MAX_RETRY_COUNT`, `DEFAULT_STATUS`). Move constants to a `const.ts` file in the corresponding folder.
+- **Variables**: Always name variables (local variables, function arguments, state keys) in `camelCase`.
+
+### 8. Documentation Standards
+
+- **JSDoc Requirement**: Always document all components, interfaces/types, utility functions, and constants with clear JSDoc comments.
+- **Inline Comments**: Provide inline comments for any complex blocks, math formulas, or non-obvious logic to explain the intent and behavior.
+
+### 9. Testing Requirements
+
+- **Mandatory Tests**: Every component, utility function, and service/business logic module **MUST** have accompanying tests.
+- **Coverage Threshold**: The project enforces a strict minimum test coverage bar of **80%** globally (across statements, branches, functions, and lines). Jest configuration enforces this threshold during continuous integration and verification runs.
+- **Test Location**: Tests must be placed in a `__tests__/` folder inside the corresponding component or module folder. Do **not** place test files alongside source files.
+- **Test File Naming**: Name test files after the source file they test, with a `.test.ts` or `.test.tsx` suffix (e.g., `ProfileForm.test.tsx`, `util.test.ts`).
+- **Coverage Scope**:
+  - **Components** (`.tsx`): Test rendering, user interactions, and prop variations using React Testing Library.
+  - **Utility functions** (`util.ts`): Test all exported functions with unit tests covering normal cases, edge cases, and error paths.
+  - **Business logic / Services**: Test all public methods with mocked dependencies.
+- **No Empty Test Files**: Every test file must contain at least one meaningful test assertion. Placeholder or skipped-only test files are not allowed.
+- **Unit Test Agent**: Reference the [/test](file:///Users/mr.robot/z-stash/AmitRaikwar-in/amitraikwar/.claude/agents/UNIT_TEST.md) agent guidelines when writing or updating tests to ensure conformity to established testing patterns and best practices.
+
+### 10. Icon Library Usage
+
+- **Always use react-icons**: Always use the `react-icons` library for all icons across the codebase.
+- **Custom SVG Restriction**: Do not define custom SVG icon components locally or add custom SVG icons under `src/assets/icons/`. The only exception is project or brand specific icons (like [Telegramonic.tsx](file:///Users/mr.robot/z-stash/AmitRaikwar-in/amitraikwar/src/assets/icons/Projects/Telegramonic.tsx)).
+- **Icon Packages**:
+  - Use **Lucide Icons** (`react-icons/lu`) for standard layout, navigation, actions, and status icons.
+  - Use **FontAwesome 6** (`react-icons/fa6`) for social media and brand icons.
+
+### 11. Theming Compatibility
+
+All components **must** be fully compatible with the project's light/dark theming system powered by Chakra UI v2 and the custom `useColorSelector` hook.
+
+- **Theme Colors & Hook Values**: Never use raw hex values, `rgba(...)`, or hardcoded color strings as Chakra UI prop values (e.g., `color`, `bg`, `borderColor`, `fill`). Always use a color defined in [`colors.ts`](file:///Users/mr.robot/z-stash/AmitRaikwar-in/amitraikwar/src/components/Theme/colors.ts) (e.g., `"primary"`, `"secondary"`, `"gray.200"`) or dynamic values from the [`useColorSelector`](file:///Users/mr.robot/z-stash/AmitRaikwar-in/amitraikwar/src/components/Theme/colorSelector/useColorSelector.tsx) hook.
+- **No Inline Style Colors**: Never use `style={{ color: '#fff' }}` or any CSS-in-JS color overrides. Route all color values through Chakra UI props or Tailwind/CSS variables.
+- **Allowed `useColorMode` / `useColorSelector` Usage**: You **may** import `useColorSelector` to get dynamic theme values for text headings, hero text, icons, and background gradients.
+- **Extending the Theme**: If a design requires a color or gradient not covered by the existing theme, add it to `colors.ts` or configure it in `useColorSelector.tsx` before using it in a component.
+
+**Available namespaces in `useColorSelector`**:
+
+| Namespace    | Properties                                 |
+| ------------ | ------------------------------------------ |
+| `text.*`     | `Heading`, `Hero`                          |
+| `icon.*`     | `primary.color`, `primary.bg`, `secondary` |
+| `bg.*`       | `container`                                |
+| `gradient.*` | `topAppBar`, `sideBarBG`, `contentBG`      |
+
+---
+
+## Examples
+
+### Correct Component Folder Structure
+
+```text
+profile_setting/
+├── index.ts
+├── ProfileSettingScreen.tsx
+├── types.ts
+├── const.ts
+├── util.ts
+├── __tests__/
+│   ├── ProfileSettingScreen.test.tsx
+│   └── util.test.ts
+└── components/
+    ├── index.ts
+    ├── ProfileForm.tsx
+    └── __tests__/
+        └── ProfileForm.test.tsx
+```
+
+#### profile_setting/index.ts:
+
+```typescript
+/**
+ * Export default component from the folder.
+ */
+export { default } from './ProfileSettingScreen';
+```
+
+#### profile_setting/components/index.ts:
+
+```typescript
+/**
+ * Export the ProfileForm component.
+ */
+export { ProfileForm } from './ProfileForm';
+```
+
+#### profile_setting/types.ts:
+
+```typescript
+/**
+ * Props for the ProfileForm component.
+ */
+export interface ProfileFormProps {
+  initialData: any;
+  name: string;
+}
+```
+
+#### profile_setting/const.ts:
+
+```typescript
+/**
+ * Maximum character limit for user bio.
+ */
+export const MAX_BIO_CHAR_LIMIT = 150;
+```
+
+#### profile_setting/util.ts:
+
+```typescript
+/**
+ * Filters empty or whitespace-only phone numbers from a list.
+ * @param phoneNumbers List of phone numbers to clean.
+ * @returns Filtered array containing valid numbers.
+ */
+export const filterValidPhoneNumbers = (phoneNumbers: string[]): string[] => {
+  return phoneNumbers.filter((phone) => phone.trim() !== '');
+};
+```
+
+#### profile_setting/ProfileSettingScreen.tsx:
+
+```tsx
+import { Box } from '@chakra-ui/react';
+import { ProfileForm } from './components';
+import { ProfileFormProps } from './types';
+
+/**
+ * Renders the main Profile Setting Screen.
+ * @param props The screen component props.
+ */
+const ProfileSettingScreen = ({ initialData, name }: ProfileFormProps) => {
+  return (
+    <Box>
+      <ProfileForm initialData={initialData} name={name} />
+    </Box>
+  );
+};
+
+export default ProfileSettingScreen;
+```
+
+#### profile_setting/components/ProfileForm.tsx:
+
+```tsx
+import { Box, Input } from '@chakra-ui/react';
+import { ProfileFormProps } from '../types';
+import { MAX_BIO_CHAR_LIMIT } from '../const';
+
+/**
+ * Renders the profile input form.
+ * @param props Component properties.
+ */
+export const ProfileForm = ({ initialData, name }: ProfileFormProps) => {
+  // Component logic...
+  return (
+    <Box>
+      <Input placeholder={name} maxLength={MAX_BIO_CHAR_LIMIT} />
+    </Box>
+  );
+};
+```
+
+#### profile_setting/\_\_tests\_\_/util.test.ts:
+
+```typescript
+import { filterValidPhoneNumbers } from '../util';
+
+describe('filterValidPhoneNumbers', () => {
+  it('returns only non-empty phone numbers', () => {
+    expect(filterValidPhoneNumbers(['+1234', '', '  '])).toEqual(['+1234']);
+  });
+
+  it('returns an empty array when all entries are blank', () => {
+    expect(filterValidPhoneNumbers(['', ' '])).toEqual([]);
+  });
+
+  it('returns all entries when all are valid', () => {
+    const input = ['+1', '+2'];
+    expect(filterValidPhoneNumbers(input)).toEqual(input);
+  });
+});
+```
+
+#### profile_setting/components/\_\_tests\_\_/ProfileForm.test.tsx:
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import { ProfileForm } from '../ProfileForm';
+
+describe('ProfileForm', () => {
+  it('renders the name placeholder', () => {
+    render(<ProfileForm name="John" initialData={null} />);
+    expect(screen.getByPlaceholderText('John')).toBeInTheDocument();
+  });
+});
+```
+
+### Theming Compatibility (Rule 11)
+
+#### ❌ Incorrect — hardcoded colors break light/dark theming:
+
+```tsx
+import { Box, Text } from '@chakra-ui/react';
+
+export const StatusCard = () => {
+  return (
+    // ❌ Raw hex and rgba — will not respond to color mode changes
+    <Box
+      bg="#ffffff"
+      borderColor="rgba(0,0,0,0.1)"
+      style={{ color: '#17191C' }}
+    >
+      <Text color="#475569">Active</Text>
+    </Box>
+  );
+};
+```
+
+#### ✅ Correct — semantic tokens adapt automatically to light and dark mode:
+
+```tsx
+import { Box, Text } from '@chakra-ui/react';
+
+export const StatusCard = () => {
+  return (
+    // ✅ Semantic tokens resolve to the correct color for each color mode
+    <Box bg="bg.card" borderColor="border.subtle">
+      <Text color="text.secondary">Active</Text>
+    </Box>
+  );
+};
+```
+
+#### ✅ Correct — extending the theme when a new token is needed:
+
+```ts
+// theme.ts — add BOTH _light and _dark variants
+semanticTokens: {
+  colors: {
+    status: {
+      success: { value: { _light: '#16A34A', _dark: '#4ADE80' } },
+    },
+  },
+},
+```
+
+```tsx
+// Then consume the new token in the component
+<Text color="status.success">Completed</Text>
+```

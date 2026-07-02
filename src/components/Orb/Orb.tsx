@@ -190,6 +190,7 @@ export default function Orb({
   backgroundColor = '#000000',
 }: OrbProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const container = ctnDom.current;
@@ -200,7 +201,7 @@ export default function Orb({
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
       },
-      { threshold: 0.01 }
+      { threshold: 0.01 },
     );
     observer.observe(container);
 
@@ -280,10 +281,22 @@ export default function Orb({
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
 
+    let scrollTimeout: number | null = null;
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = window.setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 100);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     let rafId: number;
     const update = (t: number) => {
       rafId = requestAnimationFrame(update);
-      if (!isVisibleRef.current) return;
+      if (!isVisibleRef.current || isScrollingRef.current) return;
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
       program.uniforms.iTime.value = t * 0.001;
@@ -310,6 +323,10 @@ export default function Orb({
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove as any);
       window.removeEventListener('mouseleave', handleMouseLeave as any);
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
       container.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };

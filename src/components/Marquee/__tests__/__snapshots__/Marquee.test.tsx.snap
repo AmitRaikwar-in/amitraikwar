@@ -6,18 +6,6 @@ exports[`Marquee should render the Marquee component 1`] = `
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-15jpxfq"
     >
@@ -48,18 +36,6 @@ exports[`Marquee should render the Marquee component 2`] = `
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-19uklyi"
     >
@@ -270,18 +246,6 @@ exports[`Marquee should render the Marquee component with horizontal direction 1
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-19uklyi"
     >
@@ -492,18 +456,6 @@ exports[`Marquee should render the Marquee component with reverse false 1`] = `
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-15jpxfq"
     >
@@ -714,18 +666,6 @@ exports[`Marquee should render the Marquee component with vertical direction 1`]
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: column;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-3si7d9"
     >
@@ -936,18 +876,6 @@ exports[`Marquee should render the Marquee component without hover 1`] = `
     class="css-1t1xmrl"
     style="display: flex; overflow: hidden; padding: 0.5rem; flex-direction: row;"
   >
-    <style>
-      
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        
-    </style>
     <div
       class="css-19uklyi"
     >

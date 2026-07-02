@@ -11,6 +11,18 @@
     />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Amit Raikwar | Portfolio</title>
+    <style>
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background-image: url('%PUBLIC_URL%/noise.webp');
+        background-size: 15%;
+        opacity: 0.05;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -29,7 +41,9 @@
         font-family: 'Space Mono', Consolas, Monaco, monospace;
         overflow: hidden;
         box-sizing: border-box;
-        transition: opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.8s;
+        transition:
+          opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1),
+          visibility 0.8s;
       }
       .preloader-wrapper.preloader-fade-out {
         opacity: 0;
@@ -95,7 +109,9 @@
         height: 36px;
         border-radius: 50%;
         background: linear-gradient(135deg, #8a2be2 0%, #06b6d4 100%);
-        box-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 40px rgba(6, 182, 212, 0.4);
+        box-shadow:
+          0 0 20px rgba(138, 43, 226, 0.8),
+          0 0 40px rgba(6, 182, 212, 0.4);
         animation: pulseCore 2.5s ease-in-out infinite;
       }
       .preloader-title {
@@ -105,7 +121,11 @@
         letter-spacing: 0.25em;
         margin-bottom: 16px;
         text-transform: uppercase;
-        background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+        background: linear-gradient(
+          90deg,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0.7) 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
@@ -134,7 +154,8 @@
         z-index: 2;
       }
       @keyframes pulseGlow {
-        0%, 100% {
+        0%,
+        100% {
           transform: translate(-50%, -50%) scale(1);
           opacity: 0.6;
         }
@@ -160,15 +181,20 @@
         }
       }
       @keyframes pulseCore {
-        0%, 100% {
+        0%,
+        100% {
           transform: scale(0.9);
           opacity: 0.8;
-          box-shadow: 0 0 15px rgba(138, 43, 226, 0.6), 0 0 30px rgba(6, 182, 212, 0.3);
+          box-shadow:
+            0 0 15px rgba(138, 43, 226, 0.6),
+            0 0 30px rgba(6, 182, 212, 0.3);
         }
         50% {
           transform: scale(1.1);
           opacity: 1;
-          box-shadow: 0 0 25px rgba(138, 43, 226, 0.9), 0 0 50px rgba(6, 182, 212, 0.5);
+          box-shadow:
+            0 0 25px rgba(138, 43, 226, 0.9),
+            0 0 50px rgba(6, 182, 212, 0.5);
         }
       }
       @keyframes fadeTitle {
@@ -182,9 +208,16 @@
         }
       }
       @keyframes blinkDots {
-        0%, 100% { opacity: 0.2; }
-        33% { opacity: 0.6; }
-        66% { opacity: 1; }
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        33% {
+          opacity: 0.6;
+        }
+        66% {
+          opacity: 1;
+        }
       }
     </style>
     <div id="preloader" class="preloader-wrapper">

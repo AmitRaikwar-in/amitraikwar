@@ -44,6 +44,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
   const rotationSpeedRef = useRef(rotationSpeed);
   const isHoveredRef = useRef(false);
   const currentSpeedMultiplierRef = useRef(1.0);
+  const isScrollingRef = useRef(false);
   const [webGLSupported, setWebGLSupported] = useState<boolean>(true);
 
   const propsRef = useRef({
@@ -91,7 +92,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
       },
-      { threshold: 0.01 }
+      { threshold: 0.01 },
     );
     observer.observe(container);
 
@@ -374,7 +375,7 @@ const LightPillar: React.FC<LightPillarProps> = ({
       )
         return;
 
-      if (!isVisibleRef.current) {
+      if (!isVisibleRef.current || isScrollingRef.current) {
         rafRef.current = requestAnimationFrame(animate);
         return;
       }
@@ -383,10 +384,13 @@ const LightPillar: React.FC<LightPillarProps> = ({
 
       if (deltaTime >= frameTime) {
         // Smoothly scale speed multiplier on interaction
-        const targetMultiplier = (propsRef.current.interactive && isHoveredRef.current) ? 4.0 : 1.0;
-        currentSpeedMultiplierRef.current += (targetMultiplier - currentSpeedMultiplierRef.current) * 0.08;
+        const targetMultiplier =
+          propsRef.current.interactive && isHoveredRef.current ? 4.0 : 1.0;
+        currentSpeedMultiplierRef.current +=
+          (targetMultiplier - currentSpeedMultiplierRef.current) * 0.08;
 
-        timeRef.current += 0.016 * rotationSpeedRef.current * currentSpeedMultiplierRef.current;
+        timeRef.current +=
+          0.016 * rotationSpeedRef.current * currentSpeedMultiplierRef.current;
         materialRef.current.uniforms.uTime.value = timeRef.current;
 
         // Pre-compute rotation on CPU
@@ -423,12 +427,27 @@ const LightPillar: React.FC<LightPillarProps> = ({
       }, 150);
     };
 
+    let scrollTimeout: number | null = null;
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = window.setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 100);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
 
     // Cleanup
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) {
+        window.clearTimeout(scrollTimeout);
+      }
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
@@ -487,8 +506,12 @@ const LightPillar: React.FC<LightPillarProps> = ({
       mouseRef.current.set(x, y);
     };
 
-    container.addEventListener('mouseenter', handleMouseEnter, { passive: true });
-    container.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    container.addEventListener('mouseenter', handleMouseEnter, {
+      passive: true,
+    });
+    container.addEventListener('mouseleave', handleMouseLeave, {
+      passive: true,
+    });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
@@ -505,7 +528,6 @@ const LightPillar: React.FC<LightPillarProps> = ({
     if (!materialRef.current) return;
     materialRef.current.uniforms.uInteractive.value = interactive;
   }, [interactive]);
-
 
   useEffect(() => {
     rotationSpeedRef.current = rotationSpeed;
@@ -533,7 +555,6 @@ const LightPillar: React.FC<LightPillarProps> = ({
     if (!materialRef.current) return;
     materialRef.current.uniforms.uIntensity.value = intensity;
   }, [intensity]);
-
 
   useEffect(() => {
     if (!materialRef.current) return;

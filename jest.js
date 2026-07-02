@@ -46,5 +46,3 @@ jest.mock('ogl', () => ({
   Triangle: jest.fn(),
   Mesh: jest.fn(),
 }));
-
-

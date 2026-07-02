@@ -113,7 +113,7 @@ const ArticlesScreen = () => {
       paddingX={{ base: 1, md: 6 }}
       position="relative"
     >
-      <Noise type="bg" opacity={0.26} baseFrequency={7.5} />
+      <Noise type="bg" />
       <Box
         position={'fixed'}
         top={{ base: 3, md: 5 }}

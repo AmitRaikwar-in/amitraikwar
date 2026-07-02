@@ -88,7 +88,7 @@ const DotField = memo(
         ([entry]) => {
           isVisibleRef.current = entry.isIntersecting;
         },
-        { threshold: 0.01 }
+        { threshold: 0.01 },
       );
       observer.observe(canvas.parentElement || canvas);
 

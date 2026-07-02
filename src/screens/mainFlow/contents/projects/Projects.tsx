@@ -17,7 +17,6 @@ const Projects = () => {
       rowGap={20}
       ref={ref}
       pos="relative"
-      bg="black"
     >
       <HeroText />
       <motion.div
@@ -34,13 +33,13 @@ const Projects = () => {
           topColor="#5227ff"
           bottomColor="#ff9ffc"
           intensity={2}
-          rotationSpeed={0.3}
+          rotationSpeed={1.3}
           glowAmount={0.003}
           pillarWidth={3}
           pillarHeight={1.0}
           noiseIntensity={0.6}
           pillarRotation={90}
-          interactive={true}
+          interactive={false}
           mixBlendMode="screen"
           quality="medium"
         />

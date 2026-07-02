@@ -30,18 +30,6 @@ const Marquee = ({
       paddingX={gap}
       {...hoverProps}
     >
-      <style>
-        {`
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
-          }
-          @keyframes marquee-vertical {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-          }
-        `}
-      </style>
       {Array(repeat)
         .fill(0)
         .map((_, i) => (

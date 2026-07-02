@@ -2,16 +2,6 @@
 
 exports[`ShinyText should disable animation when disabled is true 1`] = `
 <div>
-  <style>
-    @keyframes shine {
-            0% {
-                background-position: 100%;
-                }
-            100% {
-                background-position: -100%;
-                }
-            }
-  </style>
   <div
     class="text-[#b5b5b5a4] bg-clip-text inline-block  "
     style="background-size: 200% 100%; animation: none;"
@@ -23,16 +13,6 @@ exports[`ShinyText should disable animation when disabled is true 1`] = `
 
 exports[`ShinyText should render the ShinyText component with correct text 1`] = `
 <div>
-  <style>
-    @keyframes shine {
-            0% {
-                background-position: 100%;
-                }
-            100% {
-                background-position: -100%;
-                }
-            }
-  </style>
   <div
     class="text-[#b5b5b5a4] bg-clip-text inline-block animate-shine "
     style="background-size: 200% 100%; animation: shine 5s linear infinite;"

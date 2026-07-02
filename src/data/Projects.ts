@@ -104,6 +104,12 @@ Core idea of this project is to build a place on the internet where coders can f
     githubLink: 'https://github.com/WorldOfTech0/WOT',
     link: 'https://worldoftech.co.in',
     tags: [Language.react, Language.typescript, Language.i18n],
+    image: [
+      'worldoftech/1.png',
+      'worldoftech/2.png',
+      'worldoftech/3.png',
+      'worldoftech/4.png',
+    ],
     keyPoints: [
       'Built as a highly organized directory cataloging free tools across media, AI, privacy, books, and system utilities.',
       'Features a responsive glassmorphic UI with quick category filters and a fast local search/filter system.',
@@ -133,8 +139,8 @@ Core idea of this project is to build a place on the internet where coders can f
     status: Status.DEVELOPMENT,
     description:
       'A hardware-agnostic audio-networking application that turns nearby computers, smartphones, and tablets into a synchronized, unified speaker system using local Wi-Fi and Bluetooth protocols.',
-    githubLink: 'https://github.com/AmitRaikwar-in/AudioMesh',
-    image: ['mac/AR_Mac1.png', 'mac/AR_Mac2.png', 'mac/AR_Mac3.png'],
+    githubLink: 'https://github.com/AudioMesh',
+    image: ['audiomesh/Landing1.png', 'audiomesh/Landing2.png'],
     link: 'https://audiomesh.amitraikwar.in/',
     tags: [
       Language.rust,
@@ -177,6 +183,33 @@ This library has most of the UI components and hooks required for building hourc
     ],
   },
   {
+    title: 'Growboard',
+    icon: ProjectName.Growboard,
+    status: Status.LIVE,
+    description: `A web app for managing stuffs in life like study, projects, expenses, secrets, passwords, writing journals, etc. A web app for managing stuff in life like study, projects, expenses, secrets, passwords, writing journals etc. 
+      This project was started with a idea to manage everything at one place without maintaining something overwhelming or complicated.`,
+    githubLink: 'https://www.github.com/Growboard/growboard',
+    link: 'https://gb.amitraikwar.com',
+    tags: [
+      Language.react,
+      Language.typescript,
+      Language.i18n,
+      Language.supabase,
+    ],
+    image: [
+      'growboard/LandingPage.png',
+      'growboard/Login.png',
+      'growboard/Expenses.png',
+      'growboard/LandingPage.png',
+    ],
+    keyPoints: [
+      'Compatible with all devices and has a responsive design.',
+      'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
+      'Feature like project management, expense management, password management, journal writing, and more.',
+      'This project is still under development and more features are being added regularly.',
+    ],
+  },
+  {
     title: 'Galaxy UI Library',
     icon: ProjectName.GalaxyUI,
     status: Status.DEVELOPMENT,
@@ -191,27 +224,6 @@ This library has most of the UI components and hooks required for building hourc
       'It is built with React, Next.js, TypeScript, Chakra UI, and Tailwind CSS.',
       'Utility hooks that facilitate the development of web applications.',
       'Currently hosted on NPM and is being updated with new components and features regularly.',
-    ],
-  },
-  {
-    title: 'Growboard',
-    icon: ProjectName.Dashwave,
-    status: Status.DEVELOPMENT,
-    description: `A web app for managing stuffs in life like study, projects, expenses, secrets, passwords, writing journals, etc. A web app for managing stuff in life like study, projects, expenses, secrets, passwords, writing journals etc. 
-      This project was started with a idea to manage everything at one place without maintaining something overwhelming or complicated.`,
-    githubLink: 'https://www.github.com/onemanfighter/hourcoding-ui',
-    link: 'https://dashwave.amitraikwar.com',
-    tags: [
-      Language.react,
-      Language.typescript,
-      Language.i18n,
-      Language.supabase,
-    ],
-    keyPoints: [
-      'Compatible with all devices and has a responsive design.',
-      'Built with React, TypeScript, Chakra UI, and Tailwind CSS.',
-      'Feature like project management, expense management, password management, journal writing, and more.',
-      'This project is still under development and more features are being added regularly.',
     ],
   },
   {
