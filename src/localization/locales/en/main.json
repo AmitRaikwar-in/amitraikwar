@@ -11,8 +11,18 @@
     "work": "Work",
     "projects": "Projects",
     "skills": "Skills",
+    "resume": "Resume",
     "articles": "Articles",
     "contact": "Contact"
+  },
+  "resume": {
+    "title": "Resume",
+    "subtitle": "Interactive Resume & Audio Walkthrough",
+    "audioTitle": "Audio Walkthrough",
+    "audioSubtitle": "Listen to a quick audio summary of my professional journey",
+    "pdfTitle": "Resume Document",
+    "openInDrive": "View in Google Drive",
+    "downloadPdf": "Download PDF"
   },
   "about": {
     "quoteHeading": "Crafting digital experiences that inspire",

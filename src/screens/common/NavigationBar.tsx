@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Img } from '@chakra-ui/react';
+import { Box, Button, HStack, Img, Text } from '@chakra-ui/react';
 import { AnimatedModal, LinkButton, useCursor, GlassBox } from '@components';
 import AmitRaikwarLogo from '@assets/images/AmitRaikwarLogo.png';
 import { SearchIcon } from '@assets';
@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMoveToTop } from '@hooks';
 import { BASE_URL_ROUTE } from '@router';
 import PingTest from './PingTest';
+import Resume from '../mainFlow/contents/Resume';
 
 const NavigationLink = [
   {
@@ -240,6 +241,29 @@ const NavigationBar = () => {
                 {t(ArticleLink.name)}
               </Button>
             </Box>
+            <Text
+              color={'white'}
+              fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+              display={{
+                base: 'none',
+                md: 'block',
+              }}
+            >
+              {'|'}
+            </Text>
+            <AnimatedModal
+              triggerComponent={
+                <LinkButton
+                  text={t('navigation.resume')}
+                  fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                />
+              }
+              title={t('resume.title')}
+              containerClassName="w-[92vw] max-w-[1100px]"
+              footer={<Box></Box>}
+            >
+              <Resume />
+            </AnimatedModal>
           </HStack>
         )}
 

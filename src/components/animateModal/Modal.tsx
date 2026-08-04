@@ -12,11 +12,13 @@ const AnimatedModal = ({
   triggerComponent,
   children,
   footer,
+  containerClassName,
 }: {
   title: string;
   triggerComponent: React.ReactNode;
   children: React.ReactNode;
   footer: React.ReactNode;
+  containerClassName?: string;
 }) => {
   return (
     <Box className="flex items-center justify-center">
@@ -26,13 +28,15 @@ const AnimatedModal = ({
         </ModalTrigger>
         <ModalBody>
           <ModalContent>
-            <Heading
-              fontSize="xl"
-              className="text-center text-white"
-              marginBottom={'4'}
-            >
-              {title}
-            </Heading>
+            {title && (
+              <Heading
+                fontSize="xl"
+                className="text-center text-white"
+                marginBottom={'4'}
+              >
+                {title}
+              </Heading>
+            )}
             {children}
           </ModalContent>
           <ModalFooter>{footer}</ModalFooter>

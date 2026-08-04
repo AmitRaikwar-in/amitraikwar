@@ -6,12 +6,11 @@ import { useRef } from 'react';
 
 const LinkButton = ({
   text,
-  href,
-  animationOnHover,
   withUnderline,
   withArrow,
   fontSize,
   onClick,
+  href = undefined,
 }: LinkButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const { setCursorInsets } = useCursor();
@@ -52,7 +51,7 @@ const LinkButton = ({
       rightIcon={withArrow ? <ArrowIcon /> : undefined}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={() => onClick?.(href)}
+      onClick={() => href && onClick?.(href)}
       justifyItems={'end'}
       rowGap={2}
       {...(!onClick ? { as: 'a', href } : {})}
