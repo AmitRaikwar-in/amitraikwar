@@ -39,15 +39,40 @@ const FollowCursor = () => {
   const shouldHide = hasInsets && (insets.width === 0 || insets.height === 0);
 
   useEffect(() => {
+    let mouseTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const enableIframePointerEvents = () => {
+      document.body.classList.remove('disable-iframe-pointer-events');
+    };
+
+    const disableIframePointerEvents = () => {
+      document.body.classList.add('disable-iframe-pointer-events');
+      if (mouseTimeout) clearTimeout(mouseTimeout);
+      mouseTimeout = setTimeout(enableIframePointerEvents, 150);
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       dotTargetX.set(e.clientX);
       dotTargetY.set(e.clientY);
       ringTargetX.set(e.clientX);
       ringTargetY.set(e.clientY);
+
+      disableIframePointerEvents();
+    };
+
+    const handleMouseDown = () => {
+      enableIframePointerEvents();
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      if (mouseTimeout) clearTimeout(mouseTimeout);
+      enableIframePointerEvents();
+    };
   }, [dotTargetX, dotTargetY, ringTargetX, ringTargetY]);
 
   const ringSize = shouldHide ? 0 : isHovering ? 48 : 36;
@@ -72,7 +97,7 @@ const FollowCursor = () => {
           borderRadius: '50%',
           backgroundColor: '#ffffff',
           mixBlendMode: 'difference',
-          zIndex: 99999,
+          zIndex: 2147483647,
           pointerEvents: 'none',
           x: dotX,
           y: dotY,
@@ -105,7 +130,7 @@ const FollowCursor = () => {
           position: 'fixed',
           left: 0,
           top: 0,
-          zIndex: 99998,
+          zIndex: 2147483646,
           pointerEvents: 'none',
           x: ringX,
           y: ringY,

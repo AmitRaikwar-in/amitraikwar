@@ -91,7 +91,7 @@ const SocialNavigation = () => {
         transform="translateY(-50%)"
         right={14}
         rowGap={6}
-        zIndex={1000}
+        zIndex={500}
         display={{ base: 'none', lg: 'flex' }}
       >
         <VStack
@@ -166,7 +166,7 @@ const SocialNavigation = () => {
         position="fixed"
         bottom={{ base: '20px', md: '30px' }}
         right={{ base: '20px', md: '30px' }}
-        zIndex={1100}
+        zIndex={500}
         display={{ base: 'block', lg: 'none' }}
       >
         <IconButton

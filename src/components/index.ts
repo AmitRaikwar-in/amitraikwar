@@ -20,3 +20,5 @@ export * from './GlassBox';
 export * from './BorderGlow';
 export * from './Orb';
 export * from './WebsiteLoader';
+export * from './ResumeAudioPlayer';
+

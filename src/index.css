@@ -89,3 +89,9 @@ body,
   background-color: rgba(193, 129, 193, 0.576);
   color: black; /* Optional: set text color within selection */
 }
+
+/* Allow custom cursor to track smoothly over iframes without getting stuck at boundaries */
+body.disable-iframe-pointer-events iframe {
+  pointer-events: none !important;
+}
+
