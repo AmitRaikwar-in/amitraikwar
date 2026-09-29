@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  Divider,
-  HStack,
-  Input,
-  Radio,
-  RadioGroup,
-  Text,
-  Textarea,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 import '@mdxeditor/editor/style.css';
-import { ArticleCard, MdPreview, useCursor } from '@components';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCursor } from '@components';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BASE_NAV_ROUTE } from '@router';
 import { ARTICLE_DEFAULT } from './constants';
 import { ArticleWithContent } from './types';
 import { getRequestObject, isValidArticle } from './utils';
@@ -21,25 +12,58 @@ import {
   useGetEditorArticleData,
   useUpdateArticle,
 } from '@services';
-import { DeleteArticleButton } from './components';
+import {
+  EditorHeader,
+  MarkdownWorkspace,
+  MetadataSection,
+  PreloadSection,
+  PublishSidebar,
+} from './components';
 
 const ArticleEditor = () => {
+  const navigate = useNavigate();
   const { setCursorType } = useCursor();
+
+  // Component state
   const [articleKey, setArticleKey] = useState<string>('');
   const [articleType, setArticleType] = useState<'New' | 'Update'>('New');
   const [queryArticleKey, setQueryArticleKey] = useState<string>('');
   const [state, setState] = useState<ArticleWithContent>(ARTICLE_DEFAULT);
-  const { data, isPending } = useGetEditorArticleData(queryArticleKey);
-  const { mutate: addArticleMutation } = useAddArticle();
-  const { mutate: updateArticleMutation } = useUpdateArticle();
+  const [isMetadataOpen, setIsMetadataOpen] = useState<boolean>(true);
+
+  // API mutations & query
+  const { data, isPending: isQueryPending } = useGetEditorArticleData(queryArticleKey);
+  const { mutate: addArticleMutation, isPending: isAdding } = useAddArticle() as any;
+  const { mutate: updateArticleMutation, isPending: isUpdating } = useUpdateArticle() as any;
+
+  const isSubmitting = isAdding || isUpdating;
 
   useLayoutEffect(() => {
     setCursorType('none');
   }, [setCursorType]);
 
-  const onSubmit = useCallback(() => {
-    console.log('State', articleType);
+  // Preload populated data into editor state
+  useLayoutEffect(() => {
+    if (data) {
+      const dataFromReq = (data as any)?.data?.rows?.[0];
+      if (dataFromReq) {
+        let authorName = dataFromReq.author;
+        try {
+          const parsed = JSON.parse(dataFromReq.author);
+          if (parsed && typeof parsed === 'object' && parsed.name) {
+            authorName = parsed.name;
+          }
+        } catch {
+          // Author is already a string
+        }
+        setState({ ...dataFromReq, author: authorName || '' });
+        setQueryArticleKey('');
+      }
+    }
+  }, [data]);
 
+  // Handlers
+  const onSubmit = useCallback(() => {
     if (articleType === 'New') {
       addArticleMutation(getRequestObject(state));
       return;
@@ -48,198 +72,153 @@ const ArticleEditor = () => {
     updateArticleMutation(getRequestObject(state));
   }, [addArticleMutation, articleType, state, updateArticleMutation]);
 
-  useLayoutEffect(() => {
-    if (data) {
-      const dataFromReq = (data as any)?.data.rows[0];
-      setState({ ...dataFromReq, author: JSON.parse(dataFromReq.author).name });
-      setQueryArticleKey('');
-    }
-  }, [data, state]);
+  const onReset = useCallback(() => {
+    setState(ARTICLE_DEFAULT);
+    setQueryArticleKey('');
+    setArticleKey('');
+  }, []);
+
+  const onFieldChange = useCallback(
+    (field: keyof ArticleWithContent, value: string) => {
+      setState((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    },
+    [],
+  );
+
+  const onContentChange = useCallback((value: string) => {
+    setState((prev) => ({
+      ...prev,
+      md_data: value,
+    }));
+  }, []);
+
+  // Live Statistics
+  const stats = useMemo(() => {
+    const text = state.md_data || '';
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const chars = text.length;
+    const lines = text ? text.split('\n').length : 0;
+    const readTime = Math.max(1, Math.ceil(words / 200));
+    return { words, chars, lines, readTime };
+  }, [state.md_data]);
+
+  // Field validation checklist items
+  const validationItems = useMemo(
+    () => [
+      { key: 'article_key', label: 'Slug / Key', filled: Boolean(state.article_key.trim()) },
+      { key: 'title', label: 'Title', filled: Boolean(state.title.trim()) },
+      { key: 'description', label: 'Description', filled: Boolean(state.description.trim()) },
+      { key: 'author', label: 'Author', filled: Boolean(state.author.trim()) },
+      { key: 'group_id', label: 'Group ID', filled: Boolean(state.group_id.trim()) },
+      { key: 'group_name', label: 'Group Name', filled: Boolean(state.group_name.trim()) },
+      { key: 'md_data', label: 'Content', filled: Boolean(state.md_data.trim()) },
+    ],
+    [state],
+  );
+
+  const filledCount = validationItems.filter((i) => i.filled).length;
+  const isFormValid = isValidArticle(state);
 
   return (
-    <VStack
-      px={10}
-      pt={20}
-      width={'100vw'}
-      rowGap={4}
-      bg={'black'}
-      color={'gray.100'}
+    <Box
+      minH="100vh"
+      w="100%"
+      bg="#07080d"
+      color="gray.100"
+      position="relative"
+      overflowX="hidden"
+      pb={16}
     >
-      <HStack width={'100%'} justifyContent={'space-between'} align={'start'}>
-        <VStack w={'80%'} rowGap={4}>
-          <HStack w={'100%'} justifyContent={'space-between'}>
-            <Text
-              fontSize={'3xl'}
-              fontWeight={'bold'}
-              color={'white'}
-              textAlign={'center'}
-            >
-              Article editor
-            </Text>
+      {/* Background ambient glow spots */}
+      <Box
+        position="absolute"
+        top="-100px"
+        left="15%"
+        w="500px"
+        h="450px"
+        bg="radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%)"
+        pointerEvents="none"
+        filter="blur(50px)"
+        zIndex={0}
+      />
+      <Box
+        position="absolute"
+        top="300px"
+        right="10%"
+        w="550px"
+        h="500px"
+        bg="radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)"
+        pointerEvents="none"
+        filter="blur(60px)"
+        zIndex={0}
+      />
 
-            <Button
-              onClick={() => {
-                setState(ARTICLE_DEFAULT);
-                setQueryArticleKey('');
-              }}
-              colorScheme={'red'}
-            >
-              Clear Article
-            </Button>
-          </HStack>
-          <HStack w={'100%'} rowGap={4}>
-            <Input
-              placeholder="Article Key"
-              value={state.article_key}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  article_key: e.target.value,
-                }))
-              }
-            />
-            <Input
-              placeholder="Article Title"
-              value={state.title}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  title: e.target.value,
-                }))
-              }
-            />
-            <Input
-              placeholder="Article description"
-              value={state.description}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  description: e.target.value,
-                }))
-              }
-            />
-          </HStack>
-          <HStack w={'100%'} rowGap={4}>
-            <Input
-              placeholder="Author"
-              value={state.author}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  author: e.target.value,
-                }))
-              }
-            />
-            <Input
-              placeholder="Group Id"
-              value={state.group_id}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  group_id: e.target.value,
-                }))
-              }
-            />
-            <Input
-              placeholder="Group Name"
-              value={state.group_name}
-              onChange={(e) =>
-                setState((prev) => ({
-                  ...prev,
-                  group_name: e.target.value,
-                }))
-              }
-            />
-          </HStack>
-          <Input
-            placeholder="Image"
-            value={state.image}
-            onChange={(e) =>
-              setState((prev) => ({
-                ...prev,
-                image: e.target.value,
-              }))
-            }
-          />
-          <Button
-            w={'100%'}
-            onClick={onSubmit}
-            isDisabled={!isValidArticle(state)}
-          >
-            {articleType === 'New' ? 'Submit' : 'Update'} Article
-          </Button>
-        </VStack>
-        <VStack borderLeft={'1px solid gray'} p={1}>
-          <RadioGroup
-            value={articleType}
-            onChange={(value) => {
-              setArticleType(value as 'New' | 'Update');
-            }}
-          >
-            <Radio value="New" padding={2}>
-              New Article
-            </Radio>
-            <Radio value="Update" padding={2}>
-              Update Article
-            </Radio>
-          </RadioGroup>
-          <HStack>
-            <Input
-              placeholder="Article Key"
-              value={articleKey}
-              onChange={(e) => setArticleKey(e.target.value)}
-            />
-            <Button
-              isDisabled={isPending}
-              isLoading={isPending}
-              onClick={() => setQueryArticleKey(articleKey)}
-            >
-              Preload
-            </Button>
-          </HStack>
-          <DeleteArticleButton
-            articleKey={state.article_key}
-            onDelete={() => setState(ARTICLE_DEFAULT)}
-          />
-          <ArticleCard {...state} />
-        </VStack>
-      </HStack>
-      <Divider />
-      <Text fontSize={'xl'} fontWeight={'bold'} color={'white'}>
-        Article Content
-      </Text>
-      <HStack
-        width={'100%'}
-        border={'1px solid white'}
-        borderRadius={'md'}
-        p={2}
-        className=" min-h-[100vh]"
-        align={'start'}
+      <Box
+        maxW="1800px"
+        w="100%"
+        mx="auto"
+        px={{ base: 4, md: 8, xl: 10 }}
+        pt={6}
+        position="relative"
+        zIndex={1}
       >
-        <Box
-          w={'50%'}
-          height={'100%'}
-          minH={'200vh'}
-          borderRight={'1px solid white'}
-        >
-          <MdPreview mdString={state.md_data} />
-        </Box>
-        <Textarea
-          w={'50%'}
-          height={'200vh'}
-          resize={'none'}
-          bgSize={'cover'}
-          boxSizing="border-box"
-          value={state.md_data}
-          onChange={(e) =>
-            setState((prev) => ({
-              ...prev,
-              md_data: e.target.value,
-            }))
-          }
+        {/* Navigation, Mode Toggle & Actions */}
+        <EditorHeader
+          articleType={articleType}
+          setArticleType={setArticleType}
+          isFormValid={isFormValid}
+          filledCount={filledCount}
+          isSubmitting={isSubmitting}
+          onClear={onReset}
+          onSubmit={onSubmit}
+          onBack={() => navigate(`${BASE_NAV_ROUTE}articles`)}
         />
-      </HStack>
-    </VStack>
+
+        {/* Preload Search Card (when in Update mode) */}
+        {articleType === 'Update' && (
+          <PreloadSection
+            articleKey={articleKey}
+            setArticleKey={setArticleKey}
+            onPreload={(key) => setQueryArticleKey(key)}
+            isLoading={isQueryPending}
+          />
+        )}
+
+        {/* Main 2-Column Workspace Grid */}
+        <Flex direction={{ base: 'column', xl: 'row' }} gap={6} align="flex-start">
+          {/* Left Column: Metadata & Markdown Workspace */}
+          <VStack spacing={6} flex={1} w="100%" align="stretch">
+            <MetadataSection
+              state={state}
+              onChange={onFieldChange}
+              isOpen={isMetadataOpen}
+              onToggle={() => setIsMetadataOpen((prev) => !prev)}
+              isFormValid={isFormValid}
+              filledCount={filledCount}
+            />
+
+            <MarkdownWorkspace
+              content={state.md_data}
+              onChangeContent={onContentChange}
+              stats={stats}
+            />
+          </VStack>
+
+          {/* Right Column: Feed Preview & Readiness Checklist */}
+          <PublishSidebar
+            state={state}
+            articleType={articleType}
+            isFormValid={isFormValid}
+            filledCount={filledCount}
+            validationItems={validationItems}
+            onReset={onReset}
+          />
+        </Flex>
+      </Box>
+    </Box>
   );
 };
 
