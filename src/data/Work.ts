@@ -2,11 +2,11 @@ import { WorkType } from './types';
 
 export const WORK_DATA: WorkType = {
   '2026': {
-    title: 'Software Lead | IoT | Rust',
+    title: 'Software Lead | IoT | Java | Rust',
     description:
-      'Started this year with rust learning and independently working on new technology(RUST) for hardware firmware requirement.',
+      'Started this year with new learnings and independently working on new technology(RUST and Java) for IoT firmware requirement.',
     keyPoints: [
-      'Taking more responsibilities along with deliverables and also learning new technology (Rust) for hardware firmware project.',
+      'Taking more responsibilities along with deliverables and also learning new technology (Rust and Java) for IoT firmware project.',
       'Mentoring the new team members, improved the app performance and fixing the critical bugs.',
       'Brainstorming many big code design and architecture decisions with the team.',
       'Implementing many design patterns, best practices, and improved the app performance along with fixing the bugs',
@@ -23,10 +23,9 @@ export const WORK_DATA: WorkType = {
       'Implemented many design patterns, best practices, and improved the app performance along with fixing the bugs',
     ],
     tags: [
-      'React',
-      'TypeScript',
+      'Java',
       'gRPC',
-      'React Native',
+      'Rust',
       'LaunchDarkly',
       'Responsibilities',
       'Team handling',

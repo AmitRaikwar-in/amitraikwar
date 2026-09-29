@@ -23,10 +23,10 @@ const AnimatedModal = ({
   return (
     <Box className="flex items-center justify-center">
       <Modal>
-        <ModalTrigger className="bg-white flex justify-center group/modal-btn">
+        <ModalTrigger className="flex justify-center group/modal-btn">
           {triggerComponent}
         </ModalTrigger>
-        <ModalBody>
+        <ModalBody className={containerClassName}>
           <ModalContent>
             {title && (
               <Heading

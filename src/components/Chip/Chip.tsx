@@ -101,16 +101,16 @@ export const ChipMap: Record<
     title: 'Tauri',
     Icon: (props: SVGProps<SVGSVGElement>) => <Tauri {...props} />,
   },
-  [Skills.more]: {
-    title: 'More...',
-    Icon: (_props: SVGProps<SVGSVGElement>) => <></>,
-  },
 };
 
 const Chip = ({ type, size = 'md' }: ChipProps) => {
   const isMd = size === 'md';
   const isSm = size === 'sm';
-  const { title, Icon } = ChipMap[type];
+  const chip = ChipMap[type] || {
+    title: type,
+    Icon: () => null,
+  };
+  const { title, Icon } = chip;
 
   return (
     <HStack
@@ -135,12 +135,10 @@ const Chip = ({ type, size = 'md' }: ChipProps) => {
           '0 6px 16px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
       }}
     >
-      {type !== Skills.more && (
-        <Icon
-          width={isMd ? 16 : isSm ? 12 : 9}
-          height={isMd ? 16 : isSm ? 12 : 9}
-        />
-      )}
+      <Icon
+        width={isMd ? 16 : isSm ? 12 : 9}
+        height={isMd ? 16 : isSm ? 12 : 9}
+      />
       <Text
         fontSize={isMd ? 'sm' : isSm ? 'xs' : '9px'}
         fontWeight="semibold"

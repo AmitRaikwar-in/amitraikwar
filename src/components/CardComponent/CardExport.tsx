@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import { useCursor } from '../Cursor';
 import { CardBasic } from './Card';
 import { CardExportProps } from './types';
-import { Box, Button, HStack, Text, Wrap } from '@chakra-ui/react';
-import { Chip, Language } from '../Chip';
+import { Box, Button, Flex, HStack, Text, Wrap } from '@chakra-ui/react';
+import { Chip } from '../Chip';
 import { Link } from 'react-router-dom';
 import { PROJECT_NAME_ICON_MAP } from '@assets';
 import { Status } from '@data';
@@ -122,11 +122,12 @@ const Card = ({
       )}
 
       <CardBasic text={centerText} icon={icon && PROJECT_NAME_ICON_MAP[icon]} />
-      <HStack
-        justifyContent={'space-between'}
+      <Flex
+        direction={{ base: 'column', sm: 'row' }}
+        justifyContent={{ base: 'flex-start', sm: 'space-between' }}
+        alignItems={{ base: 'flex-start', sm: 'center' }}
         width={'full'}
-        alignItems={'center'}
-        alignContent={'center'}
+        gap={{ base: 1.5, sm: 2 }}
         marginTop={2}
         mb={2}
       >
@@ -141,10 +142,20 @@ const Card = ({
         >
           {titleText}
         </Text>
-        <Button size="xs" py={1} px={2} as={Link} to={'projects/' + icon}>
+        <Button
+          size="xs"
+          fontSize={{ base: '10px', sm: 'xs' }}
+          py={{ base: 0.5, sm: 1 }}
+          px={{ base: 1.5, sm: 2 }}
+          minW="auto"
+          whiteSpace="nowrap"
+          flexShrink={0}
+          as={Link}
+          to={'projects/' + icon}
+        >
           Know More
         </Button>
-      </HStack>
+      </Flex>
       <Text
         maxW={'full'}
         fontSize="xs"
@@ -159,7 +170,6 @@ const Card = ({
         {chips
           ?.slice(0, 5)
           ?.map((tag) => <Chip key={tag} type={tag} size="xs" />)}
-        <Chip type={Language.more} size="xs" />
       </Wrap>
     </div>
   );

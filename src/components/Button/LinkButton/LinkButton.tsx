@@ -9,6 +9,8 @@ const LinkButton = ({
   withUnderline,
   withArrow,
   fontSize,
+  px,
+  minW,
   onClick,
   href = undefined,
 }: LinkButtonProps) => {
@@ -44,7 +46,8 @@ const LinkButton = ({
       fontWeight={'300'}
       borderRadius={0}
       overflow={'clip'}
-      px={2}
+      px={px ?? { base: 1, sm: 1.5, md: 2 }}
+      minW={minW ?? 'auto'}
       maxHeight={'7'}
       _hover={{ color: 'violet' }}
       borderBottom={withUnderline ? '1px solid white' : 'none'}

@@ -1,18 +1,24 @@
-import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  IconButton,
+  Text,
+  Tooltip,
+  useClipboard,
+  VStack,
+} from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { DotField } from '@components';
-import { EmailIcon, GetInTouch } from '@assets';
+import { CheckIcon, CopyIcon, EmailIcon } from '@assets';
 import { CONTACT } from '@data';
 import { useRef } from 'react';
-import { useIsIntersecting } from '@hooks';
-import { AnimatePresence, motion } from 'framer-motion';
 
 const Contact = () => {
   const { t } = useTranslation();
   const ref = useRef<HTMLButtonElement>(null);
-
-  const isContactContainerIntersecting = useIsIntersecting(ref);
-  const SafeAnimatePresence = AnimatePresence as any;
+  const { onCopy, hasCopied } = useClipboard(CONTACT.email);
 
   return (
     <Box minH={'100vh'} width={'100%'} id="contact">
@@ -54,47 +60,37 @@ const Contact = () => {
         >
           {t('contact.description')}
         </Text>
-        <Button
-          leftIcon={<EmailIcon />}
-          as="a"
-          href={`mailto:${CONTACT.email}`}
-          variant={'outline'}
-          colorScheme={'violet'}
-          size={'lg'}
-          px={4}
-          ref={ref}
-        >
-          {CONTACT.email}
-        </Button>
-        <SafeAnimatePresence initial={false}>
-          {isContactContainerIntersecting && (
-            <Box
-              display={{ base: 'none', lg: 'flex' }}
-              flexDirection="column"
-              position="fixed"
-              bottom="40vh"
-              right={150}
-              alignItems="end"
-              as={motion.div}
-              initial="collapsed"
-              animate="open"
-              exit="collapsed"
-              variants={{
-                open: { opacity: 1, height: 'auto' },
-                collapsed: { opacity: 0, height: 0 },
-              }}
-              transition={
-                {
-                  duration: 0.5,
-                  ease: [0.04, 0.62, 0.23, 0.98],
-                } as any
-              }
+        <HStack spacing={3}>
+          <Tooltip label={CONTACT.email} hasArrow placement="top">
+            <Button
+              leftIcon={<EmailIcon />}
+              as="a"
+              href={`mailto:${CONTACT.email}`}
+              variant={'outline'}
+              colorScheme={'violet'}
+              size={'lg'}
+              px={6}
+              ref={ref}
             >
-              <GetInTouch width={56} height={56} />
-              <Text>{t('contact.getInTouch')}</Text>
-            </Box>
-          )}
-        </SafeAnimatePresence>
+              {t('contact.sendEmail')}
+            </Button>
+          </Tooltip>
+          <Tooltip
+            label={hasCopied ? t('contact.copied') : t('contact.copyEmail')}
+            closeOnClick={false}
+            hasArrow
+            placement="top"
+          >
+            <IconButton
+              icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
+              aria-label="copy email"
+              onClick={onCopy}
+              variant={'outline'}
+              colorScheme={hasCopied ? 'green' : 'violet'}
+              size={'lg'}
+            />
+          </Tooltip>
+        </HStack>
       </VStack>
     </Box>
   );

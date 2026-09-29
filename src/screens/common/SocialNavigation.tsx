@@ -1,4 +1,11 @@
-import { GithubIcon, LeetcodeIcon, LinkedInIcon, MediumIcon } from '@assets';
+import {
+  CodeChefIcon,
+  CodeforcesIcon,
+  GithubIcon,
+  LeetcodeIcon,
+  LinkedInIcon,
+  MediumIcon,
+} from '@assets';
 import { IconButton, VStack, Box } from '@chakra-ui/react';
 import { useCursor, GlassBox } from '@components';
 import { RefObject, useRef, useState } from 'react';
@@ -141,6 +148,7 @@ const SocialNavigation = () => {
             href={CONTACT.linkedIn}
             target={'_blank'}
             {...IconProps}
+            color="#0A66C2"
           />
           <IconButton
             icon={<MediumIcon />}
@@ -155,6 +163,22 @@ const SocialNavigation = () => {
             aria-label="leetcode icon"
             as={'a'}
             href={CONTACT.leetcode}
+            target={'_blank'}
+            {...IconProps}
+          />
+          <IconButton
+            icon={<CodeChefIcon />}
+            aria-label="codechef icon"
+            as={'a'}
+            href={CONTACT.codechef}
+            target={'_blank'}
+            {...IconProps}
+          />
+          <IconButton
+            icon={<CodeforcesIcon />}
+            aria-label="codeforces icon"
+            as={'a'}
+            href={CONTACT.codeforces}
             target={'_blank'}
             {...IconProps}
           />
@@ -258,6 +282,7 @@ const SocialNavigation = () => {
                   target={'_blank'}
                   size="sm"
                   {...MobileIconProps}
+                  color="#0A66C2"
                 />
                 <IconButton
                   icon={<MediumIcon />}
@@ -273,6 +298,24 @@ const SocialNavigation = () => {
                   aria-label="leetcode icon"
                   as={'a'}
                   href={CONTACT.leetcode}
+                  target={'_blank'}
+                  size="sm"
+                  {...MobileIconProps}
+                />
+                <IconButton
+                  icon={<CodeChefIcon />}
+                  aria-label="codechef icon"
+                  as={'a'}
+                  href={CONTACT.codechef}
+                  target={'_blank'}
+                  size="sm"
+                  {...MobileIconProps}
+                />
+                <IconButton
+                  icon={<CodeforcesIcon />}
+                  aria-label="codeforces icon"
+                  as={'a'}
+                  href={CONTACT.codeforces}
                   target={'_blank'}
                   size="sm"
                   {...MobileIconProps}

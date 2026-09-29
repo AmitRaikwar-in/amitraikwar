@@ -53,4 +53,12 @@ global.ResizeObserver = class ResizeObserver {
   disconnect = jest.fn();
 };
 
-
+global.IntersectionObserver = class IntersectionObserver {
+  root = null;
+  rootMargin = '';
+  thresholds = [];
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+  takeRecords = jest.fn().mockReturnValue([]);
+};

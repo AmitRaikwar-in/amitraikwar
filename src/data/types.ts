@@ -32,3 +32,12 @@ export type WorkItemType = {
 export type WorkType = {
   [title: string]: WorkItemType;
 };
+
+export type CertificateItemType = {
+  title: string;
+  issuer: string;
+  badgeImage: string;
+  verificationUrl: string;
+  tags?: string[];
+  glowColors?: string[];
+};
