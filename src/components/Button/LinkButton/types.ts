@@ -6,5 +6,7 @@ export type LinkButtonProps = {
   withArrow?: boolean;
   href?: string;
   fontSize?: BoxProps['fontSize'];
+  px?: BoxProps['px'];
+  minW?: BoxProps['minW'];
   onClick?: (target: string) => void;
 };

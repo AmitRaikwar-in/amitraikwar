@@ -6,7 +6,7 @@ const AboutMe = () => {
   const { t } = useTranslation();
 
   return (
-    <VStack minH={'100vh'} id="about" width={'100%'}>
+    <VStack id="about" width={'100%'}>
       <Heading
         width={'100%'}
         textAlign={'start'}
@@ -29,25 +29,62 @@ const AboutMe = () => {
           trigger="click"
           highlightWords={['React', 'Native', 'growth']}
           gravity={1}
-          fontSize="1.5rem"
+          fontSize="clamp(1rem, 2.5vw, 1.5rem)"
         />
       </Box>
-      <Box width={'100%'} overflowX={'clip'} marginY={'10vh'}>
-        <Marquee pauseOnHover gap={10} duration={20}>
-          {Object.values(ChipMap).map((v) =>
-            v.Icon({
-              width: 64,
-              height: 64,
-            }),
-          )}
+      <Box
+        width={'100%'}
+        overflowX={'clip'}
+        marginY={{ base: '6vh', md: '10vh' }}
+        style={{
+          maskImage:
+            'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        }}
+      >
+        <Marquee pauseOnHover gap={{ base: 5, sm: 8, md: 10 }} duration={35}>
+          {Object.entries(ChipMap).map(([key, v]) => (
+            <Box
+              as="span"
+              key={key}
+              w={{ base: '36px', sm: '48px', md: '64px' }}
+              h={{ base: '36px', sm: '48px', md: '64px' }}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              flexShrink={0}
+            >
+              {v.Icon({
+                width: '100%',
+                height: '100%',
+              })}
+            </Box>
+          ))}
         </Marquee>
-        <Marquee pauseOnHover gap={10} duration={20} reverse>
-          {Object.values(ChipMap).map((v) =>
-            v.Icon({
-              width: 64,
-              height: 64,
-            }),
-          )}
+        <Marquee
+          pauseOnHover
+          gap={{ base: 5, sm: 8, md: 10 }}
+          duration={35}
+          reverse
+        >
+          {Object.entries(ChipMap).map(([key, v]) => (
+            <Box
+              as="span"
+              key={key}
+              w={{ base: '36px', sm: '48px', md: '64px' }}
+              h={{ base: '36px', sm: '48px', md: '64px' }}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              flexShrink={0}
+            >
+              {v.Icon({
+                width: '100%',
+                height: '100%',
+              })}
+            </Box>
+          ))}
         </Marquee>
       </Box>
     </VStack>

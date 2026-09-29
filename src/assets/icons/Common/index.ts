@@ -17,3 +17,7 @@ export { default as StarTrekIcon } from './Startrek';
 export { default as Redirect } from './Redirect';
 export { default as StreakIcon } from './Streak';
 export { default as NpmIcon } from './NpmIcon';
+export { default as CodeChefIcon } from './CodeChefIcon';
+export { default as CodeforcesIcon } from './CodeforcesIcon';
+export { default as CopyIcon } from './CopyIcon';
+export { default as CheckIcon } from './CheckIcon';

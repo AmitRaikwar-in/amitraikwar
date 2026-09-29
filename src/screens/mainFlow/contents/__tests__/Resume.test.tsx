@@ -21,8 +21,8 @@ describe('Resume Screen Component', () => {
 
 
 
-    // Audio player iframe / component
-    expect(screen.getByTitle('Audio Walkthrough')).toBeInTheDocument();
+    // Audio player iframe / component (commented out in Resume.tsx)
+    // expect(screen.getByTitle('Audio Walkthrough')).toBeInTheDocument();
 
 
     // External action links

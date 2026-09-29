@@ -26,7 +26,7 @@ const Marquee = ({
         padding: '0.5rem', // Assuming p-2 translates to 0.5rem padding
         flexDirection: vertical ? 'column' : 'row',
       }}
-      gap={gap}
+      gap={0}
       paddingX={gap}
       {...hoverProps}
     >
@@ -36,9 +36,14 @@ const Marquee = ({
           <Box
             key={i}
             gap={gap}
+            pr={vertical ? 0 : gap}
+            pb={vertical ? gap : 0}
             display={'flex'}
             flexShrink={0}
             justifyContent={'space-around'}
+            style={{
+              willChange: 'transform',
+            }}
             animation={
               (vertical
                 ? `marquee-vertical ${duration}s linear infinite`

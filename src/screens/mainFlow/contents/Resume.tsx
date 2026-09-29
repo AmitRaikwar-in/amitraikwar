@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { GlassBox, ResumeAudioPlayer } from '@components';
+import { GlassBox } from '@components';
 import { RESUME_DATA } from '@data';
 import { useTranslation } from 'react-i18next';
 
@@ -33,7 +33,7 @@ const Resume = () => {
     <VStack
       width="100%"
       spacing={5}
-      padding={{ base: 2, md: 4 }}
+      padding={{ base: 1, sm: 2, md: 4 }}
       align="stretch"
       maxH="80vh"
       overflowY="auto"
@@ -51,7 +51,7 @@ const Resume = () => {
       }}
     >
       {/* Audio Walkthrough Header & Player */}
-      <VStack align="start" spacing={2} width="100%">
+      {/* <VStack align="start" spacing={2} width="100%">
         <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="bold" color="white">
           {t('resume.audioTitle')}
         </Text>
@@ -63,7 +63,7 @@ const Resume = () => {
             fallbackDuration={RESUME_DATA.audioDuration}
           />
         </Box>
-      </VStack>
+      </VStack> */}
 
       {/* PDF View Header & Actions */}
       <Flex
@@ -74,7 +74,11 @@ const Resume = () => {
         width="100%"
         pt={1}
       >
-        <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="bold" color="white">
+        <Text
+          fontSize={{ base: 'md', md: 'lg' }}
+          fontWeight="bold"
+          color="white"
+        >
           {t('resume.pdfTitle')}
         </Text>
 

@@ -39,7 +39,7 @@ export function Modal({ children }: { children: ReactNode }) {
 
 export const ModalTrigger = ({
   children,
-  className,
+  className = '',
 }: {
   children: ReactNode;
   className?: string;
@@ -47,10 +47,7 @@ export const ModalTrigger = ({
   const { setOpen } = useModal();
   return (
     <button
-      className={
-        'px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden' +
-        className
-      }
+      className={`rounded-md text-black dark:text-white text-center relative overflow-hidden ${className}`}
       onClick={() => setOpen(true)}
     >
       {children}
@@ -97,15 +94,14 @@ export const ModalBody = ({
             backdropFilter: 'blur(0px)',
           }}
           className={
-            'fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full flex items-center justify-center z-[9000] ' +
-            className
+            'fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full flex items-center justify-center z-[9000]'
           }
         >
           <Overlay />
           <motion.div
             ref={modalRef}
             className={`min-h-[50%] max-h-[95%] ${
-              className ? className : 'max-w-[60%]'
+              className ? className : 'w-[96vw] md:max-w-[60%]'
             } bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-[9001] flex flex-col flex-1 overflow-hidden`}
             initial={{
               opacity: 0,

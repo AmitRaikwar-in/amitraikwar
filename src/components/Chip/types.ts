@@ -17,7 +17,6 @@ export enum Skills {
   rust = 'rust',
   electron = 'electron',
   tauri = 'tauri',
-  more = 'more',
 }
 
 export type ChipProps = {

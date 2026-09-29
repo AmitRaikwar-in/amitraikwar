@@ -137,17 +137,17 @@ const NavigationBar = () => {
       <HStack
         position="relative"
         zIndex={0}
-        columnGap={{ base: 1.5, sm: 3, md: 6 }}
+        columnGap={{ base: 1, sm: 2, md: 4, lg: 6 }}
         border={'1px solid rgba(255, 255, 255, 0.1)'}
         boxShadow={'0 8px 32px 0 rgba(0, 0, 0, 0.6)'}
-        paddingX={{ base: 2, md: 3 }}
+        paddingX={{ base: 1.5, sm: 2, md: 3 }}
         paddingY="0.5"
         borderRadius="24px"
         overflow="hidden"
         alignItems="center"
         justifyContent="space-between"
         pointerEvents="auto"
-        width={{ base: '90%', md: '60%' }}
+        width={{ base: '98%', sm: '94%', md: 'fit-content', lg: '60%' }}
         maxWidth="1400px"
       >
         <GlassBox
@@ -188,13 +188,24 @@ const NavigationBar = () => {
 
         {/* Center: Navigation Links */}
         {pathName === BASE_URL_ROUTE && (
-          <HStack columnGap={{ base: 1, sm: 2, md: 3 }}>
+          <HStack
+            columnGap={{ base: 0.5, sm: 1.5, md: 2, lg: 3 }}
+            alignItems="center"
+            overflowX={{ base: 'auto', md: 'visible' }}
+            maxW="100%"
+            sx={{
+              '&::-webkit-scrollbar': { display: 'none' },
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
             {NavigationLink.map(({ name, href }) => (
               <LinkButton
                 key={name}
                 text={t(name)}
                 href={`#${href}`}
-                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                fontSize={{ base: '11px', sm: 'xs', md: 'md', lg: 'lg' }}
+                px={{ base: 1, sm: 1.5, md: 2 }}
                 onClick={() => scrollToComponent(href)}
               />
             ))}
@@ -204,6 +215,7 @@ const NavigationBar = () => {
               border={'1px solid rgba(255, 255, 255, 0.1)'}
               borderRadius="12px"
               overflow="hidden"
+              flexShrink={0}
             >
               <GlassBox
                 width="100%"
@@ -227,8 +239,10 @@ const NavigationBar = () => {
                 key={ArticleLink.name}
                 as={Link}
                 to={'/' + ArticleLink.href}
-                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                fontSize={{ base: '11px', sm: 'xs', md: 'md', lg: 'lg' }}
                 size={{ base: 'xs', sm: 'sm', md: 'md' }}
+                px={{ base: 1.5, sm: 2, md: 3 }}
+                minW="auto"
                 color={'white'}
                 colorScheme="violet"
                 _hover={{
@@ -255,11 +269,12 @@ const NavigationBar = () => {
               triggerComponent={
                 <LinkButton
                   text={t('navigation.resume')}
-                  fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                  fontSize={{ base: '11px', sm: 'xs', md: 'md', lg: 'lg' }}
+                  px={{ base: 1, sm: 1.5, md: 2 }}
                 />
               }
               title={t('resume.title')}
-              containerClassName="w-[92vw] max-w-[1100px]"
+              containerClassName="w-[98vw] sm:w-[94vw] md:w-[90vw] max-w-[1100px]"
               footer={<Box></Box>}
             >
               <Resume />
@@ -278,10 +293,11 @@ const NavigationBar = () => {
                   onMouseLeave={onMouseLeave}
                   ref={ref}
                   position="relative"
+                  aria-label="search"
                   color={'white'}
                   borderRadius="100px"
                   cursor="pointer"
-                  p={2}
+                  p={{ base: 1.5, md: 2 }}
                   _hover={{
                     transform: 'scale(1.1)',
                   }}
